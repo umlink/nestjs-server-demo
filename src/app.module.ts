@@ -1,13 +1,26 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { UserController } from './user/user.controller';
-import { AppService } from './app.service';
-import {UserService} from './user/user.service';
-import { TestController } from './test/test.controller';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { CatsModule } from './modules/cats/cats.module';
+import { UserModule } from './modules/user/user.module';
+import { ConfigModule } from './modules/config/config.module';
+import { TestModule } from './modules/test/test.modules';
+import { AuthModule } from './modules/auth/auth.module';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
-  imports: [],
-  controllers: [AppController, UserController, TestController],
-  providers: [AppService, UserService],
+  imports: [
+    ConfigModule.register({ folder: 'config' }),
+    TestModule,
+    CatsModule,
+    UserModule,
+    AuthModule,
+  ],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

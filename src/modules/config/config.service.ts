@@ -13,8 +13,7 @@ export class ConfigService {
     const filePath = `${process.env.NODE_ENV || 'dev'}.env`;
     const envFile = path.resolve(__dirname, '../../../', options.folder, filePath);
     this.envConfig = dotenv.parse(fs.readFileSync(envFile));
-    console.log('配置文件打印：NODE_ENV', process.env.NODE_ENV)
-    console.log(this.envConfig)
+    console.log(this.envConfig);
   }
 
   get(key: string): string {

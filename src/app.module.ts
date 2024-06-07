@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { CatsModule } from './modules/cats/cats.module';
-import { UserModule } from './modules/user/user.module';
+import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from './modules/config/config.module';
 import { TestModule } from './modules/test/test.modules';
 import { AuthModule } from './modules/auth/auth.module';
@@ -11,7 +11,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
     ConfigModule.register({ folder: 'config' }),
     TestModule,
     CatsModule,
-    UserModule,
+    UsersModule,
     AuthModule,
   ],
   controllers: [],

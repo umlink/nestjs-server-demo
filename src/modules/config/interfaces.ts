@@ -1,3 +1,3 @@
 export type EnvConfig = {
-  folder: string
-}
+  folder: string;
+};

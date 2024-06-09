@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import logger from './middleware/logfn.middleware';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -11,8 +12,27 @@ async function mainApp() {
     AppModule,
     new FastifyAdapter({ logger: true }),
   );
-  // 注册全局函数式中间件
+  /**
+   * 开启方式后期需定制处理，如：线上自动关闭
+   */
+  const config = new DocumentBuilder()
+    .setTitle('Swagger API')
+    .setDescription('这里是关于 swagger api 文档的描述')
+    .setVersion('1.0')
+    .addTag('😄Nestjs Service')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('/swagger-api', app, document);
+  /**
+   * 设置接口统一前缀
+   * app.setGlobalPrefix('api');
+   */
+  app.setGlobalPrefix('api');
+  /**
+   * 注册全局函数式中间件
+   */
   app.use(logger);
+  //********************************************
   await app.listen(8088, '0.0.0.0');
 }
 mainApp().then((r) => console.info('server started by 0.0.0.0:8088'));

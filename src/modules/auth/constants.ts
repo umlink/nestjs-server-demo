@@ -1,4 +1,5 @@
 export const jwtConstants = {
-  secret: 'this is anyone code',
+  secret: 'QWE_123_!@#_KR_LIN',
   authKey: '__auth_tk__',
+  expiresIn: '30d',
 };

@@ -13,21 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id    Int     @default(autoincrement()) @id
+  username  String
+  avatar String
   email String  @unique
-  name  String?
   phone String
-  posts Post[]
-  start_at DateTime
+  is_vip Boolean
+  created_at DateTime
+  updated_at DateTime
+  deleted_at DateTime
 }
-
 model Post {
   id        Int      @default(autoincrement()) @id
   title     String
   content   String?
   published Boolean? @default(false)
-  author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
 }

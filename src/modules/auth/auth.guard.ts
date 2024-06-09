@@ -35,10 +35,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
    * @param {*} user 这是 Passport 策略验证成功后返回的用户对象。如果验证失败，这个值可能是 false 或 null，具体取决于你使用的 Passport 策略
    * @param {*} info 如果验证失败，info通常是一个error对象
    */
-  handleRequest(error, user, info) {
+  handleRequest = (error: any, user: any, info: any) => {
     if (info || error) throw new UnauthorizedException('token校验失败');
     if (!user) throw new NotFoundException('用户不存在');
-
     return user;
-  }
+  };
 }

@@ -27,7 +27,7 @@ async function mainApp() {
    * 设置接口统一前缀
    * app.setGlobalPrefix('api');
    */
-  app.setGlobalPrefix('api');
+  // app.setGlobalPrefix('api');
   /**
    * 注册全局函数式中间件
    */
@@ -35,4 +35,4 @@ async function mainApp() {
   //********************************************
   await app.listen(8088, '0.0.0.0');
 }
-mainApp().then((r) => console.info('server started by 0.0.0.0:8088'));
+mainApp().then(() => console.info('server started by 0.0.0.0:8088'));

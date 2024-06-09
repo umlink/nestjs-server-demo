@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/auth.guard';
+import { PrismaService } from './prisma.service';
 
 @Module({
   imports: [

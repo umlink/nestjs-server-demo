@@ -1,9 +1,4 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Observable, map } from 'rxjs';
 import { getReasonPhrase } from 'http-status-codes';
 
@@ -17,7 +12,6 @@ export class ResultFormatInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       map((data) => {
-        console.log(data);
         return {
           code,
           message,

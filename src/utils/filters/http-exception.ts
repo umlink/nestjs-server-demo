@@ -1,10 +1,4 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  HttpException,
-  Logger,
-} from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Logger } from '@nestjs/common';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { getReasonPhrase } from 'http-status-codes';
 
@@ -15,16 +9,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>();
     const request = ctx.getRequest<FastifyRequest['raw']>();
     const code = exception.getStatus();
-    console.log(response);
-    const message = response.raw.statusMessage || getReasonPhrase(code);
-
-    Logger.log(`${request.url} - ${message}`, '非正常接口请求');
-
+    const message = exception.message || getReasonPhrase(code) || 'Server error';
+    // 日志打印
+    Logger.log(`${request.url} - ${message}`);
     response.status(code).send({
       code,
       message: message,
-      path: request.url,
-      timestamp: new Date().toISOString(),
+      success: false,
+      data: null,
     });
   }
 }

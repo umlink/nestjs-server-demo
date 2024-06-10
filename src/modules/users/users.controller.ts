@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateCatDto } from './dto/create-user.dto';
 import { ConfigService } from '../config/config.service';
@@ -17,8 +25,7 @@ export class UsersController {
     return this.userService.getUserByName({ id: Number(id) });
   }
   @Post('/list')
-  findAll(@Body() user: CreateCatDto) {
-    console.log(user);
-    return [];
+  findAll() {
+    throw new HttpException('授权失败', 401);
   }
 }

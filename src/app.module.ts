@@ -5,9 +5,9 @@ import { ConfigModule } from './modules/config/config.module';
 import { TestModule } from './modules/test/test.modules';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_FILTER } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/auth.guard';
-import { PrismaService } from './prisma.service';
+import { HttpExceptionFilter } from './utils/filters/http-exception';
 
 @Module({
   imports: [
@@ -22,6 +22,10 @@ import { PrismaService } from './prisma.service';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
     },
   ],
 })

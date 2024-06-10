@@ -6,6 +6,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { ResultFormatInterceptor } from './utils/result-format.interceptor';
 
 async function mainApp() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -28,6 +29,7 @@ async function mainApp() {
    * app.setGlobalPrefix('api');
    */
   // app.setGlobalPrefix('api');
+  app.useGlobalInterceptors(new ResultFormatInterceptor());
   /**
    * 注册全局函数式中间件
    */

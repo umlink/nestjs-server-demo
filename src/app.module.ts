@@ -10,13 +10,7 @@ import { JwtAuthGuard } from './modules/auth/auth.guard';
 import { HttpExceptionFilter } from './utils/filters/http-exception';
 
 @Module({
-  imports: [
-    ConfigModule.register({ folder: 'config' }),
-    TestModule,
-    CatsModule,
-    UsersModule,
-    AuthModule,
-  ],
+  imports: [ConfigModule.register({ folder: 'config' }), TestModule, CatsModule, UsersModule, AuthModule],
   controllers: [],
   providers: [
     {
@@ -31,8 +25,6 @@ import { HttpExceptionFilter } from './utils/filters/http-exception';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL });
+    consumer.apply(LoggerMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

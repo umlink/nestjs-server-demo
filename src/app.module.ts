@@ -6,11 +6,18 @@ import { TestModule } from './modules/test/test.modules';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { APP_GUARD, APP_FILTER } from '@nestjs/core';
-import { JwtAuthGuard } from './modules/auth/auth.guard';
-import { HttpExceptionFilter } from './utils/filters/http-exception';
+import { JwtAuthGuard } from '@/utils/guard/auth.guard';
+import { HttpExceptionFilter } from './utils/filters/http-exception-filters';
+import { RolesGuard } from '@/utils/guard/roles.guard';
 
 @Module({
-  imports: [ConfigModule.register({ folder: 'config' }), TestModule, CatsModule, UsersModule, AuthModule],
+  imports: [
+    ConfigModule.register({ folder: 'config' }),
+    TestModule,
+    AuthModule,
+    CatsModule,
+    UsersModule,
+  ],
   controllers: [],
   providers: [
     {
@@ -21,10 +28,16 @@ import { HttpExceptionFilter } from './utils/filters/http-exception';
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
     },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

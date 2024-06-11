@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
+import { Roles } from '@/utils/decorator/roles.decorator';
+import { RoleEnum } from '@/constants/role.enum';
 
 @Controller('cats')
 export class CatsController {
@@ -13,6 +23,7 @@ export class CatsController {
   }
 
   @Get()
+  @Roles(RoleEnum.SUPER_ADMIN, RoleEnum.ADMIN)
   findAll() {
     return this.catsService.findAll();
   }

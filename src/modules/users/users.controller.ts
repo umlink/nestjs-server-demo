@@ -1,16 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Body,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Post, Param, HttpException } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateCatDto } from './dto/create-user.dto';
 import { ConfigService } from '../config/config.service';
-import { Public } from '../auth/auth.decorators';
+import { Public } from '@/utils/decorator/auth.decorators';
 import { UsersModule } from './users.module';
 
 @Controller('user')

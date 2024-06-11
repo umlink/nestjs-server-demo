@@ -6,7 +6,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { ResultFormatInterceptor } from './utils/result-format.interceptor';
+import { ResultFormatInterceptor } from './utils/interceptor/result-format-interceptor';
 
 async function mainApp() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -26,7 +26,6 @@ async function mainApp() {
   SwaggerModule.setup('/swagger-api', app, document);
   /**
    * 设置接口统一前缀
-   * app.setGlobalPrefix('api');
    */
   // app.setGlobalPrefix('api');
   app.useGlobalInterceptors(new ResultFormatInterceptor());

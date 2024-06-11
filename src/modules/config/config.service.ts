@@ -10,13 +10,8 @@ export class ConfigService {
   private readonly envConfig: EnvConfig;
 
   constructor(@Inject(CONFIG_OPTIONS) private options: Partial<EnvConfig>) {
-    const filePath = `${process.env.NODE_ENV || 'dev'}.env`;
-    const envFile = path.resolve(
-      __dirname,
-      '../../../',
-      options.folder,
-      filePath,
-    );
+    const filePath = `.env.${process.env.NODE_ENV || 'dev'}`;
+    const envFile = path.resolve(__dirname, '../../../', options.folder, filePath);
     this.envConfig = dotenv.parse(fs.readFileSync(envFile));
     console.log(this.envConfig);
   }

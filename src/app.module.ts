@@ -1,5 +1,4 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-import { CatsModule } from './modules/cats/cats.module';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from './modules/config/config.module';
 import { TestModule } from './modules/test/test.modules';
@@ -36,7 +35,6 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
     ]),
     TestModule,
     AuthModule,
-    CatsModule,
     UsersModule,
   ],
   controllers: [],

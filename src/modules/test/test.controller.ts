@@ -1,14 +1,18 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
+import { Roles } from '@/utils/decorator/roles.decorator';
+import { RoleEnum } from '@/constants/role.enum';
 
 @Controller('test')
 export class TestController {
-  constructor (private readonly configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) {}
   @Get('/config')
-  getConfig (): string {
-    return this.configService.get('HOST_NAME')
+  getConfig(): string {
+    return this.configService.get('HOST_NAME');
   }
-  // @HttpCode() 自定义先
-  // @Header('Cache-Control', 'none')
-  // @Redirect('https://nestjs.com', 301)
+  @Get('/test2')
+  @Roles(RoleEnum.admin) // 只有管理员可以访问
+  getTest2(): string {
+    return this.configService.get('HOST_NAME');
+  }
 }

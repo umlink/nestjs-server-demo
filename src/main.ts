@@ -8,7 +8,8 @@ import {
 } from '@nestjs/platform-fastify';
 import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
-import { ResultFormatInterceptor } from './utils/interceptor/result-format-interceptor';
+import { ResponseInterceptor } from './utils/interceptor/response.interceptor';
+import { TimeoutInterceptor } from '@/utils/interceptor/timeout.interceptor';
 
 /**
  * ⚠️底层使用 fastify
@@ -26,8 +27,11 @@ async function mainApp() {
   app.enableCors();
   // 设置接口统一前缀
   // app.setGlobalPrefix('api');
-  // 格式化响应体
-  app.useGlobalInterceptors(new ResultFormatInterceptor());
+  // 全局统一拦截器
+  app.useGlobalInterceptors(
+    new ResponseInterceptor(), // 格式化响应体
+    new TimeoutInterceptor(), // 超时处理 - 防止长时间占用资源
+  );
   // 注册全局函数式中间件
   app.use(logger);
   /**
@@ -43,5 +47,6 @@ async function mainApp() {
   SwaggerModule.setup('/swagger-api', app, document);
   /************************************************************************/
   await app.listen(8088, '0.0.0.0');
+  /************************************************************************/
 }
 mainApp().then(() => console.info('server started by 0.0.0.0:8088'));

@@ -8,7 +8,7 @@ import { Observable, map } from 'rxjs';
 import { getReasonPhrase } from 'http-status-codes';
 
 @Injectable()
-export class ResultFormatInterceptor implements NestInterceptor {
+export class ResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const ctx = context.switchToHttp();
     const response = ctx.getResponse();

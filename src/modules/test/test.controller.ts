@@ -11,7 +11,7 @@ export class TestController {
     return this.configService.get('HOST_NAME');
   }
   @Get('/test2')
-  @Roles(RoleEnum.admin) // 只有管理员可以访问
+  @Roles([RoleEnum.admin, RoleEnum.superAdmin]) // 只有管理员和超管可以访问
   getTest2(): string {
     return this.configService.get('HOST_NAME');
   }

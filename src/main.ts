@@ -8,7 +8,7 @@ import {
 } from '@nestjs/platform-fastify';
 import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
-import { TimeoutInterceptor } from '@/utils/interceptor/timeout.interceptor';
+import { TimeoutInterceptor } from '@/tools/interceptor/timeout.interceptor';
 import { ValidationPipe } from '@nestjs/common';
 
 /**

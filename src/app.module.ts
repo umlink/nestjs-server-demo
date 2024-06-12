@@ -5,12 +5,12 @@ import { TestModule } from './modules/test/test.modules';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
-import { JwtAuthGuard } from '@/utils/guard/auth.guard';
-import { HttpExceptionFilter } from './utils/filters/http-exception.filters';
-import { RolesGuard } from '@/utils/guard/roles.guard';
+import { JwtAuthGuard } from '@/tools/guard/auth.guard';
+import { HttpExceptionFilter } from '@/tools/filters/http-exception.filters';
+import { RolesGuard } from '@/tools/guard/roles.guard';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
-import { PostInterceptor } from '@/utils/interceptor/post.interceptor';
-import { ResponseInterceptor } from '@/utils/interceptor/response.interceptor';
+import { PostInterceptor } from '@/tools/interceptor/post.interceptor';
+import { ResponseInterceptor } from '@/tools/interceptor/response.interceptor';
 /**
  * ThrottlerModule: 限流
  * 一秒钟内调用次数不超过 3 次、10 秒内调用次数不超过 20 次、一分钟内调用次数不超过 100 次

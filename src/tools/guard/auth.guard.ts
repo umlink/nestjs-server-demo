@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { IS_PUBLIC_KEY } from '@/utils/decorator/auth.decorators';
+import { IS_PUBLIC_KEY } from '@/tools/decorator/auth.decorators';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 

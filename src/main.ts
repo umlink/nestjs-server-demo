@@ -14,6 +14,7 @@ import { TimeoutInterceptor } from '@/utils/interceptor/timeout.interceptor';
 /**
  * ⚠️底层使用 fastify
  */
+const DEFAULT_PORT: number = 8088;
 async function mainApp() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -41,12 +42,12 @@ async function mainApp() {
     .setTitle('Swagger API')
     .setDescription('这里是关于 swagger api 文档的描述')
     .setVersion('1.0')
-    .addTag('😄Nestjs Service')
+    .addTag('🤣Nestjs Service')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger-api', app, document);
   /************************************************************************/
-  await app.listen(8088, '0.0.0.0');
+  await app.listen(DEFAULT_PORT, '0.0.0.0');
   /************************************************************************/
 }
-mainApp().then(() => console.info('server started by 0.0.0.0:8088'));
+mainApp().then(() => console.info(`server started by 0.0.0.0:${DEFAULT_PORT}`));

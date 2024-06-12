@@ -1,6 +1,15 @@
-import { Controller, Get, Post, Param, HttpException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  HttpException,
+  ParseIntPipe,
+  Body,
+  HttpCode,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateCatDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { ConfigService } from '../config/config.service';
 import { Public } from '@/utils/decorator/auth.decorators';
 import { UsersModule } from './users.module';
@@ -13,11 +22,15 @@ export class UsersController {
   ) {}
   @Get('/info/:id')
   @Public()
-  async getOneByName(@Param('id') id: string): Promise<UsersModule> {
-    return this.userService.getUserByName({ id: Number(id) });
+  async getOneByName(@Param('id', ParseIntPipe) id: number): Promise<UsersModule> {
+    return this.userService.getUserByName({ id });
   }
   @Post('/list')
-  findAll() {
-    throw new HttpException('授权失败', 401);
+  async findAll(): Promise<string> {
+    return '获取成功';
+  }
+  @Post('/add')
+  addUser(@Body() createUserDto: CreateUserDto) {
+    return '创建成功';
   }
 }

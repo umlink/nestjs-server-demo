@@ -9,7 +9,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>();
     const request = ctx.getRequest<FastifyRequest['raw']>();
     const code = exception.getStatus();
-    const message = exception.message || getReasonPhrase(code) || 'Server error';
+    const res: any = exception.getResponse();
+    const resMsg = typeof res === 'object' ? res.message : exception.message;
+    const message = resMsg || getReasonPhrase(code) || 'Server error';
     // 日志打印
     Logger.log(`${request.url} - ${message}`);
     response.status(code).send({

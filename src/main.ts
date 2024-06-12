@@ -2,14 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import logger from './middleware/logfn.middleware';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
 import { ResponseInterceptor } from './utils/interceptor/response.interceptor';
 import { TimeoutInterceptor } from '@/utils/interceptor/timeout.interceptor';
+import { ValidationPipe } from '@nestjs/common';
 
 /**
  * ⚠️底层使用 fastify
@@ -28,9 +26,14 @@ async function mainApp() {
   app.enableCors();
   // 设置接口统一前缀
   // app.setGlobalPrefix('api');
-  // 全局统一拦截器
+  /**
+   * 参数校验
+   * disableErrorMessages: true 可禁用详细信息
+   * transform：true 自动类型转换
+   */
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  // 全局统一拦截器 也可从 app.module.ts 中注入
   app.useGlobalInterceptors(
-    new ResponseInterceptor(), // 格式化响应体
     new TimeoutInterceptor(), // 超时处理 - 防止长时间占用资源
   );
   // 注册全局函数式中间件

@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '@/prisma.service';
 import { Prisma } from '@prisma/client';
+import { getIOSTime } from '@/tools/utils/time.utils';
 
 @Injectable()
 export class UsersService {
@@ -40,6 +41,15 @@ export class UsersService {
   async delUser(id: number) {
     return this.prisma.user.delete({ where: { id } }).catch((res) => {
       Logger.warn(`删除用户id:${id} [${res.meta.cause}]`);
+    });
+  }
+  async updateUser(id: number, options: Prisma.UserUpdateInput) {
+    this.prisma.user.update({
+      where: { id },
+      data: {
+        ...options,
+        updatedAt: getIOSTime(),
+      },
     });
   }
 }

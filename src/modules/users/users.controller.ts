@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -24,9 +26,14 @@ export class UsersController {
   async getUserDetail(@Param('id', ParseIntPipe) id: number) {
     return this.userService.getUserById(id);
   }
-  @Post('/list')
-  async findAll(): Promise<string> {
-    return '获取成功';
+  @Post('/delete/:id')
+  @Roles([RoleEnum.admin, RoleEnum.superAdmin])
+  async delUserById(@Param('id', ParseIntPipe) id: number) {
+    const res = await this.userService.delUser(id);
+    if (!res) {
+      throw new HttpException('用户不存在', HttpStatus.NOT_ACCEPTABLE);
+    }
+    return null;
   }
   @Post('/create')
   addUser(@Body() createUserDto: CreateUserDto) {
@@ -35,7 +42,6 @@ export class UsersController {
       createdAt: getIOSTime(),
       updatedAt: getIOSTime(),
     };
-    console.log(user);
     return this.userService.addUser(user);
   }
 }

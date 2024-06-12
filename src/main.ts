@@ -2,10 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import logger from './middleware/logfn.middleware';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
 import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
-import { ResponseInterceptor } from './utils/interceptor/response.interceptor';
 import { TimeoutInterceptor } from '@/utils/interceptor/timeout.interceptor';
 import { ValidationPipe } from '@nestjs/common';
 

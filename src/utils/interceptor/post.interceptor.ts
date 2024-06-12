@@ -16,7 +16,8 @@ export class PostInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest<FastifyRequest['raw']>();
     const response = context.switchToHttp().getResponse<FastifyReply['raw']>();
     if (request.method === 'POST') {
-      if (response.statusCode === 201) context.switchToHttp().getResponse().status(HttpStatus.OK);
+      if (response.statusCode === 201)
+        context.switchToHttp().getResponse().status(HttpStatus.OK);
     }
     return next.handle();
   }

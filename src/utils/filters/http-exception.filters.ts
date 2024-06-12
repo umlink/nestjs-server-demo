@@ -1,4 +1,10 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Logger } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+  Logger,
+} from '@nestjs/common';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { getReasonPhrase } from 'http-status-codes';
 
@@ -9,9 +15,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>();
     const request = ctx.getRequest<FastifyRequest['raw']>();
     const code = exception.getStatus();
-    const res: any = exception.getResponse();
-    const resMsg = typeof res === 'object' ? res.message : exception.message;
-    const message = resMsg || getReasonPhrase(code) || 'Server error';
+    const exceptionResponse: any = exception.getResponse();
+    const errMsg =
+      typeof exceptionResponse === 'object'
+        ? exceptionResponse.message
+        : exception.message;
+    const message = errMsg || getReasonPhrase(code) || 'Server error';
     // 日志打印
     Logger.log(`${request.url} - ${message}`);
     response.status(code).send({
@@ -19,6 +28,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message: message,
       success: false,
       data: null,
+      timestamp: new Date().toISOString(),
     });
   }
 }

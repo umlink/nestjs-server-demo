@@ -3,10 +3,8 @@ import {
   Get,
   Post,
   Param,
-  HttpException,
   ParseIntPipe,
   Body,
-  HttpCode,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -22,7 +20,9 @@ export class UsersController {
   ) {}
   @Get('/info/:id')
   @Public()
-  async getOneByName(@Param('id', ParseIntPipe) id: number): Promise<UsersModule> {
+  async getOneByName(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<UsersModule> {
     return this.userService.getUserByName({ id });
   }
   @Post('/list')
@@ -31,6 +31,6 @@ export class UsersController {
   }
   @Post('/add')
   addUser(@Body() createUserDto: CreateUserDto) {
-    return '创建成功';
+    return createUserDto;
   }
 }

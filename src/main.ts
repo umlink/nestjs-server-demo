@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import logger from './middleware/logfn.middleware';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -33,7 +33,12 @@ async function mainApp() {
    * disableErrorMessages: true 可禁用详细信息
    * transform：true 自动类型转换
    */
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
   // 全局统一拦截器 也可从 app.module.ts 中注入
   app.useGlobalInterceptors(
     new TimeoutInterceptor(), // 超时处理 - 防止长时间占用资源

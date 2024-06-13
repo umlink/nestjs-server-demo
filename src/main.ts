@@ -56,8 +56,9 @@ async function mainApp() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger-api', app, document);
-  /************************************************************************/
+
+  /*------------------------------------------------------------------------------*/
   await app.listen(DEFAULT_PORT, '0.0.0.0');
-  /************************************************************************/
+  /*------------------------------------------------------------------------------*/
 }
 mainApp().then(() => console.info(`server started by 0.0.0.0:${DEFAULT_PORT}`));

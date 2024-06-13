@@ -1,12 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import logger from './middleware/logfn.middleware';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
 import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 /**
  * ⚠️底层使用 fastify
@@ -15,8 +15,10 @@ const DEFAULT_PORT: number = 8088;
 async function mainApp() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({ logger: true }), // 开启默认日志
+    new FastifyAdapter(), // 开启默认日志
   );
+  const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
+  app.useLogger(logger);
   // 保护应用免受一些众所周知的 Web 漏洞的攻击
   await app.register(helmet);
   // CSRF 保护
@@ -41,7 +43,7 @@ async function mainApp() {
     new TimeoutInterceptor(), // 超时处理 - 防止长时间占用资源
   );
   // 注册全局函数式中间件
-  app.use(logger);
+  // app.use(logger);
   /**
    * 开启方式后期需定制处理，如：线上自动关闭
    */

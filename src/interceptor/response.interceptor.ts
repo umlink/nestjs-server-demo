@@ -1,6 +1,9 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
+import { CallHandler, ExecutionContext, Inject, Injectable, NestInterceptor } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { getReasonPhrase } from 'http-status-codes';
+import { Logger } from 'winston';
+import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
+import { getReqMainInfo } from '@/utils/logger-utils';
 
 /**
  * 格式化输出内容
@@ -9,14 +12,18 @@ import { getReasonPhrase } from 'http-status-codes';
  */
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
+  constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger) {}
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const ctx = context.switchToHttp();
     const response = ctx.getResponse();
     const code = response.statusCode;
     const message = response.statusMessage || getReasonPhrase(code);
-
     return next.handle().pipe(
       map((data) => {
+        this.logger.info(`httpRequestRes:`, {
+          url: getReqMainInfo(ctx.getRequest()).url,
+          res: data,
+        });
         return {
           code,
           message,

@@ -27,7 +27,7 @@ async function mainApp() {
   // 启用跨源资源共享（CORS）保护机制
   app.enableCors();
   // 设置接口统一前缀
-  // app.setGlobalPrefix('api');
+  // app.setGlobalPrefix('xxx-api');
   /**
    * 参数校验
    * disableErrorMessages: true 可禁用详细信息
@@ -54,7 +54,9 @@ async function mainApp() {
     .setVersion('1.0')
     .addTag('🤣Nestjs Service')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config, {
+    ignoreGlobalPrefix: true, // 忽略设置 setGlobalPrefix
+  });
   SwaggerModule.setup('/swagger-api', app, document);
 
   /*------------------------------------------------------------------------------*/

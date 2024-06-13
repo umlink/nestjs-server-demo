@@ -14,8 +14,10 @@ import { ConfigService } from '../config/config.service';
 import { getIOSTime } from '@/utils/time-utils';
 import { Roles } from '@/decorator/roles.decorator';
 import { RoleEnum } from '@/constants/role.enum';
-import { ApiOperation, ApiQuery } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UserEntity } from '@/modules/users/entities/user.entity';
 
+@ApiTags('User')
 @Controller('user')
 export class UsersController {
   constructor(
@@ -24,14 +26,14 @@ export class UsersController {
   ) {}
 
   @Get('/detail/:id')
-  @Roles([RoleEnum.admin, RoleEnum.superAdmin])
   @ApiOperation({ summary: '获取用户详情', tags: ['User'] })
+  @Roles([RoleEnum.admin, RoleEnum.superAdmin])
   async getUserDetail(@Param('id', ParseIntPipe) id: number) {
     return this.userService.getUserById(id);
   }
 
   @Post('/delete/:id')
-  @ApiOperation({ summary: '删除用户', tags: ['User'] })
+  @ApiOperation({ summary: '删除用户' })
   @Roles([RoleEnum.admin, RoleEnum.superAdmin])
   async delUserById(@Param('id', ParseIntPipe) id: number) {
     const res = await this.userService.delUser(id);
@@ -42,8 +44,9 @@ export class UsersController {
   }
 
   @Post('/create')
-  @ApiQuery({ type: CreateUserDto })
-  @ApiOperation({ summary: '创建用户', tags: ['User'] })
+  @ApiBody({ type: CreateUserDto })
+  @ApiResponse({ type: UserEntity })
+  @ApiOperation({ summary: '创建用户' })
   addUser(@Body() createUserDto: CreateUserDto) {
     const user = {
       ...createUserDto,

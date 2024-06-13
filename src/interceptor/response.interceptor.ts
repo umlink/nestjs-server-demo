@@ -20,7 +20,7 @@ export class ResponseInterceptor implements NestInterceptor {
     const message = response.statusMessage || getReasonPhrase(code);
     return next.handle().pipe(
       map((data) => {
-        this.logger.info(`httpRequestRes:`, {
+        this.logger.info('httpResponse', {
           url: getReqMainInfo(ctx.getRequest()).url,
           res: data,
         });

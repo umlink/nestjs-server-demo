@@ -8,7 +8,7 @@ import { Logger } from 'winston';
 export class LoggerMiddleware implements NestMiddleware {
   constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger) {}
   use(req: FastifyRequest, res: FastifyReply, next: () => void) {
-    this.logger.info('httpRequestLog:', { req: getReqMainInfo(req) });
+    this.logger.info('httpRequest', { req: getReqMainInfo(req) });
     next();
   }
 }

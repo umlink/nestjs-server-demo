@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '@/prisma.service';
 import { Prisma } from '@prisma/client';
-import { getIOSTime } from '@/tools/utils/time.utils';
+import { getIOSTime } from '@/utils/time-utils';
 
 @Injectable()
 export class UsersService {

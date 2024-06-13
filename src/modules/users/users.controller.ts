@@ -11,8 +11,8 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ConfigService } from '../config/config.service';
-import { getIOSTime } from '@/tools/utils/time.utils';
-import { Roles } from '@/tools/decorator/roles.decorator';
+import { getIOSTime } from '@/utils/time-utils';
+import { Roles } from '@/decorator/roles.decorator';
 import { RoleEnum } from '@/constants/role.enum';
 import { ApiOperation, ApiQuery } from '@nestjs/swagger';
 

@@ -1,6 +1,6 @@
-import { Body, Controller, Post, Get, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Public } from '@/tools/decorator/auth.decorators';
+import { Public } from '@/decorator/auth.decorators';
 
 @Controller('auth')
 export class AuthController {
@@ -11,7 +11,6 @@ export class AuthController {
   signIn(@Body() signInDto: Record<string, any>) {
     return this.authService.login(signInDto.username, signInDto.password);
   }
-  // @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;

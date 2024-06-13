@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Injectable, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { EnvConfig } from './interfaces';
-import { CONFIG_OPTIONS } from '../../constants/dynamic-module';
+import { CONFIG_OPTIONS } from '@/constants/dynamic-module';
 
 @Injectable()
 export class ConfigService {

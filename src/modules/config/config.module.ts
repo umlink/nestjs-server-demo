@@ -1,6 +1,6 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
 import { ConfigService } from './config.service';
-import { CONFIG_OPTIONS } from '../../constants/dynamic-module';
+import { CONFIG_OPTIONS } from '@/constants/dynamic-module';
 
 /**
  * 关于使用 register、forRoot、forFeature 的区别介绍

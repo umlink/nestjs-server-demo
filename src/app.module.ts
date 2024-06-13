@@ -1,16 +1,16 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from './modules/config/config.module';
 import { TestModule } from './modules/test/test.modules';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
-import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpExceptionFilter } from '@/filters/http-exception.filters';
 import { RolesGuard } from '@/guard/roles.guard';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { JwtAuthGuard } from '@/modules/auth/auth.guard';
 import { PostInterceptor } from '@/interceptor/post.interceptor';
 import { ResponseInterceptor } from '@/interceptor/response.interceptor';
-import { JwtAuthGuard } from '@/modules/auth/auth.guard';
 
 /**
  * ThrottlerModule: 限流

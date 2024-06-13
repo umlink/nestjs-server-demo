@@ -14,6 +14,7 @@ import { ResponseInterceptor } from '@/interceptor/response.interceptor';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
 import { DemoService } from '@/schedule/demo.service';
+import { PrismaModule } from '@/modules/prisma/prisma.module';
 
 /**
  * ThrottlerModule: 限流
@@ -46,6 +47,7 @@ const throttleOptions = [
     }),
     ScheduleModule.forRoot(),
     ThrottlerModule.forRoot(throttleOptions),
+    PrismaModule,
     TestModule,
     AuthModule,
     UsersModule,

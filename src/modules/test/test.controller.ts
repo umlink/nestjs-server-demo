@@ -1,14 +1,39 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
 import { Roles } from '@/decorator/roles.decorator';
 import { RoleEnum } from '@/constants/role.enum';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
+import { Public } from '@/decorator/auth.decorators';
+
+type CacheTypeDemo = {
+  name: string;
+  description: string;
+};
 
 @Controller('test')
 export class TestController {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
   @Get('/config')
   getConfig(): string {
     return this.configService.get('HOST_NAME');
+  }
+  @Get('/addCache')
+  @Public()
+  async addCache() {
+    await this.cacheManager.set('cache-key', {
+      name: 'cache',
+      description: '这是缓存测试数据',
+    });
+    return '缓存设置成功';
+  }
+  @Get('/getCache')
+  @Public()
+  async getCache(): Promise<CacheTypeDemo> {
+    return await this.cacheManager.get<CacheTypeDemo>('cache-key');
   }
   @Get('/test2')
   @Roles([RoleEnum.admin, RoleEnum.superAdmin]) // 只有管理员和超管可以访问

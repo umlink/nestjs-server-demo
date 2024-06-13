@@ -7,8 +7,8 @@ import { getIOSTime } from '@/utils/time-utils';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getUserByName(where: Prisma.UserWhereUniqueInput) {
-    return this.prisma.user.findUnique({
+  async getUserByName(where: Prisma.UserWhereInput) {
+    return this.prisma.user.findFirst({
       where,
       select: {
         id: true,

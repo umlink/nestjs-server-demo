@@ -11,6 +11,7 @@ import { RolesGuard } from '@/guard/roles.guard';
 import { JwtAuthGuard } from '@/modules/auth/auth.guard';
 import { PostInterceptor } from '@/interceptor/post.interceptor';
 import { ResponseInterceptor } from '@/interceptor/response.interceptor';
+import { CacheModule } from '@nestjs/cache-manager';
 
 /**
  * ThrottlerModule: 限流
@@ -36,6 +37,11 @@ const throttleOptions = [
 @Module({
   imports: [
     ConfigModule.register({ folder: 'config' }),
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 1000 * 60,
+      max: 1000 * 60 * 60,
+    }),
     ThrottlerModule.forRoot(throttleOptions),
     TestModule,
     AuthModule,

@@ -134,7 +134,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "..",
@@ -153,8 +153,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./prisma-client\"\n}\n\ndatasource db {\n  provider     = \"mysql\"\n  url          = env(\"DATABASE_URL\")\n  relationMode = \"prisma\"\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  name      String   @db.VarChar(32)\n  email     String   @db.VarChar(32)\n  avatar    String   @db.VarChar(128)\n  password  String   @db.VarChar(128)\n  createdAt DateTime @map(\"created_at\")\n  updatedAt DateTime @map(\"updated_at\")\n\n  @@map(\"user\")\n}\n",
-  "inlineSchemaHash": "4ece7ad5d6e75c93d637a44ce24b9c3f3d522cb7322ff4ecf862220f3a905262",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./prisma-client\"\n  // previewFeatures = [\"relationJoins\"]\n}\n\ndatasource db {\n  provider     = \"mysql\"\n  url          = env(\"DATABASE_URL\")\n  relationMode = \"prisma\"\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  name      String   @db.VarChar(32)\n  email     String   @db.VarChar(32)\n  avatar    String   @db.VarChar(128)\n  password  String   @db.VarChar(128)\n  createdAt DateTime @map(\"created_at\")\n  updatedAt DateTime @map(\"updated_at\")\n\n  @@map(\"user\")\n}\n",
+  "inlineSchemaHash": "9e3faa49fdf2d98b63cbf97a32f631826f08833759d7cdfe5a13b6cc53027a92",
   "copyEngine": true
 }
 config.dirname = '/'

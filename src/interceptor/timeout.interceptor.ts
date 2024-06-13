@@ -1,17 +1,5 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-  RequestTimeoutException,
-} from '@nestjs/common';
-import {
-  catchError,
-  Observable,
-  throwError,
-  timeout,
-  TimeoutError,
-} from 'rxjs';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor, RequestTimeoutException } from '@nestjs/common';
+import { catchError, Observable, throwError, timeout, TimeoutError } from 'rxjs';
 
 /**
  * http接口 10s 超时

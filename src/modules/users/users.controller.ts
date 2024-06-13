@@ -1,20 +1,11 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ConfigService } from '../config/config.service';
 import { getIOSTime } from '@/utils/time-utils';
 import { Roles } from '@/decorator/roles.decorator';
 import { RoleEnum } from '@/constants/role.enum';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from '@/modules/users/entities/user.entity';
 
 @ApiTags('User')
@@ -26,10 +17,10 @@ export class UsersController {
   ) {}
 
   @Get('/detail/:id')
-  @ApiOperation({ summary: '获取用户详情', tags: ['User'] })
-  @Roles([RoleEnum.admin, RoleEnum.superAdmin])
-  async getUserDetail(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.getUserById(id);
+  @ApiOperation({ summary: '获取用户详情' })
+  async getUserDetail(@Param('id', ParseIntPipe) id: number): Promise<UserEntity> {
+    const ret = await this.userService.getUserById(id);
+    return new UserEntity(ret);
   }
 
   @Post('/delete/:id')
@@ -45,14 +36,14 @@ export class UsersController {
 
   @Post('/create')
   @ApiBody({ type: CreateUserDto })
-  @ApiResponse({ type: UserEntity })
   @ApiOperation({ summary: '创建用户' })
-  addUser(@Body() createUserDto: CreateUserDto) {
+  async addUser(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
     const user = {
       ...createUserDto,
       createdAt: getIOSTime(),
       updatedAt: getIOSTime(),
     };
-    return this.userService.addUser(user);
+    const ret = await this.userService.addUser(user);
+    return new UserEntity(ret);
   }
 }

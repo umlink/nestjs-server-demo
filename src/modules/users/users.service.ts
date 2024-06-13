@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '@/prisma.service';
 import { Prisma } from '@prisma/client';
 import { getIOSTime } from '@/utils/time-utils';
+import { UserEntity } from '@/modules/users/entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -18,14 +19,9 @@ export class UsersService {
       },
     });
   }
-  async getUserById(id: number) {
+  async getUserById(id: number): Promise<UserEntity> {
     return this.prisma.user.findUnique({
       where: { id },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-      },
     });
   }
   async addUser(user: Prisma.UserCreateInput) {

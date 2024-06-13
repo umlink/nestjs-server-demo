@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { ClassSerializerInterceptor, MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { UsersModule } from './modules/users/users.module';
@@ -12,6 +12,8 @@ import { JwtAuthGuard } from '@/modules/auth/auth.guard';
 import { PostInterceptor } from '@/interceptor/post.interceptor';
 import { ResponseInterceptor } from '@/interceptor/response.interceptor';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ScheduleModule } from '@nestjs/schedule';
+import { DemoService } from '@/schedule/demo.service';
 
 /**
  * ThrottlerModule: 限流
@@ -42,6 +44,7 @@ const throttleOptions = [
       ttl: 1000 * 60,
       max: 1000 * 60 * 60,
     }),
+    ScheduleModule.forRoot(),
     ThrottlerModule.forRoot(throttleOptions),
     TestModule,
     AuthModule,
@@ -49,6 +52,7 @@ const throttleOptions = [
   ],
   controllers: [],
   providers: [
+    DemoService,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard, // 授权认证
@@ -70,6 +74,10 @@ const throttleOptions = [
       useClass: ResponseInterceptor, // 统一响应处理
     },
     {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor, // 响应体根据某些规则序列化
+    },
+    {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter, // 异常捕获
     },
@@ -78,8 +86,6 @@ const throttleOptions = [
 // 设置中间件，可指定路由可方法
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL });
+    consumer.apply(LoggerMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

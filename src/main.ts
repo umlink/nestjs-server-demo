@@ -2,14 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import logger from './middleware/logfn.middleware';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import {
-  FastifyAdapter,
-  NestFastifyApplication,
-} from '@nestjs/platform-fastify';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
 import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor';
-import { ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 /**
  * ⚠️底层使用 fastify
@@ -27,7 +24,7 @@ async function mainApp() {
   // 启用跨源资源共享（CORS）保护机制
   app.enableCors();
   // 设置接口统一前缀
-  // app.setGlobalPrefix('xxx-api');
+  app.setGlobalPrefix('xxx-api');
   /**
    * 参数校验
    * disableErrorMessages: true 可禁用详细信息
@@ -55,7 +52,7 @@ async function mainApp() {
     .addTag('🤣Nestjs Service')
     .build();
   const document = SwaggerModule.createDocument(app, config, {
-    ignoreGlobalPrefix: true, // 忽略设置 setGlobalPrefix
+    ignoreGlobalPrefix: false, // 忽略设置 setGlobalPrefix
   });
   SwaggerModule.setup('/swagger-api', app, document);
 
@@ -63,4 +60,4 @@ async function mainApp() {
   await app.listen(DEFAULT_PORT, '0.0.0.0');
   /*------------------------------------------------------------------------------*/
 }
-mainApp().then(() => console.info(`server started by 0.0.0.0:${DEFAULT_PORT}`));
+mainApp().then(() => Logger.log(`server started by 0.0.0.0:${DEFAULT_PORT}`));

@@ -3,10 +3,10 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ConfigService } from '../config/config.service';
 import { getIOSTime } from '@/utils/time-utils';
-import { Roles } from '@/decorator/roles.decorator';
-import { RoleEnum } from '@/constants/role.enum';
+import { RequiredRoles } from '@/decorator/roles.decorator';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from '@/modules/users/entities/user.entity';
+import { RolesEnums } from '@/constants/enums';
 
 @ApiTags('User')
 @Controller('user')
@@ -25,7 +25,7 @@ export class UsersController {
 
   @Post('/delete/:id')
   @ApiOperation({ summary: '删除用户' })
-  @Roles([RoleEnum.admin, RoleEnum.superAdmin])
+  @RequiredRoles([RolesEnums.Admin, RolesEnums.SuperAdmin])
   async delUserById(@Param('id', ParseIntPipe) id: number) {
     const res = await this.userService.delUser(id);
     if (!res) {

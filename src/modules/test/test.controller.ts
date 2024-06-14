@@ -1,10 +1,10 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
-import { Roles } from '@/decorator/roles.decorator';
-import { RoleEnum } from '@/constants/role.enum';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { Public } from '@/decorator/auth.decorators';
+import { RequiredRoles } from '@/decorator/roles.decorator';
+import { RolesEnums } from '@/constants/enums';
 
 type CacheTypeDemo = {
   name: string;
@@ -36,7 +36,7 @@ export class TestController {
     return await this.cacheManager.get<CacheTypeDemo>('cache-key');
   }
   @Get('/test2')
-  @Roles([RoleEnum.admin, RoleEnum.superAdmin]) // 只有管理员和超管可以访问
+  @RequiredRoles([RolesEnums.Admin, RolesEnums.SuperAdmin]) // 只有管理员和超管可以访问
   getTest2(): string {
     return this.configService.get('HOST_NAME');
   }

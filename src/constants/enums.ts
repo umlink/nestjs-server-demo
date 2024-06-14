@@ -1,11 +1,13 @@
 export enum RolesEnums {
-  User = 'User',
-  Admin = 'Admin',
-  SuperAdmin = 'SuperAdmin',
+  User = 'USER',
+  Admin = 'ADMIN',
+  SuperAdmin = 'SUPER_ADMIN',
 }
 
+/**
+ * 其它更细粒度的权限控制
+ */
 export enum PermissionEnums {
-  Manage = 'Manage',
   Create = 'Create',
   Read = 'Read',
   Update = 'Update',

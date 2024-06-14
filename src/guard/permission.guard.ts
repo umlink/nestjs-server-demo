@@ -7,7 +7,7 @@ import { PERMISSION_KEY } from '@/decorator/permission.decorator';
 
 /**
  * 数据级操作管控
- * 如：增删该差导出等等
+ * 如：增删改查导出等等
  * */
 @Injectable()
 export class PermissionGuard implements CanActivate {
@@ -25,6 +25,6 @@ export class PermissionGuard implements CanActivate {
       return true;
     }
     const { user } = context.switchToHttp().getRequest();
-    return requiredPermission.some((role) => user.roles?.includes(role));
+    return requiredPermission.some((permission) => user.permission?.includes(permission));
   }
 }

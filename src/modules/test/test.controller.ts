@@ -5,6 +5,7 @@ import { Cache } from 'cache-manager';
 import { Public } from '@/decorator/auth.decorators';
 import { RequiredRoles } from '@/decorator/roles.decorator';
 import { RolesEnums } from '@/constants/enums';
+import { Vip } from '@/decorator/vip.decorators';
 
 type CacheTypeDemo = {
   name: string;
@@ -17,7 +18,9 @@ export class TestController {
     private readonly configService: ConfigService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
+
   @Get('/config')
+  @Vip()
   getConfig(): string {
     return this.configService.get('HOST_NAME');
   }
@@ -35,7 +38,7 @@ export class TestController {
   async getCache(): Promise<CacheTypeDemo> {
     return await this.cacheManager.get<CacheTypeDemo>('cache-key');
   }
-  @Get('/test2')
+  @Get('/admin')
   @RequiredRoles([RolesEnums.Admin, RolesEnums.SuperAdmin]) // 只有管理员和超管可以访问
   getTest2(): string {
     return this.configService.get('HOST_NAME');

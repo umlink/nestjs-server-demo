@@ -1,21 +1,15 @@
-import { ClassSerializerInterceptor, MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from './modules/config/config.module';
 import { TestModule } from './modules/test/test.modules';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
-import { HttpExceptionFilter } from '@/filters/http-exception.filters';
-import { RolesGuard } from '@/guard/roles.guard';
-import { JwtAuthGuard } from '@/modules/auth/auth.guard';
-import { PostInterceptor } from '@/interceptor/post.interceptor';
-import { ResponseInterceptor } from '@/interceptor/response.interceptor';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
-import { DemoService } from '@/schedule/demo.service';
 import { PrismaModule } from '@/modules/prisma/prisma.module';
 import { LogsModule } from '@/modules/logs/logs.module';
+import providers from '@/providers';
 
 /**
  * ThrottlerModule: 限流
@@ -55,37 +49,7 @@ const throttleOptions = [
     UsersModule,
   ],
   controllers: [],
-  providers: [
-    DemoService,
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard, // 授权认证
-    },
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard, // 角色守卫
-    },
-    {
-      provide: APP_GUARD,
-      useClass: ThrottlerGuard, // 全局限流
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: PostInterceptor, // 处理 post 201
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ResponseInterceptor, // 统一响应处理
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ClassSerializerInterceptor, // 响应体根据某些规则序列化
-    },
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter, // 异常捕获
-    },
-  ],
+  providers,
 })
 // 设置中间件，可指定路由可方法
 export class AppModule {

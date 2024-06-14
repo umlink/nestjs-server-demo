@@ -20,7 +20,7 @@ export class TestController {
 
   @Get('/config')
   getConfig(): string {
-    return this.configService.get('HOST_NAME');
+    return this.configService.get('NODE_ENV');
   }
   @Get('/addCache')
   @Public()
@@ -39,6 +39,6 @@ export class TestController {
   @Get('/admin')
   @RequiredRoles([RolesEnums.Admin, RolesEnums.SuperAdmin]) // 只有管理员和超管可以访问
   getTest2(): string {
-    return this.configService.get('HOST_NAME');
+    return this.configService.get('NODE_ENV');
   }
 }

@@ -1,7 +1,13 @@
 export type EnvConfig = {
-  folder: string;
-  NEST_JWT_SECRET: string;
-  NEST_JWT_AUTH_KEY: string;
-  NEST_JWT_EXPIRES_IN: string;
-  HOST_NAME: string;
+  NODE_ENV: string;
+
+  JWT_SECRET: string;
+  JWT_AUTH_KEY: string;
+  JWT_EXPIRES_IN: string;
+
+  DATABASE_URL: string;
+  DATABASE_EXPLICIT_CONNECT: string;
+
+  CACHE_HTTP_GLOBAL_TTL: string;
+  CACHE_HTTP_GLOBAL_MAX: string;
 };

@@ -6,12 +6,13 @@ import { VipGuard } from '@/guard/vip.guard';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { PostInterceptor } from '@/interceptor/post.interceptor';
 import { ResponseInterceptor } from '@/interceptor/response.interceptor';
+import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor';
 import { ClassSerializerInterceptor } from '@nestjs/common';
 import { HttpExceptionFilter } from '@/filters/http-exception.filters';
-import { DemoService } from '@/schedule/demo.service';
+import { TaskDemoService } from '@/schedule/taskDemo.service';
 
 const appModules: Provider[] = [
-  DemoService,
+  TaskDemoService, // 定时任务
   {
     provide: APP_GUARD,
     useClass: JwtAuthGuard, // 授权认证
@@ -39,6 +40,10 @@ const appModules: Provider[] = [
   {
     provide: APP_INTERCEPTOR,
     useClass: ClassSerializerInterceptor, // 响应体根据某些规则序列化
+  },
+  {
+    provide: APP_INTERCEPTOR,
+    useClass: TimeoutInterceptor, // 超时过滤【注意特殊情况单独设置超时时间，如上传场景】
   },
   {
     provide: APP_FILTER,

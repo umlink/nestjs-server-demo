@@ -9,8 +9,8 @@ import { CONFIG_OPTIONS } from '@/constants/dynamic-module';
 export class ConfigService {
   private readonly envConfig: EnvConfig;
 
-  constructor(@Inject(CONFIG_OPTIONS) private options: Partial<EnvConfig>) {
-    const filePath = `.env.${process.env.NODE_ENV || 'dev'}`;
+  constructor(@Inject(CONFIG_OPTIONS) private options: Partial<{ folder: string }>) {
+    const filePath = `.env.${process.env.NODE_ENV || 'development'}`;
     const envFile = path.resolve(__dirname, '../../../', options.folder, filePath);
     this.envConfig = dotenv.parse(fs.readFileSync(envFile));
     console.log(this.envConfig);

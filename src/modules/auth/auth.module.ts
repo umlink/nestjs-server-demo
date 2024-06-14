@@ -15,8 +15,8 @@ import { ConfigService } from '@/modules/config/config.service';
       inject: [ConfigService],
       useFactory(config: ConfigService) {
         return {
-          secret: config.get('NEST_JWT_SECRET'),
-          signOptions: { expiresIn: config.get('NEST_JWT_EXPIRES_IN') },
+          secret: config.get('JWT_SECRET'),
+          signOptions: { expiresIn: config.get('JWT_EXPIRES_IN') },
         };
       },
     }),

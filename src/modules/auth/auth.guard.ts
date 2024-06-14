@@ -20,13 +20,13 @@ export class JwtAuthGuard implements CanActivate {
     if (isPublic) return true;
 
     const request = context.switchToHttp().getRequest();
-    const token = request.headers[this.config.get('NEST_JWT_AUTH_KEY')];
+    const token = request.headers[this.config.get('JWT_AUTH_KEY')];
     if (!token) {
       throw new UnauthorizedException();
     }
     try {
       request['user'] = await this.jwtService.verifyAsync(token, {
-        secret: this.config.get('NEST_JWT_SECRET'),
+        secret: this.config.get('JWT_SECRET'),
       });
     } catch {
       throw new UnauthorizedException();

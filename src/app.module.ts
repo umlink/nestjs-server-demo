@@ -7,9 +7,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
-import { PrismaModule } from '@/modules/prisma/prisma.module';
+import { PrismaModule } from 'nestjs-prisma';
 import { LogsModule } from '@/modules/logs/logs.module';
 import providers from '@/providers';
+import { ConfigService } from '@/modules/config/config.service';
 
 /**
  * ThrottlerModule: 限流
@@ -34,16 +35,34 @@ const throttleOptions = [
 ];
 @Module({
   imports: [
-    ConfigModule.register({ folder: 'config' }),
-    CacheModule.register({
+    ConfigModule.register({ folder: '' }),
+    CacheModule.registerAsync({
       isGlobal: true,
-      ttl: 1000 * 60,
-      max: 1000 * 60 * 60,
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return {
+          ttl: 1000 * Number(configService.get('CACHE_HTTP_GLOBAL_TTL')),
+          max: 1000 * Number(configService.get('CACHE_HTTP_GLOBAL_MAX')),
+        };
+      },
+    }),
+    PrismaModule.forRootAsync({
+      isGlobal: true,
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        const dbUrl = configService.get('DATABASE_URL');
+        return {
+          prismaOptions: {
+            log: ['info', 'query'],
+            datasourceUrl: dbUrl,
+          },
+          explicitConnect: configService.get('DATABASE_EXPLICIT_CONNECT') === 'True',
+        };
+      },
     }),
     ScheduleModule.forRoot(),
     ThrottlerModule.forRoot(throttleOptions),
     LogsModule,
-    PrismaModule,
     TestModule,
     AuthModule,
     UsersModule,

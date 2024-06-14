@@ -27,7 +27,8 @@
   },
   "prisma": {
     "schema": "./src/prisma/schema.prisma",
-    "seed": "ts-node prisma/seed.ts"
+    "migrate:dev": "npx dotenv -e .env.development -- prisma migrate dev",
+    "prisma:studio": "npx dotenv -e .env.development -- prisma studio"
   },
   "dependencies": {
     "@fastify/csrf-protection": "^6.4.1",

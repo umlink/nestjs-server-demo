@@ -5,7 +5,6 @@ import { Cache } from 'cache-manager';
 import { Public } from '@/decorator/auth.decorators';
 import { RequiredRoles } from '@/decorator/roles.decorator';
 import { RolesEnums } from '@/constants/enums';
-import { Vip } from '@/decorator/vip.decorators';
 
 type CacheTypeDemo = {
   name: string;
@@ -20,7 +19,6 @@ export class TestController {
   ) {}
 
   @Get('/config')
-  @Vip()
   getConfig(): string {
     return this.configService.get('HOST_NAME');
   }

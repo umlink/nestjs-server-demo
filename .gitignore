@@ -4,7 +4,7 @@
 /build
 
 # Logs
-logs
+nestjs-logs
 *.log
 npm-debug.log*
 pnpm-debug.log*
@@ -41,7 +41,7 @@ config/.env
 .env.test.local
 .env.production.local
 .env.local
-.env
+#.env
 
 # temp directory
 .temp

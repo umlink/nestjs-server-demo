@@ -1,7 +1,17 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Inject,
+  Logger,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ConfigService } from '../config/config.service';
 import { getIOSTime } from '@/utils/time-utils';
 import { RequiredRoles } from '@/decorator/roles.decorator';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -11,14 +21,16 @@ import { RolesEnums } from '@/constants/enums';
 @ApiTags('User')
 @Controller('user')
 export class UsersController {
-  constructor(
-    private readonly userService: UsersService,
-    private readonly configService: ConfigService,
-  ) {}
+  constructor(private readonly userService: UsersService) {}
 
   @Get('/detail/:id')
   @ApiOperation({ summary: '获取用户详情' })
   async getUserDetail(@Param('id', ParseIntPipe) id: number): Promise<UserEntity> {
+    Logger.error('1111111 error');
+    Logger.error('2222222error msg', { a: 1, b: 2 });
+    Logger.debug('3333333debug msg', { a: 1, b: 2 });
+    Logger.log('4444444 info msg', { a: 1, b: 2 });
+    Logger.warn('4warn msg', { a: 1, b: 2 });
     const ret = await this.userService.getUserById(id);
     return new UserEntity(ret);
   }

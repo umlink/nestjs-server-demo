@@ -3,7 +3,7 @@ import { FastifyRequest } from 'fastify';
 export const getReqMainInfo: (req: FastifyRequest) => {
   [prop: string]: any;
 } = (req) => {
-  const { query, headers, url, method, body, connection } = req;
+  const { query, headers, url, originalUrl, method, body, connection } = req;
 
   // 获取 IP
   const xRealIp = headers['X-Real-IP'];
@@ -13,7 +13,7 @@ export const getReqMainInfo: (req: FastifyRequest) => {
   const ip = xRealIp || xForwardedFor || cIp || remoteAddress;
 
   return {
-    url,
+    url: originalUrl || url,
     host: headers.host,
     ip,
     method,

@@ -17,6 +17,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const message = errMsg || getReasonPhrase(code) || 'Server error';
     // 日志打印
     this.logger.error(`httpRequestError`, {
+      stack: exception.stack,
       req: getReqMainInfo(ctx.getRequest<FastifyRequest>()),
       msg: message,
     });

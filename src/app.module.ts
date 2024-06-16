@@ -11,11 +11,6 @@ import { PrismaModule } from '@/modules/prisma/prisma.module';
 import { LogsModule } from '@/modules/logs/logs.module';
 import providers from '@/providers';
 import { ConfigService } from '@/modules/config/config.service';
-
-/**
- * ThrottlerModule: 限流
- * 一秒钟内调用次数不超过 3 次、10 秒内调用次数不超过 20 次、一分钟内调用次数不超过 100 次
- */
 @Module({
   imports: [
     ConfigModule.register({ folder: '' }),
@@ -60,7 +55,6 @@ import { ConfigService } from '@/modules/config/config.service';
     AuthModule,
     UsersModule,
   ],
-  controllers: [],
   providers,
 })
 // 设置中间件，可指定路由可方法

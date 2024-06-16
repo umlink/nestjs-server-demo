@@ -2,8 +2,8 @@ import { Exclude, Transform } from 'class-transformer';
 import dayjs from 'dayjs';
 
 export class UserEntity {
-  id: number;
-  name: string;
+  id: bigint;
+  username: string;
   email: string;
 
   @Exclude()

@@ -7,6 +7,6 @@ export class TaskDemoService {
 
   @Cron(CronExpression.EVERY_10_SECONDS)
   handleCron() {
-    this.logger.debug('Cron task called every 10 seconds');
+    Logger.log('这是一个定时任务，每 10s 执行一次');
   }
 }

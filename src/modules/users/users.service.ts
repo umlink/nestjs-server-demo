@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from 'nestjs-prisma/dist/prisma.service';
+import { PrismaService } from '@/modules/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { getIOSTime } from '@/utils/time-utils';
 import { UserEntity } from '@/modules/users/entities/user.entity';
@@ -14,7 +14,7 @@ export class UsersService {
       select: {
         id: true,
         email: true,
-        name: true,
+        username: true,
         password: true,
       },
     });
@@ -30,7 +30,7 @@ export class UsersService {
       select: {
         id: true,
         email: true,
-        name: true,
+        username: true,
       },
     });
   }

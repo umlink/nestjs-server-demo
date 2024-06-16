@@ -6,7 +6,7 @@ export type EnvConfig = {
   JWT_EXPIRES_IN: string;
 
   DATABASE_URL: string;
-  DATABASE_EXPLICIT_CONNECT: string;
+  DATABASE_LOG_LEVEL: string;
 
   CACHE_HTTP_GLOBAL_TTL: string;
   CACHE_HTTP_GLOBAL_MAX: string;
@@ -14,4 +14,11 @@ export type EnvConfig = {
   LOG_PATH: string;
   LOG_MAX_SIZE: string;
   LOG_MAX_FILES: string;
+
+  THROTTLE_SHORT_TTL: string;
+  THROTTLE_SHORT_LIMIT: string;
+  THROTTLE_MEDIUM_TTL: string;
+  THROTTLE_MEDIUM_LIMIT: string;
+  THROTTLE_LONG_TTL: string;
+  THROTTLE_LONG_LIMIT: string;
 };

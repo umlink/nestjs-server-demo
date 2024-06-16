@@ -7,7 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
-import { PrismaModule } from 'nestjs-prisma';
+import { PrismaModule } from '@/modules/prisma/prisma.module';
 import { LogsModule } from '@/modules/logs/logs.module';
 import providers from '@/providers';
 import { ConfigService } from '@/modules/config/config.service';
@@ -16,23 +16,6 @@ import { ConfigService } from '@/modules/config/config.service';
  * ThrottlerModule: 限流
  * 一秒钟内调用次数不超过 3 次、10 秒内调用次数不超过 20 次、一分钟内调用次数不超过 100 次
  */
-const throttleOptions = [
-  {
-    name: 'short',
-    ttl: 1000,
-    limit: 3,
-  },
-  {
-    name: 'medium',
-    ttl: 10000,
-    limit: 20,
-  },
-  {
-    name: 'long',
-    ttl: 60000,
-    limit: 100,
-  },
-];
 @Module({
   imports: [
     ConfigModule.register({ folder: '' }),
@@ -46,22 +29,32 @@ const throttleOptions = [
         };
       },
     }),
-    PrismaModule.forRootAsync({
-      isGlobal: true,
+    ScheduleModule.forRoot(),
+    ThrottlerModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
-        const dbUrl = configService.get('DATABASE_URL');
+      useFactory(configService: ConfigService) {
         return {
-          prismaOptions: {
-            log: ['info', 'query'],
-            datasourceUrl: dbUrl,
-          },
-          explicitConnect: configService.get('DATABASE_EXPLICIT_CONNECT') === 'True',
+          throttlers: [
+            {
+              name: 'short',
+              ttl: Number(configService.get('THROTTLE_SHORT_TTL')),
+              limit: Number(configService.get('THROTTLE_SHORT_LIMIT')),
+            },
+            {
+              name: 'medium',
+              ttl: Number(configService.get('THROTTLE_MEDIUM_TTL')),
+              limit: Number(configService.get('THROTTLE_MEDIUM_LIMIT')),
+            },
+            {
+              name: 'long',
+              ttl: Number(configService.get('THROTTLE_LONG_TTL')),
+              limit: Number(configService.get('THROTTLE_LONG_LIMIT')),
+            },
+          ],
         };
       },
     }),
-    ScheduleModule.forRoot(),
-    ThrottlerModule.forRoot(throttleOptions),
+    PrismaModule,
     LogsModule,
     TestModule,
     AuthModule,

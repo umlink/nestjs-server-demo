@@ -22,7 +22,7 @@ const getTransportByLevel = (configService: ConfigService, level?: string) => {
         (info) =>
           `${info.timestamp} [${info.level}] : ${info.message} ${
             Object.keys(info).length ? JSON.stringify(info, null, level === 'error' ? 2 : 0) : ''
-          }\n${info['stack'] || ''}`,
+          } ${info['stack'] || ''}`,
       ),
     ),
   };
@@ -44,7 +44,7 @@ const getTransportByLevel = (configService: ConfigService, level?: string) => {
         if (process.env.NODE_ENV === 'development') {
           transports.push(
             new winston.transports.Console({
-              // level: "info", 可指定一种日志类型，指定，则为全部
+              // level: "info", 可指定一种日志类型，不指定，则为全部
               format: winston.format.combine(
                 winston.format.timestamp({
                   format: 'YYYY-MM-DD HH:mm:ss',

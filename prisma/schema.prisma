@@ -57,8 +57,9 @@ model VipExchangeCode {
   startTime  DateTime @map("start_time") @db.DateTime(0)
   expireTime DateTime @map("expire_time") @db.DateTime(0)
   creatorId  Int      @map("creator_id")
-  createdAt   DateTime @map("created_at") @db.DateTime(0)
-  updatedAt   DateTime @map("updated_at") @db.DateTime(0)
+  exchanged  Int      @default(0) @db.TinyInt
+  createdAt  DateTime @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime @map("updated_at") @db.DateTime(0)
 
   @@index([id], map: "vip_exchange_code_id_index")
   @@map("vip_exchange_code")
@@ -123,4 +124,17 @@ model ResumeTemplate {
 
   @@index([creatorId], map: "resume_template_creator_id_index")
   @@map("resume_template")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model order {
+  id          String    @id @unique(map: "id") @db.VarChar(32)
+  userId      Int       @map("user_id")
+  price       Decimal   @db.Decimal(10, 0)
+  payType     Int?      @map("pay_type")
+  orderStatus Int       @default(0) @map("order_status")
+  orderDesc   String?   @map("order_desc") @db.VarChar(512)
+  overtime    DateTime? @db.DateTime(0)
+  createdAt   DateTime  @map("created_at") @db.DateTime(0)
+  updatedAt   DateTime  @map("updated_at") @db.DateTime(0)
 }

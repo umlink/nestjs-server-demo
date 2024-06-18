@@ -12,17 +12,20 @@
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
     "start:debug": "cross-env NODE_ENV=development nest start --debug --watch",
     "start:prod": "cross-env NODE_ENV=production node dist/main",
-    "migrate:dev": "npx ts-node src/scripts/migrate.ts",
-    "migrate:dev:create": "cross-env NODE_ENV=development npx prisma migrate dev --create-only",
-    "migrate:deploy": "cross-env NODE_ENV=development npx prisma migrate deploy",
-    "prisma:generate": "cross-env NODE_ENV=development npx prisma generate",
-    "prisma:studio": "cross-env NODE_ENV=development npx prisma studio",
+    "migrate:dev": "npx dotenv -e .env.development -- prisma migrate dev",
+    "migrate:dev:create": "npx dotenv -e .env.development -- prisma migrate dev --create-only",
+    "migrate:deploy": "npx dotenv -e .env.development -- prisma migrate deploy",
+    "prisma:generate": "npx dotenv -e .env.development -- prisma generate",
+    "prisma:studio": "npx dotenv -e .env.development -- prisma studio",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "prisma": {
+    "migrate:dev": "npx dotenv -e .env.development -- prisma migrate dev"
   },
   "dependencies": {
     "@fastify/csrf-protection": "^6.4.1",

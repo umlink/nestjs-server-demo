@@ -8,9 +8,14 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PrismaModule } from '@/modules/prisma/prisma.module';
-import { LogsModule } from '@/modules/logs/logs.module';
 import providers from '@/providers';
 import { ConfigService } from '@/modules/config/config.service';
+import { consoleLogOption, getLogTransportByLevel, throttleOptions } from '@/utils/modules-utils';
+import { WinstonModule } from 'nest-winston';
+import * as Transport from 'winston-transport';
+import winston from 'winston';
+import 'winston-daily-rotate-file';
+
 @Module({
   imports: [
     ConfigModule.register({ folder: '' }),
@@ -24,33 +29,31 @@ import { ConfigService } from '@/modules/config/config.service';
         };
       },
     }),
-    ScheduleModule.forRoot(),
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
       useFactory(configService: ConfigService) {
         return {
-          throttlers: [
-            {
-              name: 'short',
-              ttl: Number(configService.get('THROTTLE_SHORT_TTL')),
-              limit: Number(configService.get('THROTTLE_SHORT_LIMIT')),
-            },
-            {
-              name: 'medium',
-              ttl: Number(configService.get('THROTTLE_MEDIUM_TTL')),
-              limit: Number(configService.get('THROTTLE_MEDIUM_LIMIT')),
-            },
-            {
-              name: 'long',
-              ttl: Number(configService.get('THROTTLE_LONG_TTL')),
-              limit: Number(configService.get('THROTTLE_LONG_LIMIT')),
-            },
-          ],
+          throttlers: throttleOptions(configService),
         };
       },
     }),
+    WinstonModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory(configService: ConfigService) {
+        const transports: Transport[] = [
+          getLogTransportByLevel(configService),
+          getLogTransportByLevel(configService, 'error'),
+        ];
+        if (process.env.NODE_ENV === 'development') {
+          transports.push(new winston.transports.Console(consoleLogOption));
+        }
+        return {
+          transports,
+        };
+      },
+    }),
+    ScheduleModule.forRoot(),
     PrismaModule,
-    LogsModule,
     TestModule,
     AuthModule,
     UsersModule,

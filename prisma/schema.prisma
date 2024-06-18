@@ -10,11 +10,12 @@ datasource db {
 
 model User {
   id        BigInt   @id @unique(map: "id") @default(autoincrement())
-  username  String   @db.VarChar(32)
   email     String   @db.VarChar(64)
   avatar    String   @db.VarChar(128)
+  username  String   @db.VarChar(32)
   password  String   @db.VarChar(128)
   disabled  Int      @default(0) @db.TinyInt
+  roles     Json
   createdAt DateTime @map("created_at")
   updatedAt DateTime @map("updated_at")
 
@@ -137,4 +138,31 @@ model order {
   overtime    DateTime? @db.DateTime(0)
   createdAt   DateTime  @map("created_at") @db.DateTime(0)
   updatedAt   DateTime  @map("updated_at") @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model permission {
+  id         Int      @id @default(autoincrement())
+  role_id    Int      @map("role_id")
+  name       String   @db.VarChar(32)
+  enum       String   @db.VarChar(32)
+  desc       String   @db.VarChar(128)
+  creator_id Int      @map("creator_id")
+  createdAt  DateTime @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime @map("updated_at") @db.DateTime(0)
+
+  @@index([id], map: "permission_id_index")
+  @@index([role_id], map: "permission_role_id_index")
+}
+
+model role {
+  id         Int      @id @default(autoincrement())
+  enum       String   @unique(map: "role_enum_uindex") @db.VarChar(32)
+  name       String   @db.VarChar(64)
+  desc       String   @db.VarChar(512)
+  creator_id Int      @map("creator_id")
+  createdAt  DateTime @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime @map("updated_at") @db.DateTime(0)
+
+  @@index([id], map: "role_id_index")
 }

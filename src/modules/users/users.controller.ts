@@ -1,15 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-  Post,
-  Inject,
-  Logger,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Logger, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { getIOSTime } from '@/utils/time-utils';
@@ -17,6 +6,7 @@ import { RequiredRoles } from '@/decorator/roles.decorator';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from '@/modules/users/entities/user.entity';
 import { RolesEnums } from '@/constants/enums';
+import { Prisma } from '@prisma/client';
 
 @ApiTags('User')
 @Controller('user')
@@ -52,6 +42,7 @@ export class UsersController {
   async addUser(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
     const user = {
       ...createUserDto,
+      roles: ['USER'] as Prisma.JsonArray,
       createdAt: getIOSTime(),
       updatedAt: getIOSTime(),
     };

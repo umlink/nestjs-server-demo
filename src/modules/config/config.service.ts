@@ -11,7 +11,7 @@ export class ConfigService {
 
   constructor(@Inject(CONFIG_OPTIONS) private options: Partial<{ folder: string }>) {
     const filePath = `.env.${process.env.NODE_ENV || 'development'}`;
-    const envFile = path.resolve(__dirname, '../../../', options.folder, filePath);
+    const envFile = path.resolve(process.cwd(), options.folder, filePath);
     this.envConfig = dotenv.parse(fs.readFileSync(envFile));
     console.log(this.envConfig);
   }

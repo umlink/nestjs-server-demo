@@ -12,6 +12,7 @@ import providers from '@/providers';
 import { ConfigService } from '@/modules/config/config.service';
 import { consoleLogOption, getLogTransportByLevel, throttleOptions } from '@/utils/modules-utils';
 import { WinstonModule } from 'nest-winston';
+import { UploadModule } from './modules/upload/upload.module';
 import * as Transport from 'winston-transport';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
@@ -57,6 +58,7 @@ import 'winston-daily-rotate-file';
     TestModule,
     AuthModule,
     UsersModule,
+    UploadModule,
   ],
   providers,
 })

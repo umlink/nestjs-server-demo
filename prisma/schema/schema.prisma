@@ -17,18 +17,6 @@ datasource db {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model InviteCode {
-  code       String    @id @unique(map: "code") @db.VarChar(32)
-  userId     Int       @map("user_id")
-  expireTime DateTime? @map("expire_time") @db.DateTime(0)
-  createdAt  DateTime? @map("created_at") @db.DateTime(0)
-  updatedAt  DateTime? @map("updated_at") @db.DateTime(0)
-
-  @@index([userId], map: "invite_code_user_id_index")
-  @@map("invite_code")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model InviteUser {
   id          Int      @id @default(autoincrement())
   inviteCode  String   @map("invite_code") @db.VarChar(32)
@@ -41,23 +29,6 @@ model InviteUser {
   @@index([inviteCode], map: "invite_user_invite_code_index")
   @@index([receiverId], map: "invite_user_receiver_id_index")
   @@map("invite_user")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model resume {
-  id          Int      @id @unique(map: "id")
-  title       String   @db.VarChar(64)
-  content     Json
-  userId      Int      @map("user_id")
-  templateId  Int?     @map("template_id")
-  themeColor  String   @map("theme_color") @db.VarChar(10)
-  isPublic    Int      @default(0) @map("is_public") @db.TinyInt
-  exportCount Int      @map("export_count")
-  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
-
-  @@index([templateId], map: "resume_template_id_index")
-  @@index([userId], map: "resume_user_id_index")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -75,44 +46,4 @@ model ResumeTemplate {
 
   @@index([creatorId], map: "resume_template_creator_id_index")
   @@map("resume_template")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model order {
-  id          String    @id @unique(map: "id") @db.VarChar(32)
-  userId      Int       @map("user_id")
-  price       Decimal   @db.Decimal(10, 0)
-  payType     Int?      @map("pay_type")
-  orderStatus Int       @default(0) @map("order_status")
-  orderDesc   String?   @map("order_desc") @db.VarChar(512)
-  overtime    DateTime? @db.DateTime(0)
-  createdAt   DateTime  @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt   DateTime  @default(now()) @map("updated_at") @db.Timestamp(0)
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model permission {
-  id        Int      @id @default(autoincrement())
-  role_id   Int      @map("role_id")
-  name      String   @db.VarChar(32)
-  enum      String   @db.VarChar(32)
-  desc      String   @db.VarChar(128)
-  creatorId Int      @map("creator_id")
-  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
-
-  @@index([id], map: "permission_id_index")
-  @@index([role_id], map: "permission_role_id_index")
-}
-
-model role {
-  id        Int      @id @default(autoincrement())
-  enum      String   @unique(map: "role_enum_uindex") @db.VarChar(32)
-  name      String   @db.VarChar(64)
-  desc      String   @db.VarChar(512)
-  creatorId Int      @map("creator_id")
-  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
-
-  @@index([id], map: "role_id_index")
 }

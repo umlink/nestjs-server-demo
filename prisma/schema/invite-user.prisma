@@ -1,0 +1,14 @@
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model InviteUser {
+  id          Int      @id @default(autoincrement())
+  inviteCode  String   @map("invite_code") @db.VarChar(32)
+  initiatorId Int      @map("initiator_id")
+  receiverId  Int      @map("receiver_id")
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
+
+  @@index([initiatorId], map: "invite_user_initiator_id_index")
+  @@index([inviteCode], map: "invite_user_invite_code_index")
+  @@index([receiverId], map: "invite_user_receiver_id_index")
+  @@map("invite_user")
+}

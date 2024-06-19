@@ -159,19 +159,6 @@ exports.Prisma.PermissionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ResumeTemplateScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  title: 'title',
-  content: 'content',
-  headerImg: 'headerImg',
-  creatorId: 'creatorId',
-  useCount: 'useCount',
-  isVip: 'isVip',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ResumeScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -181,6 +168,19 @@ exports.Prisma.ResumeScalarFieldEnum = {
   themeColor: 'themeColor',
   isPublic: 'isPublic',
   exportCount: 'exportCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ResumeTemplateScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  title: 'title',
+  content: 'content',
+  headerImg: 'headerImg',
+  creatorId: 'creatorId',
+  useCount: 'useCount',
+  isVip: 'isVip',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -207,6 +207,15 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.VipScalarFieldEnum = {
+  userId: 'userId',
+  vipTypeId: 'vipTypeId',
+  start_time: 'start_time',
+  expire_time: 'expire_time',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.VipExchangeCodeScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -229,15 +238,6 @@ exports.Prisma.VipTypeScalarFieldEnum = {
   duration: 'duration',
   sellType: 'sellType',
   disabled: 'disabled',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.VipScalarFieldEnum = {
-  userId: 'userId',
-  vipTypeId: 'vipTypeId',
-  start_time: 'start_time',
-  expire_time: 'expire_time',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -273,13 +273,13 @@ exports.Prisma.ModelName = {
   InviteUser: 'InviteUser',
   order: 'order',
   permission: 'permission',
-  ResumeTemplate: 'ResumeTemplate',
   resume: 'resume',
+  ResumeTemplate: 'ResumeTemplate',
   role: 'role',
   User: 'User',
+  Vip: 'Vip',
   VipExchangeCode: 'VipExchangeCode',
-  VipType: 'VipType',
-  Vip: 'Vip'
+  VipType: 'VipType'
 };
 
 /**

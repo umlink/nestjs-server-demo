@@ -1,11 +1,11 @@
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model Vip {
-  userId      Int       @id @unique(map: "vip_user_id_uindex") @map("user_id")
-  vipTypeId   Int       @map("vip_type_id")
-  start_time  DateTime  @db.DateTime(0)
-  expire_time DateTime? @db.DateTime(0)
-  createdAt   DateTime  @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt   DateTime  @default(now()) @map("updated_at") @db.Timestamp(0)
+  userId      Int      @id @unique(map: "vip_user_id_uindex") @map("user_id")
+  vipTypeId   Int      @map("vip_type_id")
+  start_time  DateTime @db.DateTime(0)
+  expire_time DateTime @db.DateTime(0)
+  createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
 
   @@index([vipTypeId], map: "vip_vip_type_id_index")
   @@map("vip")

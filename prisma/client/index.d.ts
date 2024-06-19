@@ -34,15 +34,15 @@ export type order = $Result.DefaultSelection<Prisma.$orderPayload>
  */
 export type permission = $Result.DefaultSelection<Prisma.$permissionPayload>
 /**
- * Model ResumeTemplate
- * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
- */
-export type ResumeTemplate = $Result.DefaultSelection<Prisma.$ResumeTemplatePayload>
-/**
  * Model resume
  * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  */
 export type resume = $Result.DefaultSelection<Prisma.$resumePayload>
+/**
+ * Model ResumeTemplate
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ */
+export type ResumeTemplate = $Result.DefaultSelection<Prisma.$ResumeTemplatePayload>
 /**
  * Model role
  * 
@@ -54,6 +54,11 @@ export type role = $Result.DefaultSelection<Prisma.$rolePayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Vip
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ */
+export type Vip = $Result.DefaultSelection<Prisma.$VipPayload>
+/**
  * Model VipExchangeCode
  * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  */
@@ -63,11 +68,6 @@ export type VipExchangeCode = $Result.DefaultSelection<Prisma.$VipExchangeCodePa
  * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  */
 export type VipType = $Result.DefaultSelection<Prisma.$VipTypePayload>
-/**
- * Model Vip
- * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
- */
-export type Vip = $Result.DefaultSelection<Prisma.$VipPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -232,16 +232,6 @@ export class PrismaClient<
   get permission(): Prisma.permissionDelegate<ExtArgs>;
 
   /**
-   * `prisma.resumeTemplate`: Exposes CRUD operations for the **ResumeTemplate** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ResumeTemplates
-    * const resumeTemplates = await prisma.resumeTemplate.findMany()
-    * ```
-    */
-  get resumeTemplate(): Prisma.ResumeTemplateDelegate<ExtArgs>;
-
-  /**
    * `prisma.resume`: Exposes CRUD operations for the **resume** model.
     * Example usage:
     * ```ts
@@ -250,6 +240,16 @@ export class PrismaClient<
     * ```
     */
   get resume(): Prisma.resumeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.resumeTemplate`: Exposes CRUD operations for the **ResumeTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ResumeTemplates
+    * const resumeTemplates = await prisma.resumeTemplate.findMany()
+    * ```
+    */
+  get resumeTemplate(): Prisma.ResumeTemplateDelegate<ExtArgs>;
 
   /**
    * `prisma.role`: Exposes CRUD operations for the **role** model.
@@ -272,6 +272,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs>;
 
   /**
+   * `prisma.vip`: Exposes CRUD operations for the **Vip** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Vips
+    * const vips = await prisma.vip.findMany()
+    * ```
+    */
+  get vip(): Prisma.VipDelegate<ExtArgs>;
+
+  /**
    * `prisma.vipExchangeCode`: Exposes CRUD operations for the **VipExchangeCode** model.
     * Example usage:
     * ```ts
@@ -290,16 +300,6 @@ export class PrismaClient<
     * ```
     */
   get vipType(): Prisma.VipTypeDelegate<ExtArgs>;
-
-  /**
-   * `prisma.vip`: Exposes CRUD operations for the **Vip** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Vips
-    * const vips = await prisma.vip.findMany()
-    * ```
-    */
-  get vip(): Prisma.VipDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -781,13 +781,13 @@ export namespace Prisma {
     InviteUser: 'InviteUser',
     order: 'order',
     permission: 'permission',
-    ResumeTemplate: 'ResumeTemplate',
     resume: 'resume',
+    ResumeTemplate: 'ResumeTemplate',
     role: 'role',
     User: 'User',
+    Vip: 'Vip',
     VipExchangeCode: 'VipExchangeCode',
-    VipType: 'VipType',
-    Vip: 'Vip'
+    VipType: 'VipType'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -804,7 +804,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'inviteCode' | 'inviteUser' | 'order' | 'permission' | 'resumeTemplate' | 'resume' | 'role' | 'user' | 'vipExchangeCode' | 'vipType' | 'vip'
+      modelProps: 'inviteCode' | 'inviteUser' | 'order' | 'permission' | 'resume' | 'resumeTemplate' | 'role' | 'user' | 'vip' | 'vipExchangeCode' | 'vipType'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1072,72 +1072,6 @@ export namespace Prisma {
           }
         }
       }
-      ResumeTemplate: {
-        payload: Prisma.$ResumeTemplatePayload<ExtArgs>
-        fields: Prisma.ResumeTemplateFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ResumeTemplateFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ResumeTemplateFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
-          }
-          findFirst: {
-            args: Prisma.ResumeTemplateFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ResumeTemplateFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
-          }
-          findMany: {
-            args: Prisma.ResumeTemplateFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>[]
-          }
-          create: {
-            args: Prisma.ResumeTemplateCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
-          }
-          createMany: {
-            args: Prisma.ResumeTemplateCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.ResumeTemplateDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
-          }
-          update: {
-            args: Prisma.ResumeTemplateUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
-          }
-          deleteMany: {
-            args: Prisma.ResumeTemplateDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ResumeTemplateUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.ResumeTemplateUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
-          }
-          aggregate: {
-            args: Prisma.ResumeTemplateAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateResumeTemplate>
-          }
-          groupBy: {
-            args: Prisma.ResumeTemplateGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<ResumeTemplateGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ResumeTemplateCountArgs<ExtArgs>,
-            result: $Utils.Optional<ResumeTemplateCountAggregateOutputType> | number
-          }
-        }
-      }
       resume: {
         payload: Prisma.$resumePayload<ExtArgs>
         fields: Prisma.resumeFieldRefs
@@ -1201,6 +1135,72 @@ export namespace Prisma {
           count: {
             args: Prisma.resumeCountArgs<ExtArgs>,
             result: $Utils.Optional<ResumeCountAggregateOutputType> | number
+          }
+        }
+      }
+      ResumeTemplate: {
+        payload: Prisma.$ResumeTemplatePayload<ExtArgs>
+        fields: Prisma.ResumeTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ResumeTemplateFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ResumeTemplateFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.ResumeTemplateFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ResumeTemplateFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.ResumeTemplateFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.ResumeTemplateCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.ResumeTemplateCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ResumeTemplateDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
+          }
+          update: {
+            args: Prisma.ResumeTemplateUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.ResumeTemplateDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ResumeTemplateUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ResumeTemplateUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ResumeTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.ResumeTemplateAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateResumeTemplate>
+          }
+          groupBy: {
+            args: Prisma.ResumeTemplateGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ResumeTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ResumeTemplateCountArgs<ExtArgs>,
+            result: $Utils.Optional<ResumeTemplateCountAggregateOutputType> | number
           }
         }
       }
@@ -1336,6 +1336,72 @@ export namespace Prisma {
           }
         }
       }
+      Vip: {
+        payload: Prisma.$VipPayload<ExtArgs>
+        fields: Prisma.VipFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VipFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VipFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          findFirst: {
+            args: Prisma.VipFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VipFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          findMany: {
+            args: Prisma.VipFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>[]
+          }
+          create: {
+            args: Prisma.VipCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          createMany: {
+            args: Prisma.VipCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.VipDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          update: {
+            args: Prisma.VipUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          deleteMany: {
+            args: Prisma.VipDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VipUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.VipUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          aggregate: {
+            args: Prisma.VipAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateVip>
+          }
+          groupBy: {
+            args: Prisma.VipGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<VipGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VipCountArgs<ExtArgs>,
+            result: $Utils.Optional<VipCountAggregateOutputType> | number
+          }
+        }
+      }
       VipExchangeCode: {
         payload: Prisma.$VipExchangeCodePayload<ExtArgs>
         fields: Prisma.VipExchangeCodeFieldRefs
@@ -1465,72 +1531,6 @@ export namespace Prisma {
           count: {
             args: Prisma.VipTypeCountArgs<ExtArgs>,
             result: $Utils.Optional<VipTypeCountAggregateOutputType> | number
-          }
-        }
-      }
-      Vip: {
-        payload: Prisma.$VipPayload<ExtArgs>
-        fields: Prisma.VipFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.VipFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.VipFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          findFirst: {
-            args: Prisma.VipFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.VipFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          findMany: {
-            args: Prisma.VipFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>[]
-          }
-          create: {
-            args: Prisma.VipCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          createMany: {
-            args: Prisma.VipCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.VipDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          update: {
-            args: Prisma.VipUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          deleteMany: {
-            args: Prisma.VipDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.VipUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.VipUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          aggregate: {
-            args: Prisma.VipAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateVip>
-          }
-          groupBy: {
-            args: Prisma.VipGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<VipGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.VipCountArgs<ExtArgs>,
-            result: $Utils.Optional<VipCountAggregateOutputType> | number
           }
         }
       }
@@ -5371,959 +5371,6 @@ export namespace Prisma {
 
 
   /**
-   * Model ResumeTemplate
-   */
-
-  export type AggregateResumeTemplate = {
-    _count: ResumeTemplateCountAggregateOutputType | null
-    _avg: ResumeTemplateAvgAggregateOutputType | null
-    _sum: ResumeTemplateSumAggregateOutputType | null
-    _min: ResumeTemplateMinAggregateOutputType | null
-    _max: ResumeTemplateMaxAggregateOutputType | null
-  }
-
-  export type ResumeTemplateAvgAggregateOutputType = {
-    id: number | null
-    creatorId: number | null
-    useCount: number | null
-    isVip: number | null
-  }
-
-  export type ResumeTemplateSumAggregateOutputType = {
-    id: number | null
-    creatorId: number | null
-    useCount: number | null
-    isVip: number | null
-  }
-
-  export type ResumeTemplateMinAggregateOutputType = {
-    id: number | null
-    code: string | null
-    title: string | null
-    headerImg: string | null
-    creatorId: number | null
-    useCount: number | null
-    isVip: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ResumeTemplateMaxAggregateOutputType = {
-    id: number | null
-    code: string | null
-    title: string | null
-    headerImg: string | null
-    creatorId: number | null
-    useCount: number | null
-    isVip: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ResumeTemplateCountAggregateOutputType = {
-    id: number
-    code: number
-    title: number
-    content: number
-    headerImg: number
-    creatorId: number
-    useCount: number
-    isVip: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type ResumeTemplateAvgAggregateInputType = {
-    id?: true
-    creatorId?: true
-    useCount?: true
-    isVip?: true
-  }
-
-  export type ResumeTemplateSumAggregateInputType = {
-    id?: true
-    creatorId?: true
-    useCount?: true
-    isVip?: true
-  }
-
-  export type ResumeTemplateMinAggregateInputType = {
-    id?: true
-    code?: true
-    title?: true
-    headerImg?: true
-    creatorId?: true
-    useCount?: true
-    isVip?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ResumeTemplateMaxAggregateInputType = {
-    id?: true
-    code?: true
-    title?: true
-    headerImg?: true
-    creatorId?: true
-    useCount?: true
-    isVip?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ResumeTemplateCountAggregateInputType = {
-    id?: true
-    code?: true
-    title?: true
-    content?: true
-    headerImg?: true
-    creatorId?: true
-    useCount?: true
-    isVip?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type ResumeTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ResumeTemplate to aggregate.
-     */
-    where?: ResumeTemplateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ResumeTemplates to fetch.
-     */
-    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ResumeTemplateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ResumeTemplates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ResumeTemplates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ResumeTemplates
-    **/
-    _count?: true | ResumeTemplateCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ResumeTemplateAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ResumeTemplateSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ResumeTemplateMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ResumeTemplateMaxAggregateInputType
-  }
-
-  export type GetResumeTemplateAggregateType<T extends ResumeTemplateAggregateArgs> = {
-        [P in keyof T & keyof AggregateResumeTemplate]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateResumeTemplate[P]>
-      : GetScalarType<T[P], AggregateResumeTemplate[P]>
-  }
-
-
-
-
-  export type ResumeTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ResumeTemplateWhereInput
-    orderBy?: ResumeTemplateOrderByWithAggregationInput | ResumeTemplateOrderByWithAggregationInput[]
-    by: ResumeTemplateScalarFieldEnum[] | ResumeTemplateScalarFieldEnum
-    having?: ResumeTemplateScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ResumeTemplateCountAggregateInputType | true
-    _avg?: ResumeTemplateAvgAggregateInputType
-    _sum?: ResumeTemplateSumAggregateInputType
-    _min?: ResumeTemplateMinAggregateInputType
-    _max?: ResumeTemplateMaxAggregateInputType
-  }
-
-  export type ResumeTemplateGroupByOutputType = {
-    id: number
-    code: string
-    title: string
-    content: JsonValue
-    headerImg: string | null
-    creatorId: number
-    useCount: number
-    isVip: number
-    createdAt: Date
-    updatedAt: Date
-    _count: ResumeTemplateCountAggregateOutputType | null
-    _avg: ResumeTemplateAvgAggregateOutputType | null
-    _sum: ResumeTemplateSumAggregateOutputType | null
-    _min: ResumeTemplateMinAggregateOutputType | null
-    _max: ResumeTemplateMaxAggregateOutputType | null
-  }
-
-  type GetResumeTemplateGroupByPayload<T extends ResumeTemplateGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ResumeTemplateGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ResumeTemplateGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ResumeTemplateGroupByOutputType[P]>
-            : GetScalarType<T[P], ResumeTemplateGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ResumeTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    code?: boolean
-    title?: boolean
-    content?: boolean
-    headerImg?: boolean
-    creatorId?: boolean
-    useCount?: boolean
-    isVip?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["resumeTemplate"]>
-
-
-  export type ResumeTemplateSelectScalar = {
-    id?: boolean
-    code?: boolean
-    title?: boolean
-    content?: boolean
-    headerImg?: boolean
-    creatorId?: boolean
-    useCount?: boolean
-    isVip?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-
-  export type $ResumeTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ResumeTemplate"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      code: string
-      title: string
-      content: Prisma.JsonValue
-      headerImg: string | null
-      creatorId: number
-      useCount: number
-      isVip: number
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["resumeTemplate"]>
-    composites: {}
-  }
-
-  type ResumeTemplateGetPayload<S extends boolean | null | undefined | ResumeTemplateDefaultArgs> = $Result.GetResult<Prisma.$ResumeTemplatePayload, S>
-
-  type ResumeTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ResumeTemplateFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: ResumeTemplateCountAggregateInputType | true
-    }
-
-  export interface ResumeTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ResumeTemplate'], meta: { name: 'ResumeTemplate' } }
-    /**
-     * Find zero or one ResumeTemplate that matches the filter.
-     * @param {ResumeTemplateFindUniqueArgs} args - Arguments to find a ResumeTemplate
-     * @example
-     * // Get one ResumeTemplate
-     * const resumeTemplate = await prisma.resumeTemplate.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends ResumeTemplateFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, ResumeTemplateFindUniqueArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one ResumeTemplate that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {ResumeTemplateFindUniqueOrThrowArgs} args - Arguments to find a ResumeTemplate
-     * @example
-     * // Get one ResumeTemplate
-     * const resumeTemplate = await prisma.resumeTemplate.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends ResumeTemplateFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ResumeTemplateFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first ResumeTemplate that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ResumeTemplateFindFirstArgs} args - Arguments to find a ResumeTemplate
-     * @example
-     * // Get one ResumeTemplate
-     * const resumeTemplate = await prisma.resumeTemplate.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends ResumeTemplateFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, ResumeTemplateFindFirstArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first ResumeTemplate that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ResumeTemplateFindFirstOrThrowArgs} args - Arguments to find a ResumeTemplate
-     * @example
-     * // Get one ResumeTemplate
-     * const resumeTemplate = await prisma.resumeTemplate.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends ResumeTemplateFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ResumeTemplateFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more ResumeTemplates that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ResumeTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all ResumeTemplates
-     * const resumeTemplates = await prisma.resumeTemplate.findMany()
-     * 
-     * // Get first 10 ResumeTemplates
-     * const resumeTemplates = await prisma.resumeTemplate.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const resumeTemplateWithIdOnly = await prisma.resumeTemplate.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends ResumeTemplateFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ResumeTemplateFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a ResumeTemplate.
-     * @param {ResumeTemplateCreateArgs} args - Arguments to create a ResumeTemplate.
-     * @example
-     * // Create one ResumeTemplate
-     * const ResumeTemplate = await prisma.resumeTemplate.create({
-     *   data: {
-     *     // ... data to create a ResumeTemplate
-     *   }
-     * })
-     * 
-    **/
-    create<T extends ResumeTemplateCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, ResumeTemplateCreateArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many ResumeTemplates.
-     * @param {ResumeTemplateCreateManyArgs} args - Arguments to create many ResumeTemplates.
-     * @example
-     * // Create many ResumeTemplates
-     * const resumeTemplate = await prisma.resumeTemplate.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends ResumeTemplateCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ResumeTemplateCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a ResumeTemplate.
-     * @param {ResumeTemplateDeleteArgs} args - Arguments to delete one ResumeTemplate.
-     * @example
-     * // Delete one ResumeTemplate
-     * const ResumeTemplate = await prisma.resumeTemplate.delete({
-     *   where: {
-     *     // ... filter to delete one ResumeTemplate
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends ResumeTemplateDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, ResumeTemplateDeleteArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one ResumeTemplate.
-     * @param {ResumeTemplateUpdateArgs} args - Arguments to update one ResumeTemplate.
-     * @example
-     * // Update one ResumeTemplate
-     * const resumeTemplate = await prisma.resumeTemplate.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends ResumeTemplateUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, ResumeTemplateUpdateArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more ResumeTemplates.
-     * @param {ResumeTemplateDeleteManyArgs} args - Arguments to filter ResumeTemplates to delete.
-     * @example
-     * // Delete a few ResumeTemplates
-     * const { count } = await prisma.resumeTemplate.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends ResumeTemplateDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ResumeTemplateDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ResumeTemplates.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ResumeTemplateUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many ResumeTemplates
-     * const resumeTemplate = await prisma.resumeTemplate.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends ResumeTemplateUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, ResumeTemplateUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one ResumeTemplate.
-     * @param {ResumeTemplateUpsertArgs} args - Arguments to update or create a ResumeTemplate.
-     * @example
-     * // Update or create a ResumeTemplate
-     * const resumeTemplate = await prisma.resumeTemplate.upsert({
-     *   create: {
-     *     // ... data to create a ResumeTemplate
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the ResumeTemplate we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends ResumeTemplateUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, ResumeTemplateUpsertArgs<ExtArgs>>
-    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of ResumeTemplates.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ResumeTemplateCountArgs} args - Arguments to filter ResumeTemplates to count.
-     * @example
-     * // Count the number of ResumeTemplates
-     * const count = await prisma.resumeTemplate.count({
-     *   where: {
-     *     // ... the filter for the ResumeTemplates we want to count
-     *   }
-     * })
-    **/
-    count<T extends ResumeTemplateCountArgs>(
-      args?: Subset<T, ResumeTemplateCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ResumeTemplateCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a ResumeTemplate.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ResumeTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ResumeTemplateAggregateArgs>(args: Subset<T, ResumeTemplateAggregateArgs>): Prisma.PrismaPromise<GetResumeTemplateAggregateType<T>>
-
-    /**
-     * Group by ResumeTemplate.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ResumeTemplateGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ResumeTemplateGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ResumeTemplateGroupByArgs['orderBy'] }
-        : { orderBy?: ResumeTemplateGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ResumeTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetResumeTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ResumeTemplate model
-   */
-  readonly fields: ResumeTemplateFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ResumeTemplate.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ResumeTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the ResumeTemplate model
-   */ 
-  interface ResumeTemplateFieldRefs {
-    readonly id: FieldRef<"ResumeTemplate", 'Int'>
-    readonly code: FieldRef<"ResumeTemplate", 'String'>
-    readonly title: FieldRef<"ResumeTemplate", 'String'>
-    readonly content: FieldRef<"ResumeTemplate", 'Json'>
-    readonly headerImg: FieldRef<"ResumeTemplate", 'String'>
-    readonly creatorId: FieldRef<"ResumeTemplate", 'Int'>
-    readonly useCount: FieldRef<"ResumeTemplate", 'Int'>
-    readonly isVip: FieldRef<"ResumeTemplate", 'Int'>
-    readonly createdAt: FieldRef<"ResumeTemplate", 'DateTime'>
-    readonly updatedAt: FieldRef<"ResumeTemplate", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ResumeTemplate findUnique
-   */
-  export type ResumeTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * Filter, which ResumeTemplate to fetch.
-     */
-    where: ResumeTemplateWhereUniqueInput
-  }
-
-  /**
-   * ResumeTemplate findUniqueOrThrow
-   */
-  export type ResumeTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * Filter, which ResumeTemplate to fetch.
-     */
-    where: ResumeTemplateWhereUniqueInput
-  }
-
-  /**
-   * ResumeTemplate findFirst
-   */
-  export type ResumeTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * Filter, which ResumeTemplate to fetch.
-     */
-    where?: ResumeTemplateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ResumeTemplates to fetch.
-     */
-    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ResumeTemplates.
-     */
-    cursor?: ResumeTemplateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ResumeTemplates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ResumeTemplates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ResumeTemplates.
-     */
-    distinct?: ResumeTemplateScalarFieldEnum | ResumeTemplateScalarFieldEnum[]
-  }
-
-  /**
-   * ResumeTemplate findFirstOrThrow
-   */
-  export type ResumeTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * Filter, which ResumeTemplate to fetch.
-     */
-    where?: ResumeTemplateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ResumeTemplates to fetch.
-     */
-    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ResumeTemplates.
-     */
-    cursor?: ResumeTemplateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ResumeTemplates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ResumeTemplates.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ResumeTemplates.
-     */
-    distinct?: ResumeTemplateScalarFieldEnum | ResumeTemplateScalarFieldEnum[]
-  }
-
-  /**
-   * ResumeTemplate findMany
-   */
-  export type ResumeTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * Filter, which ResumeTemplates to fetch.
-     */
-    where?: ResumeTemplateWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ResumeTemplates to fetch.
-     */
-    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ResumeTemplates.
-     */
-    cursor?: ResumeTemplateWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ResumeTemplates from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ResumeTemplates.
-     */
-    skip?: number
-    distinct?: ResumeTemplateScalarFieldEnum | ResumeTemplateScalarFieldEnum[]
-  }
-
-  /**
-   * ResumeTemplate create
-   */
-  export type ResumeTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * The data needed to create a ResumeTemplate.
-     */
-    data: XOR<ResumeTemplateCreateInput, ResumeTemplateUncheckedCreateInput>
-  }
-
-  /**
-   * ResumeTemplate createMany
-   */
-  export type ResumeTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ResumeTemplates.
-     */
-    data: ResumeTemplateCreateManyInput | ResumeTemplateCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ResumeTemplate update
-   */
-  export type ResumeTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * The data needed to update a ResumeTemplate.
-     */
-    data: XOR<ResumeTemplateUpdateInput, ResumeTemplateUncheckedUpdateInput>
-    /**
-     * Choose, which ResumeTemplate to update.
-     */
-    where: ResumeTemplateWhereUniqueInput
-  }
-
-  /**
-   * ResumeTemplate updateMany
-   */
-  export type ResumeTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ResumeTemplates.
-     */
-    data: XOR<ResumeTemplateUpdateManyMutationInput, ResumeTemplateUncheckedUpdateManyInput>
-    /**
-     * Filter which ResumeTemplates to update
-     */
-    where?: ResumeTemplateWhereInput
-  }
-
-  /**
-   * ResumeTemplate upsert
-   */
-  export type ResumeTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * The filter to search for the ResumeTemplate to update in case it exists.
-     */
-    where: ResumeTemplateWhereUniqueInput
-    /**
-     * In case the ResumeTemplate found by the `where` argument doesn't exist, create a new ResumeTemplate with this data.
-     */
-    create: XOR<ResumeTemplateCreateInput, ResumeTemplateUncheckedCreateInput>
-    /**
-     * In case the ResumeTemplate was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ResumeTemplateUpdateInput, ResumeTemplateUncheckedUpdateInput>
-  }
-
-  /**
-   * ResumeTemplate delete
-   */
-  export type ResumeTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-    /**
-     * Filter which ResumeTemplate to delete.
-     */
-    where: ResumeTemplateWhereUniqueInput
-  }
-
-  /**
-   * ResumeTemplate deleteMany
-   */
-  export type ResumeTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ResumeTemplates to delete
-     */
-    where?: ResumeTemplateWhereInput
-  }
-
-  /**
-   * ResumeTemplate without action
-   */
-  export type ResumeTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ResumeTemplate
-     */
-    select?: ResumeTemplateSelect<ExtArgs> | null
-  }
-
-
-  /**
    * Model resume
    */
 
@@ -7277,6 +6324,959 @@ export namespace Prisma {
      * Select specific fields to fetch from the resume
      */
     select?: resumeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ResumeTemplate
+   */
+
+  export type AggregateResumeTemplate = {
+    _count: ResumeTemplateCountAggregateOutputType | null
+    _avg: ResumeTemplateAvgAggregateOutputType | null
+    _sum: ResumeTemplateSumAggregateOutputType | null
+    _min: ResumeTemplateMinAggregateOutputType | null
+    _max: ResumeTemplateMaxAggregateOutputType | null
+  }
+
+  export type ResumeTemplateAvgAggregateOutputType = {
+    id: number | null
+    creatorId: number | null
+    useCount: number | null
+    isVip: number | null
+  }
+
+  export type ResumeTemplateSumAggregateOutputType = {
+    id: number | null
+    creatorId: number | null
+    useCount: number | null
+    isVip: number | null
+  }
+
+  export type ResumeTemplateMinAggregateOutputType = {
+    id: number | null
+    code: string | null
+    title: string | null
+    headerImg: string | null
+    creatorId: number | null
+    useCount: number | null
+    isVip: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ResumeTemplateMaxAggregateOutputType = {
+    id: number | null
+    code: string | null
+    title: string | null
+    headerImg: string | null
+    creatorId: number | null
+    useCount: number | null
+    isVip: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ResumeTemplateCountAggregateOutputType = {
+    id: number
+    code: number
+    title: number
+    content: number
+    headerImg: number
+    creatorId: number
+    useCount: number
+    isVip: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ResumeTemplateAvgAggregateInputType = {
+    id?: true
+    creatorId?: true
+    useCount?: true
+    isVip?: true
+  }
+
+  export type ResumeTemplateSumAggregateInputType = {
+    id?: true
+    creatorId?: true
+    useCount?: true
+    isVip?: true
+  }
+
+  export type ResumeTemplateMinAggregateInputType = {
+    id?: true
+    code?: true
+    title?: true
+    headerImg?: true
+    creatorId?: true
+    useCount?: true
+    isVip?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ResumeTemplateMaxAggregateInputType = {
+    id?: true
+    code?: true
+    title?: true
+    headerImg?: true
+    creatorId?: true
+    useCount?: true
+    isVip?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ResumeTemplateCountAggregateInputType = {
+    id?: true
+    code?: true
+    title?: true
+    content?: true
+    headerImg?: true
+    creatorId?: true
+    useCount?: true
+    isVip?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ResumeTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ResumeTemplate to aggregate.
+     */
+    where?: ResumeTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResumeTemplates to fetch.
+     */
+    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ResumeTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResumeTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResumeTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ResumeTemplates
+    **/
+    _count?: true | ResumeTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ResumeTemplateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ResumeTemplateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ResumeTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ResumeTemplateMaxAggregateInputType
+  }
+
+  export type GetResumeTemplateAggregateType<T extends ResumeTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateResumeTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateResumeTemplate[P]>
+      : GetScalarType<T[P], AggregateResumeTemplate[P]>
+  }
+
+
+
+
+  export type ResumeTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResumeTemplateWhereInput
+    orderBy?: ResumeTemplateOrderByWithAggregationInput | ResumeTemplateOrderByWithAggregationInput[]
+    by: ResumeTemplateScalarFieldEnum[] | ResumeTemplateScalarFieldEnum
+    having?: ResumeTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ResumeTemplateCountAggregateInputType | true
+    _avg?: ResumeTemplateAvgAggregateInputType
+    _sum?: ResumeTemplateSumAggregateInputType
+    _min?: ResumeTemplateMinAggregateInputType
+    _max?: ResumeTemplateMaxAggregateInputType
+  }
+
+  export type ResumeTemplateGroupByOutputType = {
+    id: number
+    code: string
+    title: string
+    content: JsonValue
+    headerImg: string | null
+    creatorId: number
+    useCount: number
+    isVip: number
+    createdAt: Date
+    updatedAt: Date
+    _count: ResumeTemplateCountAggregateOutputType | null
+    _avg: ResumeTemplateAvgAggregateOutputType | null
+    _sum: ResumeTemplateSumAggregateOutputType | null
+    _min: ResumeTemplateMinAggregateOutputType | null
+    _max: ResumeTemplateMaxAggregateOutputType | null
+  }
+
+  type GetResumeTemplateGroupByPayload<T extends ResumeTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ResumeTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ResumeTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ResumeTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], ResumeTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ResumeTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    title?: boolean
+    content?: boolean
+    headerImg?: boolean
+    creatorId?: boolean
+    useCount?: boolean
+    isVip?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["resumeTemplate"]>
+
+
+  export type ResumeTemplateSelectScalar = {
+    id?: boolean
+    code?: boolean
+    title?: boolean
+    content?: boolean
+    headerImg?: boolean
+    creatorId?: boolean
+    useCount?: boolean
+    isVip?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $ResumeTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ResumeTemplate"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      code: string
+      title: string
+      content: Prisma.JsonValue
+      headerImg: string | null
+      creatorId: number
+      useCount: number
+      isVip: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["resumeTemplate"]>
+    composites: {}
+  }
+
+  type ResumeTemplateGetPayload<S extends boolean | null | undefined | ResumeTemplateDefaultArgs> = $Result.GetResult<Prisma.$ResumeTemplatePayload, S>
+
+  type ResumeTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ResumeTemplateFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ResumeTemplateCountAggregateInputType | true
+    }
+
+  export interface ResumeTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ResumeTemplate'], meta: { name: 'ResumeTemplate' } }
+    /**
+     * Find zero or one ResumeTemplate that matches the filter.
+     * @param {ResumeTemplateFindUniqueArgs} args - Arguments to find a ResumeTemplate
+     * @example
+     * // Get one ResumeTemplate
+     * const resumeTemplate = await prisma.resumeTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ResumeTemplateFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ResumeTemplateFindUniqueArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ResumeTemplate that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ResumeTemplateFindUniqueOrThrowArgs} args - Arguments to find a ResumeTemplate
+     * @example
+     * // Get one ResumeTemplate
+     * const resumeTemplate = await prisma.resumeTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ResumeTemplateFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ResumeTemplateFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ResumeTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResumeTemplateFindFirstArgs} args - Arguments to find a ResumeTemplate
+     * @example
+     * // Get one ResumeTemplate
+     * const resumeTemplate = await prisma.resumeTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ResumeTemplateFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ResumeTemplateFindFirstArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ResumeTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResumeTemplateFindFirstOrThrowArgs} args - Arguments to find a ResumeTemplate
+     * @example
+     * // Get one ResumeTemplate
+     * const resumeTemplate = await prisma.resumeTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ResumeTemplateFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ResumeTemplateFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ResumeTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResumeTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ResumeTemplates
+     * const resumeTemplates = await prisma.resumeTemplate.findMany()
+     * 
+     * // Get first 10 ResumeTemplates
+     * const resumeTemplates = await prisma.resumeTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const resumeTemplateWithIdOnly = await prisma.resumeTemplate.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ResumeTemplateFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ResumeTemplateFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ResumeTemplate.
+     * @param {ResumeTemplateCreateArgs} args - Arguments to create a ResumeTemplate.
+     * @example
+     * // Create one ResumeTemplate
+     * const ResumeTemplate = await prisma.resumeTemplate.create({
+     *   data: {
+     *     // ... data to create a ResumeTemplate
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ResumeTemplateCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ResumeTemplateCreateArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ResumeTemplates.
+     * @param {ResumeTemplateCreateManyArgs} args - Arguments to create many ResumeTemplates.
+     * @example
+     * // Create many ResumeTemplates
+     * const resumeTemplate = await prisma.resumeTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends ResumeTemplateCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ResumeTemplateCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ResumeTemplate.
+     * @param {ResumeTemplateDeleteArgs} args - Arguments to delete one ResumeTemplate.
+     * @example
+     * // Delete one ResumeTemplate
+     * const ResumeTemplate = await prisma.resumeTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one ResumeTemplate
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ResumeTemplateDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ResumeTemplateDeleteArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ResumeTemplate.
+     * @param {ResumeTemplateUpdateArgs} args - Arguments to update one ResumeTemplate.
+     * @example
+     * // Update one ResumeTemplate
+     * const resumeTemplate = await prisma.resumeTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ResumeTemplateUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ResumeTemplateUpdateArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ResumeTemplates.
+     * @param {ResumeTemplateDeleteManyArgs} args - Arguments to filter ResumeTemplates to delete.
+     * @example
+     * // Delete a few ResumeTemplates
+     * const { count } = await prisma.resumeTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ResumeTemplateDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ResumeTemplateDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ResumeTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResumeTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ResumeTemplates
+     * const resumeTemplate = await prisma.resumeTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ResumeTemplateUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ResumeTemplateUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ResumeTemplate.
+     * @param {ResumeTemplateUpsertArgs} args - Arguments to update or create a ResumeTemplate.
+     * @example
+     * // Update or create a ResumeTemplate
+     * const resumeTemplate = await prisma.resumeTemplate.upsert({
+     *   create: {
+     *     // ... data to create a ResumeTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ResumeTemplate we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ResumeTemplateUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ResumeTemplateUpsertArgs<ExtArgs>>
+    ): Prisma__ResumeTemplateClient<$Result.GetResult<Prisma.$ResumeTemplatePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of ResumeTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResumeTemplateCountArgs} args - Arguments to filter ResumeTemplates to count.
+     * @example
+     * // Count the number of ResumeTemplates
+     * const count = await prisma.resumeTemplate.count({
+     *   where: {
+     *     // ... the filter for the ResumeTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends ResumeTemplateCountArgs>(
+      args?: Subset<T, ResumeTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ResumeTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ResumeTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResumeTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ResumeTemplateAggregateArgs>(args: Subset<T, ResumeTemplateAggregateArgs>): Prisma.PrismaPromise<GetResumeTemplateAggregateType<T>>
+
+    /**
+     * Group by ResumeTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResumeTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ResumeTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ResumeTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: ResumeTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ResumeTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetResumeTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ResumeTemplate model
+   */
+  readonly fields: ResumeTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ResumeTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ResumeTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ResumeTemplate model
+   */ 
+  interface ResumeTemplateFieldRefs {
+    readonly id: FieldRef<"ResumeTemplate", 'Int'>
+    readonly code: FieldRef<"ResumeTemplate", 'String'>
+    readonly title: FieldRef<"ResumeTemplate", 'String'>
+    readonly content: FieldRef<"ResumeTemplate", 'Json'>
+    readonly headerImg: FieldRef<"ResumeTemplate", 'String'>
+    readonly creatorId: FieldRef<"ResumeTemplate", 'Int'>
+    readonly useCount: FieldRef<"ResumeTemplate", 'Int'>
+    readonly isVip: FieldRef<"ResumeTemplate", 'Int'>
+    readonly createdAt: FieldRef<"ResumeTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"ResumeTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ResumeTemplate findUnique
+   */
+  export type ResumeTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * Filter, which ResumeTemplate to fetch.
+     */
+    where: ResumeTemplateWhereUniqueInput
+  }
+
+  /**
+   * ResumeTemplate findUniqueOrThrow
+   */
+  export type ResumeTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * Filter, which ResumeTemplate to fetch.
+     */
+    where: ResumeTemplateWhereUniqueInput
+  }
+
+  /**
+   * ResumeTemplate findFirst
+   */
+  export type ResumeTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * Filter, which ResumeTemplate to fetch.
+     */
+    where?: ResumeTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResumeTemplates to fetch.
+     */
+    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ResumeTemplates.
+     */
+    cursor?: ResumeTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResumeTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResumeTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ResumeTemplates.
+     */
+    distinct?: ResumeTemplateScalarFieldEnum | ResumeTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ResumeTemplate findFirstOrThrow
+   */
+  export type ResumeTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * Filter, which ResumeTemplate to fetch.
+     */
+    where?: ResumeTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResumeTemplates to fetch.
+     */
+    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ResumeTemplates.
+     */
+    cursor?: ResumeTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResumeTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResumeTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ResumeTemplates.
+     */
+    distinct?: ResumeTemplateScalarFieldEnum | ResumeTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ResumeTemplate findMany
+   */
+  export type ResumeTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * Filter, which ResumeTemplates to fetch.
+     */
+    where?: ResumeTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ResumeTemplates to fetch.
+     */
+    orderBy?: ResumeTemplateOrderByWithRelationInput | ResumeTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ResumeTemplates.
+     */
+    cursor?: ResumeTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ResumeTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ResumeTemplates.
+     */
+    skip?: number
+    distinct?: ResumeTemplateScalarFieldEnum | ResumeTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * ResumeTemplate create
+   */
+  export type ResumeTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * The data needed to create a ResumeTemplate.
+     */
+    data: XOR<ResumeTemplateCreateInput, ResumeTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * ResumeTemplate createMany
+   */
+  export type ResumeTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ResumeTemplates.
+     */
+    data: ResumeTemplateCreateManyInput | ResumeTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ResumeTemplate update
+   */
+  export type ResumeTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * The data needed to update a ResumeTemplate.
+     */
+    data: XOR<ResumeTemplateUpdateInput, ResumeTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which ResumeTemplate to update.
+     */
+    where: ResumeTemplateWhereUniqueInput
+  }
+
+  /**
+   * ResumeTemplate updateMany
+   */
+  export type ResumeTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ResumeTemplates.
+     */
+    data: XOR<ResumeTemplateUpdateManyMutationInput, ResumeTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which ResumeTemplates to update
+     */
+    where?: ResumeTemplateWhereInput
+  }
+
+  /**
+   * ResumeTemplate upsert
+   */
+  export type ResumeTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * The filter to search for the ResumeTemplate to update in case it exists.
+     */
+    where: ResumeTemplateWhereUniqueInput
+    /**
+     * In case the ResumeTemplate found by the `where` argument doesn't exist, create a new ResumeTemplate with this data.
+     */
+    create: XOR<ResumeTemplateCreateInput, ResumeTemplateUncheckedCreateInput>
+    /**
+     * In case the ResumeTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ResumeTemplateUpdateInput, ResumeTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * ResumeTemplate delete
+   */
+  export type ResumeTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
+    /**
+     * Filter which ResumeTemplate to delete.
+     */
+    where: ResumeTemplateWhereUniqueInput
+  }
+
+  /**
+   * ResumeTemplate deleteMany
+   */
+  export type ResumeTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ResumeTemplates to delete
+     */
+    where?: ResumeTemplateWhereInput
+  }
+
+  /**
+   * ResumeTemplate without action
+   */
+  export type ResumeTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ResumeTemplate
+     */
+    select?: ResumeTemplateSelect<ExtArgs> | null
   }
 
 
@@ -9127,6 +9127,911 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Vip
+   */
+
+  export type AggregateVip = {
+    _count: VipCountAggregateOutputType | null
+    _avg: VipAvgAggregateOutputType | null
+    _sum: VipSumAggregateOutputType | null
+    _min: VipMinAggregateOutputType | null
+    _max: VipMaxAggregateOutputType | null
+  }
+
+  export type VipAvgAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+  }
+
+  export type VipSumAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+  }
+
+  export type VipMinAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+    start_time: Date | null
+    expire_time: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipMaxAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+    start_time: Date | null
+    expire_time: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipCountAggregateOutputType = {
+    userId: number
+    vipTypeId: number
+    start_time: number
+    expire_time: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VipAvgAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+  }
+
+  export type VipSumAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+  }
+
+  export type VipMinAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+    start_time?: true
+    expire_time?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipMaxAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+    start_time?: true
+    expire_time?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipCountAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+    start_time?: true
+    expire_time?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vip to aggregate.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Vips
+    **/
+    _count?: true | VipCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VipAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VipSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VipMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VipMaxAggregateInputType
+  }
+
+  export type GetVipAggregateType<T extends VipAggregateArgs> = {
+        [P in keyof T & keyof AggregateVip]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVip[P]>
+      : GetScalarType<T[P], AggregateVip[P]>
+  }
+
+
+
+
+  export type VipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VipWhereInput
+    orderBy?: VipOrderByWithAggregationInput | VipOrderByWithAggregationInput[]
+    by: VipScalarFieldEnum[] | VipScalarFieldEnum
+    having?: VipScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VipCountAggregateInputType | true
+    _avg?: VipAvgAggregateInputType
+    _sum?: VipSumAggregateInputType
+    _min?: VipMinAggregateInputType
+    _max?: VipMaxAggregateInputType
+  }
+
+  export type VipGroupByOutputType = {
+    userId: number
+    vipTypeId: number
+    start_time: Date
+    expire_time: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: VipCountAggregateOutputType | null
+    _avg: VipAvgAggregateOutputType | null
+    _sum: VipSumAggregateOutputType | null
+    _min: VipMinAggregateOutputType | null
+    _max: VipMaxAggregateOutputType | null
+  }
+
+  type GetVipGroupByPayload<T extends VipGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VipGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VipGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VipGroupByOutputType[P]>
+            : GetScalarType<T[P], VipGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    vipTypeId?: boolean
+    start_time?: boolean
+    expire_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["vip"]>
+
+
+  export type VipSelectScalar = {
+    userId?: boolean
+    vipTypeId?: boolean
+    start_time?: boolean
+    expire_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $VipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Vip"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      userId: number
+      vipTypeId: number
+      start_time: Date
+      expire_time: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["vip"]>
+    composites: {}
+  }
+
+  type VipGetPayload<S extends boolean | null | undefined | VipDefaultArgs> = $Result.GetResult<Prisma.$VipPayload, S>
+
+  type VipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<VipFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: VipCountAggregateInputType | true
+    }
+
+  export interface VipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vip'], meta: { name: 'Vip' } }
+    /**
+     * Find zero or one Vip that matches the filter.
+     * @param {VipFindUniqueArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends VipFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, VipFindUniqueArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Vip that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {VipFindUniqueOrThrowArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends VipFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Vip that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipFindFirstArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends VipFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindFirstArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Vip that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipFindFirstOrThrowArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends VipFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Vips that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Vips
+     * const vips = await prisma.vip.findMany()
+     * 
+     * // Get first 10 Vips
+     * const vips = await prisma.vip.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const vipWithUserIdOnly = await prisma.vip.findMany({ select: { userId: true } })
+     * 
+    **/
+    findMany<T extends VipFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Vip.
+     * @param {VipCreateArgs} args - Arguments to create a Vip.
+     * @example
+     * // Create one Vip
+     * const Vip = await prisma.vip.create({
+     *   data: {
+     *     // ... data to create a Vip
+     *   }
+     * })
+     * 
+    **/
+    create<T extends VipCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipCreateArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Vips.
+     * @param {VipCreateManyArgs} args - Arguments to create many Vips.
+     * @example
+     * // Create many Vips
+     * const vip = await prisma.vip.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends VipCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Vip.
+     * @param {VipDeleteArgs} args - Arguments to delete one Vip.
+     * @example
+     * // Delete one Vip
+     * const Vip = await prisma.vip.delete({
+     *   where: {
+     *     // ... filter to delete one Vip
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends VipDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, VipDeleteArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Vip.
+     * @param {VipUpdateArgs} args - Arguments to update one Vip.
+     * @example
+     * // Update one Vip
+     * const vip = await prisma.vip.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends VipUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipUpdateArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Vips.
+     * @param {VipDeleteManyArgs} args - Arguments to filter Vips to delete.
+     * @example
+     * // Delete a few Vips
+     * const { count } = await prisma.vip.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends VipDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Vips.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Vips
+     * const vip = await prisma.vip.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends VipUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, VipUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Vip.
+     * @param {VipUpsertArgs} args - Arguments to update or create a Vip.
+     * @example
+     * // Update or create a Vip
+     * const vip = await prisma.vip.upsert({
+     *   create: {
+     *     // ... data to create a Vip
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Vip we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends VipUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, VipUpsertArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Vips.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipCountArgs} args - Arguments to filter Vips to count.
+     * @example
+     * // Count the number of Vips
+     * const count = await prisma.vip.count({
+     *   where: {
+     *     // ... the filter for the Vips we want to count
+     *   }
+     * })
+    **/
+    count<T extends VipCountArgs>(
+      args?: Subset<T, VipCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VipCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Vip.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VipAggregateArgs>(args: Subset<T, VipAggregateArgs>): Prisma.PrismaPromise<GetVipAggregateType<T>>
+
+    /**
+     * Group by Vip.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VipGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VipGroupByArgs['orderBy'] }
+        : { orderBy?: VipGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Vip model
+   */
+  readonly fields: VipFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Vip.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Vip model
+   */ 
+  interface VipFieldRefs {
+    readonly userId: FieldRef<"Vip", 'Int'>
+    readonly vipTypeId: FieldRef<"Vip", 'Int'>
+    readonly start_time: FieldRef<"Vip", 'DateTime'>
+    readonly expire_time: FieldRef<"Vip", 'DateTime'>
+    readonly createdAt: FieldRef<"Vip", 'DateTime'>
+    readonly updatedAt: FieldRef<"Vip", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Vip findUnique
+   */
+  export type VipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip findUniqueOrThrow
+   */
+  export type VipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip findFirst
+   */
+  export type VipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vips.
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vips.
+     */
+    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
+  }
+
+  /**
+   * Vip findFirstOrThrow
+   */
+  export type VipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vips.
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vips.
+     */
+    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
+  }
+
+  /**
+   * Vip findMany
+   */
+  export type VipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vips to fetch.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Vips.
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
+  }
+
+  /**
+   * Vip create
+   */
+  export type VipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Vip.
+     */
+    data: XOR<VipCreateInput, VipUncheckedCreateInput>
+  }
+
+  /**
+   * Vip createMany
+   */
+  export type VipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Vips.
+     */
+    data: VipCreateManyInput | VipCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Vip update
+   */
+  export type VipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Vip.
+     */
+    data: XOR<VipUpdateInput, VipUncheckedUpdateInput>
+    /**
+     * Choose, which Vip to update.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip updateMany
+   */
+  export type VipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Vips.
+     */
+    data: XOR<VipUpdateManyMutationInput, VipUncheckedUpdateManyInput>
+    /**
+     * Filter which Vips to update
+     */
+    where?: VipWhereInput
+  }
+
+  /**
+   * Vip upsert
+   */
+  export type VipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Vip to update in case it exists.
+     */
+    where: VipWhereUniqueInput
+    /**
+     * In case the Vip found by the `where` argument doesn't exist, create a new Vip with this data.
+     */
+    create: XOR<VipCreateInput, VipUncheckedCreateInput>
+    /**
+     * In case the Vip was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VipUpdateInput, VipUncheckedUpdateInput>
+  }
+
+  /**
+   * Vip delete
+   */
+  export type VipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter which Vip to delete.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip deleteMany
+   */
+  export type VipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vips to delete
+     */
+    where?: VipWhereInput
+  }
+
+  /**
+   * Vip without action
+   */
+  export type VipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
   }
 
 
@@ -11049,911 +11954,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Vip
-   */
-
-  export type AggregateVip = {
-    _count: VipCountAggregateOutputType | null
-    _avg: VipAvgAggregateOutputType | null
-    _sum: VipSumAggregateOutputType | null
-    _min: VipMinAggregateOutputType | null
-    _max: VipMaxAggregateOutputType | null
-  }
-
-  export type VipAvgAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-  }
-
-  export type VipSumAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-  }
-
-  export type VipMinAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-    start_time: Date | null
-    expire_time: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VipMaxAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-    start_time: Date | null
-    expire_time: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VipCountAggregateOutputType = {
-    userId: number
-    vipTypeId: number
-    start_time: number
-    expire_time: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type VipAvgAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-  }
-
-  export type VipSumAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-  }
-
-  export type VipMinAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-    start_time?: true
-    expire_time?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VipMaxAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-    start_time?: true
-    expire_time?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VipCountAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-    start_time?: true
-    expire_time?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type VipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Vip to aggregate.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Vips
-    **/
-    _count?: true | VipCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: VipAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VipSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VipMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VipMaxAggregateInputType
-  }
-
-  export type GetVipAggregateType<T extends VipAggregateArgs> = {
-        [P in keyof T & keyof AggregateVip]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVip[P]>
-      : GetScalarType<T[P], AggregateVip[P]>
-  }
-
-
-
-
-  export type VipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VipWhereInput
-    orderBy?: VipOrderByWithAggregationInput | VipOrderByWithAggregationInput[]
-    by: VipScalarFieldEnum[] | VipScalarFieldEnum
-    having?: VipScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VipCountAggregateInputType | true
-    _avg?: VipAvgAggregateInputType
-    _sum?: VipSumAggregateInputType
-    _min?: VipMinAggregateInputType
-    _max?: VipMaxAggregateInputType
-  }
-
-  export type VipGroupByOutputType = {
-    userId: number
-    vipTypeId: number
-    start_time: Date
-    expire_time: Date | null
-    createdAt: Date
-    updatedAt: Date
-    _count: VipCountAggregateOutputType | null
-    _avg: VipAvgAggregateOutputType | null
-    _sum: VipSumAggregateOutputType | null
-    _min: VipMinAggregateOutputType | null
-    _max: VipMaxAggregateOutputType | null
-  }
-
-  type GetVipGroupByPayload<T extends VipGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<VipGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VipGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VipGroupByOutputType[P]>
-            : GetScalarType<T[P], VipGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    userId?: boolean
-    vipTypeId?: boolean
-    start_time?: boolean
-    expire_time?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["vip"]>
-
-
-  export type VipSelectScalar = {
-    userId?: boolean
-    vipTypeId?: boolean
-    start_time?: boolean
-    expire_time?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-
-  export type $VipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Vip"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      userId: number
-      vipTypeId: number
-      start_time: Date
-      expire_time: Date | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["vip"]>
-    composites: {}
-  }
-
-  type VipGetPayload<S extends boolean | null | undefined | VipDefaultArgs> = $Result.GetResult<Prisma.$VipPayload, S>
-
-  type VipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<VipFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: VipCountAggregateInputType | true
-    }
-
-  export interface VipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vip'], meta: { name: 'Vip' } }
-    /**
-     * Find zero or one Vip that matches the filter.
-     * @param {VipFindUniqueArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends VipFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, VipFindUniqueArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one Vip that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {VipFindUniqueOrThrowArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends VipFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first Vip that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipFindFirstArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends VipFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindFirstArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first Vip that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipFindFirstOrThrowArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends VipFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Vips that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Vips
-     * const vips = await prisma.vip.findMany()
-     * 
-     * // Get first 10 Vips
-     * const vips = await prisma.vip.findMany({ take: 10 })
-     * 
-     * // Only select the `userId`
-     * const vipWithUserIdOnly = await prisma.vip.findMany({ select: { userId: true } })
-     * 
-    **/
-    findMany<T extends VipFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a Vip.
-     * @param {VipCreateArgs} args - Arguments to create a Vip.
-     * @example
-     * // Create one Vip
-     * const Vip = await prisma.vip.create({
-     *   data: {
-     *     // ... data to create a Vip
-     *   }
-     * })
-     * 
-    **/
-    create<T extends VipCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipCreateArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many Vips.
-     * @param {VipCreateManyArgs} args - Arguments to create many Vips.
-     * @example
-     * // Create many Vips
-     * const vip = await prisma.vip.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends VipCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Vip.
-     * @param {VipDeleteArgs} args - Arguments to delete one Vip.
-     * @example
-     * // Delete one Vip
-     * const Vip = await prisma.vip.delete({
-     *   where: {
-     *     // ... filter to delete one Vip
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends VipDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, VipDeleteArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one Vip.
-     * @param {VipUpdateArgs} args - Arguments to update one Vip.
-     * @example
-     * // Update one Vip
-     * const vip = await prisma.vip.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends VipUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipUpdateArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more Vips.
-     * @param {VipDeleteManyArgs} args - Arguments to filter Vips to delete.
-     * @example
-     * // Delete a few Vips
-     * const { count } = await prisma.vip.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends VipDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Vips.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Vips
-     * const vip = await prisma.vip.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends VipUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, VipUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Vip.
-     * @param {VipUpsertArgs} args - Arguments to update or create a Vip.
-     * @example
-     * // Update or create a Vip
-     * const vip = await prisma.vip.upsert({
-     *   create: {
-     *     // ... data to create a Vip
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Vip we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends VipUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, VipUpsertArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of Vips.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipCountArgs} args - Arguments to filter Vips to count.
-     * @example
-     * // Count the number of Vips
-     * const count = await prisma.vip.count({
-     *   where: {
-     *     // ... the filter for the Vips we want to count
-     *   }
-     * })
-    **/
-    count<T extends VipCountArgs>(
-      args?: Subset<T, VipCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VipCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Vip.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VipAggregateArgs>(args: Subset<T, VipAggregateArgs>): Prisma.PrismaPromise<GetVipAggregateType<T>>
-
-    /**
-     * Group by Vip.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VipGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VipGroupByArgs['orderBy'] }
-        : { orderBy?: VipGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Vip model
-   */
-  readonly fields: VipFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Vip.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__VipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the Vip model
-   */ 
-  interface VipFieldRefs {
-    readonly userId: FieldRef<"Vip", 'Int'>
-    readonly vipTypeId: FieldRef<"Vip", 'Int'>
-    readonly start_time: FieldRef<"Vip", 'DateTime'>
-    readonly expire_time: FieldRef<"Vip", 'DateTime'>
-    readonly createdAt: FieldRef<"Vip", 'DateTime'>
-    readonly updatedAt: FieldRef<"Vip", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Vip findUnique
-   */
-  export type VipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip findUniqueOrThrow
-   */
-  export type VipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip findFirst
-   */
-  export type VipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Vips.
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Vips.
-     */
-    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
-  }
-
-  /**
-   * Vip findFirstOrThrow
-   */
-  export type VipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Vips.
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Vips.
-     */
-    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
-  }
-
-  /**
-   * Vip findMany
-   */
-  export type VipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vips to fetch.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Vips.
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
-  }
-
-  /**
-   * Vip create
-   */
-  export type VipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * The data needed to create a Vip.
-     */
-    data: XOR<VipCreateInput, VipUncheckedCreateInput>
-  }
-
-  /**
-   * Vip createMany
-   */
-  export type VipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Vips.
-     */
-    data: VipCreateManyInput | VipCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Vip update
-   */
-  export type VipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * The data needed to update a Vip.
-     */
-    data: XOR<VipUpdateInput, VipUncheckedUpdateInput>
-    /**
-     * Choose, which Vip to update.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip updateMany
-   */
-  export type VipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Vips.
-     */
-    data: XOR<VipUpdateManyMutationInput, VipUncheckedUpdateManyInput>
-    /**
-     * Filter which Vips to update
-     */
-    where?: VipWhereInput
-  }
-
-  /**
-   * Vip upsert
-   */
-  export type VipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * The filter to search for the Vip to update in case it exists.
-     */
-    where: VipWhereUniqueInput
-    /**
-     * In case the Vip found by the `where` argument doesn't exist, create a new Vip with this data.
-     */
-    create: XOR<VipCreateInput, VipUncheckedCreateInput>
-    /**
-     * In case the Vip was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VipUpdateInput, VipUncheckedUpdateInput>
-  }
-
-  /**
-   * Vip delete
-   */
-  export type VipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter which Vip to delete.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip deleteMany
-   */
-  export type VipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Vips to delete
-     */
-    where?: VipWhereInput
-  }
-
-  /**
-   * Vip without action
-   */
-  export type VipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -12019,22 +12019,6 @@ export namespace Prisma {
   export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
 
 
-  export const ResumeTemplateScalarFieldEnum: {
-    id: 'id',
-    code: 'code',
-    title: 'title',
-    content: 'content',
-    headerImg: 'headerImg',
-    creatorId: 'creatorId',
-    useCount: 'useCount',
-    isVip: 'isVip',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type ResumeTemplateScalarFieldEnum = (typeof ResumeTemplateScalarFieldEnum)[keyof typeof ResumeTemplateScalarFieldEnum]
-
-
   export const ResumeScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -12049,6 +12033,22 @@ export namespace Prisma {
   };
 
   export type ResumeScalarFieldEnum = (typeof ResumeScalarFieldEnum)[keyof typeof ResumeScalarFieldEnum]
+
+
+  export const ResumeTemplateScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    title: 'title',
+    content: 'content',
+    headerImg: 'headerImg',
+    creatorId: 'creatorId',
+    useCount: 'useCount',
+    isVip: 'isVip',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ResumeTemplateScalarFieldEnum = (typeof ResumeTemplateScalarFieldEnum)[keyof typeof ResumeTemplateScalarFieldEnum]
 
 
   export const RoleScalarFieldEnum: {
@@ -12077,6 +12077,18 @@ export namespace Prisma {
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const VipScalarFieldEnum: {
+    userId: 'userId',
+    vipTypeId: 'vipTypeId',
+    start_time: 'start_time',
+    expire_time: 'expire_time',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VipScalarFieldEnum = (typeof VipScalarFieldEnum)[keyof typeof VipScalarFieldEnum]
 
 
   export const VipExchangeCodeScalarFieldEnum: {
@@ -12109,18 +12121,6 @@ export namespace Prisma {
   };
 
   export type VipTypeScalarFieldEnum = (typeof VipTypeScalarFieldEnum)[keyof typeof VipTypeScalarFieldEnum]
-
-
-  export const VipScalarFieldEnum: {
-    userId: 'userId',
-    vipTypeId: 'vipTypeId',
-    start_time: 'start_time',
-    expire_time: 'expire_time',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type VipScalarFieldEnum = (typeof VipScalarFieldEnum)[keyof typeof VipScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12476,85 +12476,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"permission"> | Date | string
   }
 
-  export type ResumeTemplateWhereInput = {
-    AND?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
-    OR?: ResumeTemplateWhereInput[]
-    NOT?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
-    id?: IntFilter<"ResumeTemplate"> | number
-    code?: StringFilter<"ResumeTemplate"> | string
-    title?: StringFilter<"ResumeTemplate"> | string
-    content?: JsonFilter<"ResumeTemplate">
-    headerImg?: StringNullableFilter<"ResumeTemplate"> | string | null
-    creatorId?: IntFilter<"ResumeTemplate"> | number
-    useCount?: IntFilter<"ResumeTemplate"> | number
-    isVip?: IntFilter<"ResumeTemplate"> | number
-    createdAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
-    updatedAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
-  }
-
-  export type ResumeTemplateOrderByWithRelationInput = {
-    id?: SortOrder
-    code?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    headerImg?: SortOrderInput | SortOrder
-    creatorId?: SortOrder
-    useCount?: SortOrder
-    isVip?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ResumeTemplateWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    code?: string
-    AND?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
-    OR?: ResumeTemplateWhereInput[]
-    NOT?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
-    title?: StringFilter<"ResumeTemplate"> | string
-    content?: JsonFilter<"ResumeTemplate">
-    headerImg?: StringNullableFilter<"ResumeTemplate"> | string | null
-    creatorId?: IntFilter<"ResumeTemplate"> | number
-    useCount?: IntFilter<"ResumeTemplate"> | number
-    isVip?: IntFilter<"ResumeTemplate"> | number
-    createdAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
-    updatedAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
-  }, "id" | "id" | "code">
-
-  export type ResumeTemplateOrderByWithAggregationInput = {
-    id?: SortOrder
-    code?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    headerImg?: SortOrderInput | SortOrder
-    creatorId?: SortOrder
-    useCount?: SortOrder
-    isVip?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ResumeTemplateCountOrderByAggregateInput
-    _avg?: ResumeTemplateAvgOrderByAggregateInput
-    _max?: ResumeTemplateMaxOrderByAggregateInput
-    _min?: ResumeTemplateMinOrderByAggregateInput
-    _sum?: ResumeTemplateSumOrderByAggregateInput
-  }
-
-  export type ResumeTemplateScalarWhereWithAggregatesInput = {
-    AND?: ResumeTemplateScalarWhereWithAggregatesInput | ResumeTemplateScalarWhereWithAggregatesInput[]
-    OR?: ResumeTemplateScalarWhereWithAggregatesInput[]
-    NOT?: ResumeTemplateScalarWhereWithAggregatesInput | ResumeTemplateScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"ResumeTemplate"> | number
-    code?: StringWithAggregatesFilter<"ResumeTemplate"> | string
-    title?: StringWithAggregatesFilter<"ResumeTemplate"> | string
-    content?: JsonWithAggregatesFilter<"ResumeTemplate">
-    headerImg?: StringNullableWithAggregatesFilter<"ResumeTemplate"> | string | null
-    creatorId?: IntWithAggregatesFilter<"ResumeTemplate"> | number
-    useCount?: IntWithAggregatesFilter<"ResumeTemplate"> | number
-    isVip?: IntWithAggregatesFilter<"ResumeTemplate"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"ResumeTemplate"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"ResumeTemplate"> | Date | string
-  }
-
   export type resumeWhereInput = {
     AND?: resumeWhereInput | resumeWhereInput[]
     OR?: resumeWhereInput[]
@@ -12632,6 +12553,85 @@ export namespace Prisma {
     exportCount?: IntWithAggregatesFilter<"resume"> | number
     createdAt?: DateTimeWithAggregatesFilter<"resume"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"resume"> | Date | string
+  }
+
+  export type ResumeTemplateWhereInput = {
+    AND?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
+    OR?: ResumeTemplateWhereInput[]
+    NOT?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
+    id?: IntFilter<"ResumeTemplate"> | number
+    code?: StringFilter<"ResumeTemplate"> | string
+    title?: StringFilter<"ResumeTemplate"> | string
+    content?: JsonFilter<"ResumeTemplate">
+    headerImg?: StringNullableFilter<"ResumeTemplate"> | string | null
+    creatorId?: IntFilter<"ResumeTemplate"> | number
+    useCount?: IntFilter<"ResumeTemplate"> | number
+    isVip?: IntFilter<"ResumeTemplate"> | number
+    createdAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
+  }
+
+  export type ResumeTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    headerImg?: SortOrderInput | SortOrder
+    creatorId?: SortOrder
+    useCount?: SortOrder
+    isVip?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ResumeTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    code?: string
+    AND?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
+    OR?: ResumeTemplateWhereInput[]
+    NOT?: ResumeTemplateWhereInput | ResumeTemplateWhereInput[]
+    title?: StringFilter<"ResumeTemplate"> | string
+    content?: JsonFilter<"ResumeTemplate">
+    headerImg?: StringNullableFilter<"ResumeTemplate"> | string | null
+    creatorId?: IntFilter<"ResumeTemplate"> | number
+    useCount?: IntFilter<"ResumeTemplate"> | number
+    isVip?: IntFilter<"ResumeTemplate"> | number
+    createdAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"ResumeTemplate"> | Date | string
+  }, "id" | "id" | "code">
+
+  export type ResumeTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    headerImg?: SortOrderInput | SortOrder
+    creatorId?: SortOrder
+    useCount?: SortOrder
+    isVip?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ResumeTemplateCountOrderByAggregateInput
+    _avg?: ResumeTemplateAvgOrderByAggregateInput
+    _max?: ResumeTemplateMaxOrderByAggregateInput
+    _min?: ResumeTemplateMinOrderByAggregateInput
+    _sum?: ResumeTemplateSumOrderByAggregateInput
+  }
+
+  export type ResumeTemplateScalarWhereWithAggregatesInput = {
+    AND?: ResumeTemplateScalarWhereWithAggregatesInput | ResumeTemplateScalarWhereWithAggregatesInput[]
+    OR?: ResumeTemplateScalarWhereWithAggregatesInput[]
+    NOT?: ResumeTemplateScalarWhereWithAggregatesInput | ResumeTemplateScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ResumeTemplate"> | number
+    code?: StringWithAggregatesFilter<"ResumeTemplate"> | string
+    title?: StringWithAggregatesFilter<"ResumeTemplate"> | string
+    content?: JsonWithAggregatesFilter<"ResumeTemplate">
+    headerImg?: StringNullableWithAggregatesFilter<"ResumeTemplate"> | string | null
+    creatorId?: IntWithAggregatesFilter<"ResumeTemplate"> | number
+    useCount?: IntWithAggregatesFilter<"ResumeTemplate"> | number
+    isVip?: IntWithAggregatesFilter<"ResumeTemplate"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ResumeTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ResumeTemplate"> | Date | string
   }
 
   export type roleWhereInput = {
@@ -12770,6 +12770,65 @@ export namespace Prisma {
     roles?: JsonWithAggregatesFilter<"User">
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type VipWhereInput = {
+    AND?: VipWhereInput | VipWhereInput[]
+    OR?: VipWhereInput[]
+    NOT?: VipWhereInput | VipWhereInput[]
+    userId?: IntFilter<"Vip"> | number
+    vipTypeId?: IntFilter<"Vip"> | number
+    start_time?: DateTimeFilter<"Vip"> | Date | string
+    expire_time?: DateTimeFilter<"Vip"> | Date | string
+    createdAt?: DateTimeFilter<"Vip"> | Date | string
+    updatedAt?: DateTimeFilter<"Vip"> | Date | string
+  }
+
+  export type VipOrderByWithRelationInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipWhereUniqueInput = Prisma.AtLeast<{
+    userId?: number
+    AND?: VipWhereInput | VipWhereInput[]
+    OR?: VipWhereInput[]
+    NOT?: VipWhereInput | VipWhereInput[]
+    vipTypeId?: IntFilter<"Vip"> | number
+    start_time?: DateTimeFilter<"Vip"> | Date | string
+    expire_time?: DateTimeFilter<"Vip"> | Date | string
+    createdAt?: DateTimeFilter<"Vip"> | Date | string
+    updatedAt?: DateTimeFilter<"Vip"> | Date | string
+  }, "userId" | "userId">
+
+  export type VipOrderByWithAggregationInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VipCountOrderByAggregateInput
+    _avg?: VipAvgOrderByAggregateInput
+    _max?: VipMaxOrderByAggregateInput
+    _min?: VipMinOrderByAggregateInput
+    _sum?: VipSumOrderByAggregateInput
+  }
+
+  export type VipScalarWhereWithAggregatesInput = {
+    AND?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
+    OR?: VipScalarWhereWithAggregatesInput[]
+    NOT?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
+    userId?: IntWithAggregatesFilter<"Vip"> | number
+    vipTypeId?: IntWithAggregatesFilter<"Vip"> | number
+    start_time?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
+    expire_time?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
   }
 
   export type VipExchangeCodeWhereInput = {
@@ -12928,65 +12987,6 @@ export namespace Prisma {
     disabled?: IntWithAggregatesFilter<"VipType"> | number
     createdAt?: DateTimeWithAggregatesFilter<"VipType"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"VipType"> | Date | string
-  }
-
-  export type VipWhereInput = {
-    AND?: VipWhereInput | VipWhereInput[]
-    OR?: VipWhereInput[]
-    NOT?: VipWhereInput | VipWhereInput[]
-    userId?: IntFilter<"Vip"> | number
-    vipTypeId?: IntFilter<"Vip"> | number
-    start_time?: DateTimeFilter<"Vip"> | Date | string
-    expire_time?: DateTimeNullableFilter<"Vip"> | Date | string | null
-    createdAt?: DateTimeFilter<"Vip"> | Date | string
-    updatedAt?: DateTimeFilter<"Vip"> | Date | string
-  }
-
-  export type VipOrderByWithRelationInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipWhereUniqueInput = Prisma.AtLeast<{
-    userId?: number
-    AND?: VipWhereInput | VipWhereInput[]
-    OR?: VipWhereInput[]
-    NOT?: VipWhereInput | VipWhereInput[]
-    vipTypeId?: IntFilter<"Vip"> | number
-    start_time?: DateTimeFilter<"Vip"> | Date | string
-    expire_time?: DateTimeNullableFilter<"Vip"> | Date | string | null
-    createdAt?: DateTimeFilter<"Vip"> | Date | string
-    updatedAt?: DateTimeFilter<"Vip"> | Date | string
-  }, "userId" | "userId">
-
-  export type VipOrderByWithAggregationInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: VipCountOrderByAggregateInput
-    _avg?: VipAvgOrderByAggregateInput
-    _max?: VipMaxOrderByAggregateInput
-    _min?: VipMinOrderByAggregateInput
-    _sum?: VipSumOrderByAggregateInput
-  }
-
-  export type VipScalarWhereWithAggregatesInput = {
-    AND?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
-    OR?: VipScalarWhereWithAggregatesInput[]
-    NOT?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
-    userId?: IntWithAggregatesFilter<"Vip"> | number
-    vipTypeId?: IntWithAggregatesFilter<"Vip"> | number
-    start_time?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
-    expire_time?: DateTimeNullableWithAggregatesFilter<"Vip"> | Date | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
   }
 
   export type InviteCodeCreateInput = {
@@ -13263,94 +13263,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ResumeTemplateCreateInput = {
-    code: string
-    title: string
-    content: JsonNullValueInput | InputJsonValue
-    headerImg?: string | null
-    creatorId: number
-    useCount?: number
-    isVip?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ResumeTemplateUncheckedCreateInput = {
-    id?: number
-    code: string
-    title: string
-    content: JsonNullValueInput | InputJsonValue
-    headerImg?: string | null
-    creatorId: number
-    useCount?: number
-    isVip?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ResumeTemplateUpdateInput = {
-    code?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
-    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
-    creatorId?: IntFieldUpdateOperationsInput | number
-    useCount?: IntFieldUpdateOperationsInput | number
-    isVip?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ResumeTemplateUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
-    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
-    creatorId?: IntFieldUpdateOperationsInput | number
-    useCount?: IntFieldUpdateOperationsInput | number
-    isVip?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ResumeTemplateCreateManyInput = {
-    id?: number
-    code: string
-    title: string
-    content: JsonNullValueInput | InputJsonValue
-    headerImg?: string | null
-    creatorId: number
-    useCount?: number
-    isVip?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ResumeTemplateUpdateManyMutationInput = {
-    code?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
-    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
-    creatorId?: IntFieldUpdateOperationsInput | number
-    useCount?: IntFieldUpdateOperationsInput | number
-    isVip?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ResumeTemplateUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
-    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
-    creatorId?: IntFieldUpdateOperationsInput | number
-    useCount?: IntFieldUpdateOperationsInput | number
-    isVip?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type resumeCreateInput = {
     id: number
     title: string
@@ -13438,6 +13350,94 @@ export namespace Prisma {
     themeColor?: StringFieldUpdateOperationsInput | string
     isPublic?: IntFieldUpdateOperationsInput | number
     exportCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeTemplateCreateInput = {
+    code: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    headerImg?: string | null
+    creatorId: number
+    useCount?: number
+    isVip?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResumeTemplateUncheckedCreateInput = {
+    id?: number
+    code: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    headerImg?: string | null
+    creatorId: number
+    useCount?: number
+    isVip?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResumeTemplateUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    isVip?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeTemplateUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    isVip?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeTemplateCreateManyInput = {
+    id?: number
+    code: string
+    title: string
+    content: JsonNullValueInput | InputJsonValue
+    headerImg?: string | null
+    creatorId: number
+    useCount?: number
+    isVip?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResumeTemplateUpdateManyMutationInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    isVip?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeTemplateUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    headerImg?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: IntFieldUpdateOperationsInput | number
+    useCount?: IntFieldUpdateOperationsInput | number
+    isVip?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13589,6 +13589,69 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     disabled?: IntFieldUpdateOperationsInput | number
     roles?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipCreateInput = {
+    userId: number
+    vipTypeId: number
+    start_time: Date | string
+    expire_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipUncheckedCreateInput = {
+    userId: number
+    vipTypeId: number
+    start_time: Date | string
+    expire_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipUpdateInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipUncheckedUpdateInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipCreateManyInput = {
+    userId: number
+    vipTypeId: number
+    start_time: Date | string
+    expire_time: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipUpdateManyMutationInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipUncheckedUpdateManyInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13765,69 +13828,6 @@ export namespace Prisma {
     duration?: IntFieldUpdateOperationsInput | number
     sellType?: IntFieldUpdateOperationsInput | number
     disabled?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipCreateInput = {
-    userId: number
-    vipTypeId: number
-    start_time: Date | string
-    expire_time?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VipUncheckedCreateInput = {
-    userId: number
-    vipTypeId: number
-    start_time: Date | string
-    expire_time?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VipUpdateInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipUncheckedUpdateInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipCreateManyInput = {
-    userId: number
-    vipTypeId: number
-    start_time: Date | string
-    expire_time?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VipUpdateManyMutationInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipUncheckedUpdateManyInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14218,82 +14218,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type ResumeTemplateCountOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    title?: SortOrder
-    content?: SortOrder
-    headerImg?: SortOrder
-    creatorId?: SortOrder
-    useCount?: SortOrder
-    isVip?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ResumeTemplateAvgOrderByAggregateInput = {
-    id?: SortOrder
-    creatorId?: SortOrder
-    useCount?: SortOrder
-    isVip?: SortOrder
-  }
-
-  export type ResumeTemplateMaxOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    title?: SortOrder
-    headerImg?: SortOrder
-    creatorId?: SortOrder
-    useCount?: SortOrder
-    isVip?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ResumeTemplateMinOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    title?: SortOrder
-    headerImg?: SortOrder
-    creatorId?: SortOrder
-    useCount?: SortOrder
-    isVip?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ResumeTemplateSumOrderByAggregateInput = {
-    id?: SortOrder
-    creatorId?: SortOrder
-    useCount?: SortOrder
-    isVip?: SortOrder
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
-  }
-
   export type resumeCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -14345,6 +14269,82 @@ export namespace Prisma {
     templateId?: SortOrder
     isPublic?: SortOrder
     exportCount?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type ResumeTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    headerImg?: SortOrder
+    creatorId?: SortOrder
+    useCount?: SortOrder
+    isVip?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ResumeTemplateAvgOrderByAggregateInput = {
+    id?: SortOrder
+    creatorId?: SortOrder
+    useCount?: SortOrder
+    isVip?: SortOrder
+  }
+
+  export type ResumeTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    title?: SortOrder
+    headerImg?: SortOrder
+    creatorId?: SortOrder
+    useCount?: SortOrder
+    isVip?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ResumeTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    title?: SortOrder
+    headerImg?: SortOrder
+    creatorId?: SortOrder
+    useCount?: SortOrder
+    isVip?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ResumeTemplateSumOrderByAggregateInput = {
+    id?: SortOrder
+    creatorId?: SortOrder
+    useCount?: SortOrder
+    isVip?: SortOrder
   }
 
   export type roleCountOrderByAggregateInput = {
@@ -14456,6 +14456,43 @@ export namespace Prisma {
     _sum?: NestedBigIntFilter<$PrismaModel>
     _min?: NestedBigIntFilter<$PrismaModel>
     _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type VipCountOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipAvgOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+  }
+
+  export type VipMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipMinOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipSumOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
   }
 
   export type VipExchangeCodeCountOrderByAggregateInput = {
@@ -14638,43 +14675,6 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
-  }
-
-  export type VipCountOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipAvgOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-  }
-
-  export type VipMaxOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipMinOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipSumOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -15068,13 +15068,13 @@ export namespace Prisma {
      */
     export type permissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = permissionDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use ResumeTemplateDefaultArgs instead
-     */
-    export type ResumeTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ResumeTemplateDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use resumeDefaultArgs instead
      */
     export type resumeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = resumeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ResumeTemplateDefaultArgs instead
+     */
+    export type ResumeTemplateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ResumeTemplateDefaultArgs<ExtArgs>
     /**
      * @deprecated Use roleDefaultArgs instead
      */
@@ -15084,6 +15084,10 @@ export namespace Prisma {
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use VipDefaultArgs instead
+     */
+    export type VipArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use VipExchangeCodeDefaultArgs instead
      */
     export type VipExchangeCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipExchangeCodeDefaultArgs<ExtArgs>
@@ -15091,10 +15095,6 @@ export namespace Prisma {
      * @deprecated Use VipTypeDefaultArgs instead
      */
     export type VipTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use VipDefaultArgs instead
-     */
-    export type VipArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

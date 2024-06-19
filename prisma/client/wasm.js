@@ -136,32 +136,6 @@ exports.Prisma.InviteUserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ResumeScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  content: 'content',
-  userId: 'userId',
-  templateId: 'templateId',
-  themeColor: 'themeColor',
-  isPublic: 'isPublic',
-  exportCount: 'exportCount',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ResumeTemplateScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  title: 'title',
-  content: 'content',
-  headerImg: 'headerImg',
-  creatorId: 'creatorId',
-  useCount: 'useCount',
-  isVip: 'isVip',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -181,6 +155,32 @@ exports.Prisma.PermissionScalarFieldEnum = {
   enum: 'enum',
   desc: 'desc',
   creatorId: 'creatorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ResumeTemplateScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  title: 'title',
+  content: 'content',
+  headerImg: 'headerImg',
+  creatorId: 'creatorId',
+  useCount: 'useCount',
+  isVip: 'isVip',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ResumeScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  userId: 'userId',
+  templateId: 'templateId',
+  themeColor: 'themeColor',
+  isPublic: 'isPublic',
+  exportCount: 'exportCount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -271,10 +271,10 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Prisma.ModelName = {
   InviteCode: 'InviteCode',
   InviteUser: 'InviteUser',
-  resume: 'resume',
-  ResumeTemplate: 'ResumeTemplate',
   order: 'order',
   permission: 'permission',
+  ResumeTemplate: 'ResumeTemplate',
+  resume: 'resume',
   role: 'role',
   User: 'User',
   VipExchangeCode: 'VipExchangeCode',

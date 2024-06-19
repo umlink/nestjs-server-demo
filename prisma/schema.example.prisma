@@ -2,6 +2,7 @@ generator client {
   provider     = "prisma-client-js"
   output       = "./client"
   relationMode = "prisma"
+  previewFeatures = ["prismaSchemaFolder"]
 }
 generator docs {
   provider = "node node_modules/prisma-docs-generator"
@@ -153,9 +154,9 @@ model permission {
   name       String   @db.VarChar(32)
   enum       String   @db.VarChar(32)
   desc       String   @db.VarChar(128)
-  creatorId Int      @map("creator_id")
-  createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
-  updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
+  creatorId  Int      @map("creator_id")
+  createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp(0)
 
   @@index([id], map: "permission_id_index")
   @@index([role_id], map: "permission_role_id_index")
@@ -167,8 +168,8 @@ model role {
   name       String   @db.VarChar(64)
   desc       String   @db.VarChar(512)
   creatorId Int      @map("creator_id")
-  createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
-  updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
+  createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp(0)
 
   @@index([id], map: "role_id_index")
 }

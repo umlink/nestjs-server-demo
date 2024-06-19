@@ -119,51 +119,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  avatar: 'avatar',
-  username: 'username',
-  password: 'password',
-  disabled: 'disabled',
-  roles: 'roles',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.VipScalarFieldEnum = {
-  userId: 'userId',
-  vipTypeId: 'vipTypeId',
-  start_time: 'start_time',
-  expire_time: 'expire_time'
-};
-
-exports.Prisma.VipTypeScalarFieldEnum = {
-  id: 'id',
-  tilte: 'tilte',
-  description: 'description',
-  equity: 'equity',
-  price: 'price',
-  originalPrice: 'originalPrice',
-  duration: 'duration',
-  sellType: 'sellType',
-  disabled: 'disabled',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.VipExchangeCodeScalarFieldEnum = {
-  id: 'id',
-  code: 'code',
-  vipTypeTd: 'vipTypeTd',
-  startTime: 'startTime',
-  expireTime: 'expireTime',
-  creatorId: 'creatorId',
-  exchanged: 'exchanged',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.InviteCodeScalarFieldEnum = {
   code: 'code',
   userId: 'userId',
@@ -240,6 +195,53 @@ exports.Prisma.RoleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  avatar: 'avatar',
+  username: 'username',
+  password: 'password',
+  disabled: 'disabled',
+  roles: 'roles',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VipExchangeCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  vipTypeTd: 'vipTypeTd',
+  startTime: 'startTime',
+  expireTime: 'expireTime',
+  creatorId: 'creatorId',
+  exchanged: 'exchanged',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VipTypeScalarFieldEnum = {
+  id: 'id',
+  tilte: 'tilte',
+  description: 'description',
+  equity: 'equity',
+  price: 'price',
+  originalPrice: 'originalPrice',
+  duration: 'duration',
+  sellType: 'sellType',
+  disabled: 'disabled',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VipScalarFieldEnum = {
+  userId: 'userId',
+  vipTypeId: 'vipTypeId',
+  start_time: 'start_time',
+  expire_time: 'expire_time',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -254,30 +256,30 @@ exports.Prisma.NullableJsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  Vip: 'Vip',
-  VipType: 'VipType',
-  VipExchangeCode: 'VipExchangeCode',
   InviteCode: 'InviteCode',
   InviteUser: 'InviteUser',
   resume: 'resume',
   ResumeTemplate: 'ResumeTemplate',
   order: 'order',
   permission: 'permission',
-  role: 'role'
+  role: 'role',
+  User: 'User',
+  VipExchangeCode: 'VipExchangeCode',
+  VipType: 'VipType',
+  Vip: 'Vip'
 };
 
 /**

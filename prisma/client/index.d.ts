@@ -14,26 +14,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model User
- * 
- */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
-/**
- * Model Vip
- * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
- */
-export type Vip = $Result.DefaultSelection<Prisma.$VipPayload>
-/**
- * Model VipType
- * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
- */
-export type VipType = $Result.DefaultSelection<Prisma.$VipTypePayload>
-/**
- * Model VipExchangeCode
- * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
- */
-export type VipExchangeCode = $Result.DefaultSelection<Prisma.$VipExchangeCodePayload>
-/**
  * Model InviteCode
  * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  */
@@ -68,6 +48,26 @@ export type permission = $Result.DefaultSelection<Prisma.$permissionPayload>
  * 
  */
 export type role = $Result.DefaultSelection<Prisma.$rolePayload>
+/**
+ * Model User
+ * 
+ */
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model VipExchangeCode
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ */
+export type VipExchangeCode = $Result.DefaultSelection<Prisma.$VipExchangeCodePayload>
+/**
+ * Model VipType
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ */
+export type VipType = $Result.DefaultSelection<Prisma.$VipTypePayload>
+/**
+ * Model Vip
+ * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+ */
+export type Vip = $Result.DefaultSelection<Prisma.$VipPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -76,8 +76,8 @@ export type role = $Result.DefaultSelection<Prisma.$rolePayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more InviteCodes
+ * const inviteCodes = await prisma.inviteCode.findMany()
  * ```
  *
  * 
@@ -97,8 +97,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more InviteCodes
+   * const inviteCodes = await prisma.inviteCode.findMany()
    * ```
    *
    * 
@@ -192,46 +192,6 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
-    * ```
-    */
-  get user(): Prisma.UserDelegate<ExtArgs>;
-
-  /**
-   * `prisma.vip`: Exposes CRUD operations for the **Vip** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Vips
-    * const vips = await prisma.vip.findMany()
-    * ```
-    */
-  get vip(): Prisma.VipDelegate<ExtArgs>;
-
-  /**
-   * `prisma.vipType`: Exposes CRUD operations for the **VipType** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more VipTypes
-    * const vipTypes = await prisma.vipType.findMany()
-    * ```
-    */
-  get vipType(): Prisma.VipTypeDelegate<ExtArgs>;
-
-  /**
-   * `prisma.vipExchangeCode`: Exposes CRUD operations for the **VipExchangeCode** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more VipExchangeCodes
-    * const vipExchangeCodes = await prisma.vipExchangeCode.findMany()
-    * ```
-    */
-  get vipExchangeCode(): Prisma.VipExchangeCodeDelegate<ExtArgs>;
-
-  /**
    * `prisma.inviteCode`: Exposes CRUD operations for the **InviteCode** model.
     * Example usage:
     * ```ts
@@ -300,6 +260,46 @@ export class PrismaClient<
     * ```
     */
   get role(): Prisma.roleDelegate<ExtArgs>;
+
+  /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs>;
+
+  /**
+   * `prisma.vipExchangeCode`: Exposes CRUD operations for the **VipExchangeCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VipExchangeCodes
+    * const vipExchangeCodes = await prisma.vipExchangeCode.findMany()
+    * ```
+    */
+  get vipExchangeCode(): Prisma.VipExchangeCodeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.vipType`: Exposes CRUD operations for the **VipType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VipTypes
+    * const vipTypes = await prisma.vipType.findMany()
+    * ```
+    */
+  get vipType(): Prisma.VipTypeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.vip`: Exposes CRUD operations for the **Vip** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Vips
+    * const vips = await prisma.vip.findMany()
+    * ```
+    */
+  get vip(): Prisma.VipDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -777,17 +777,17 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User',
-    Vip: 'Vip',
-    VipType: 'VipType',
-    VipExchangeCode: 'VipExchangeCode',
     InviteCode: 'InviteCode',
     InviteUser: 'InviteUser',
     resume: 'resume',
     ResumeTemplate: 'ResumeTemplate',
     order: 'order',
     permission: 'permission',
-    role: 'role'
+    role: 'role',
+    User: 'User',
+    VipExchangeCode: 'VipExchangeCode',
+    VipType: 'VipType',
+    Vip: 'Vip'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -804,274 +804,10 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'vip' | 'vipType' | 'vipExchangeCode' | 'inviteCode' | 'inviteUser' | 'resume' | 'resumeTemplate' | 'order' | 'permission' | 'role'
+      modelProps: 'inviteCode' | 'inviteUser' | 'resume' | 'resumeTemplate' | 'order' | 'permission' | 'role' | 'user' | 'vipExchangeCode' | 'vipType' | 'vip'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
-      User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
-          }
-          create: {
-            args: Prisma.UserCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          aggregate: {
-            args: Prisma.UserAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateUser>
-          }
-          groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<UserGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.UserCountArgs<ExtArgs>,
-            result: $Utils.Optional<UserCountAggregateOutputType> | number
-          }
-        }
-      }
-      Vip: {
-        payload: Prisma.$VipPayload<ExtArgs>
-        fields: Prisma.VipFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.VipFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.VipFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          findFirst: {
-            args: Prisma.VipFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.VipFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          findMany: {
-            args: Prisma.VipFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>[]
-          }
-          create: {
-            args: Prisma.VipCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          createMany: {
-            args: Prisma.VipCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.VipDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          update: {
-            args: Prisma.VipUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          deleteMany: {
-            args: Prisma.VipDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.VipUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.VipUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipPayload>
-          }
-          aggregate: {
-            args: Prisma.VipAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateVip>
-          }
-          groupBy: {
-            args: Prisma.VipGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<VipGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.VipCountArgs<ExtArgs>,
-            result: $Utils.Optional<VipCountAggregateOutputType> | number
-          }
-        }
-      }
-      VipType: {
-        payload: Prisma.$VipTypePayload<ExtArgs>
-        fields: Prisma.VipTypeFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.VipTypeFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.VipTypeFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
-          }
-          findFirst: {
-            args: Prisma.VipTypeFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.VipTypeFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
-          }
-          findMany: {
-            args: Prisma.VipTypeFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>[]
-          }
-          create: {
-            args: Prisma.VipTypeCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
-          }
-          createMany: {
-            args: Prisma.VipTypeCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.VipTypeDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
-          }
-          update: {
-            args: Prisma.VipTypeUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
-          }
-          deleteMany: {
-            args: Prisma.VipTypeDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.VipTypeUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.VipTypeUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
-          }
-          aggregate: {
-            args: Prisma.VipTypeAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateVipType>
-          }
-          groupBy: {
-            args: Prisma.VipTypeGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<VipTypeGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.VipTypeCountArgs<ExtArgs>,
-            result: $Utils.Optional<VipTypeCountAggregateOutputType> | number
-          }
-        }
-      }
-      VipExchangeCode: {
-        payload: Prisma.$VipExchangeCodePayload<ExtArgs>
-        fields: Prisma.VipExchangeCodeFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.VipExchangeCodeFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
-          }
-          findFirst: {
-            args: Prisma.VipExchangeCodeFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.VipExchangeCodeFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
-          }
-          findMany: {
-            args: Prisma.VipExchangeCodeFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>[]
-          }
-          create: {
-            args: Prisma.VipExchangeCodeCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
-          }
-          createMany: {
-            args: Prisma.VipExchangeCodeCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.VipExchangeCodeDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
-          }
-          update: {
-            args: Prisma.VipExchangeCodeUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
-          }
-          deleteMany: {
-            args: Prisma.VipExchangeCodeDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.VipExchangeCodeUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.VipExchangeCodeUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
-          }
-          aggregate: {
-            args: Prisma.VipExchangeCodeAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateVipExchangeCode>
-          }
-          groupBy: {
-            args: Prisma.VipExchangeCodeGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<VipExchangeCodeGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.VipExchangeCodeCountArgs<ExtArgs>,
-            result: $Utils.Optional<VipExchangeCodeCountAggregateOutputType> | number
-          }
-        }
-      }
       InviteCode: {
         payload: Prisma.$InviteCodePayload<ExtArgs>
         fields: Prisma.InviteCodeFieldRefs
@@ -1534,6 +1270,270 @@ export namespace Prisma {
           }
         }
       }
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findFirst: {
+            args: Prisma.UserFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          findMany: {
+            args: Prisma.UserFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
+          create: {
+            args: Prisma.UserCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          createMany: {
+            args: Prisma.UserCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.UserDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          update: {
+            args: Prisma.UserUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateUser>
+          }
+          groupBy: {
+            args: Prisma.UserGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<UserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserCountArgs<ExtArgs>,
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      VipExchangeCode: {
+        payload: Prisma.$VipExchangeCodePayload<ExtArgs>
+        fields: Prisma.VipExchangeCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VipExchangeCodeFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
+          }
+          findFirst: {
+            args: Prisma.VipExchangeCodeFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VipExchangeCodeFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
+          }
+          findMany: {
+            args: Prisma.VipExchangeCodeFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>[]
+          }
+          create: {
+            args: Prisma.VipExchangeCodeCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
+          }
+          createMany: {
+            args: Prisma.VipExchangeCodeCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.VipExchangeCodeDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
+          }
+          update: {
+            args: Prisma.VipExchangeCodeUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.VipExchangeCodeDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VipExchangeCodeUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.VipExchangeCodeUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipExchangeCodePayload>
+          }
+          aggregate: {
+            args: Prisma.VipExchangeCodeAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateVipExchangeCode>
+          }
+          groupBy: {
+            args: Prisma.VipExchangeCodeGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<VipExchangeCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VipExchangeCodeCountArgs<ExtArgs>,
+            result: $Utils.Optional<VipExchangeCodeCountAggregateOutputType> | number
+          }
+        }
+      }
+      VipType: {
+        payload: Prisma.$VipTypePayload<ExtArgs>
+        fields: Prisma.VipTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VipTypeFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VipTypeFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
+          }
+          findFirst: {
+            args: Prisma.VipTypeFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VipTypeFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
+          }
+          findMany: {
+            args: Prisma.VipTypeFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>[]
+          }
+          create: {
+            args: Prisma.VipTypeCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
+          }
+          createMany: {
+            args: Prisma.VipTypeCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.VipTypeDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
+          }
+          update: {
+            args: Prisma.VipTypeUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.VipTypeDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VipTypeUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.VipTypeUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipTypePayload>
+          }
+          aggregate: {
+            args: Prisma.VipTypeAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateVipType>
+          }
+          groupBy: {
+            args: Prisma.VipTypeGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<VipTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VipTypeCountArgs<ExtArgs>,
+            result: $Utils.Optional<VipTypeCountAggregateOutputType> | number
+          }
+        }
+      }
+      Vip: {
+        payload: Prisma.$VipPayload<ExtArgs>
+        fields: Prisma.VipFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VipFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VipFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          findFirst: {
+            args: Prisma.VipFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VipFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          findMany: {
+            args: Prisma.VipFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>[]
+          }
+          create: {
+            args: Prisma.VipCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          createMany: {
+            args: Prisma.VipCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.VipDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          update: {
+            args: Prisma.VipUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          deleteMany: {
+            args: Prisma.VipDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VipUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.VipUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$VipPayload>
+          }
+          aggregate: {
+            args: Prisma.VipAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateVip>
+          }
+          groupBy: {
+            args: Prisma.VipGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<VipGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VipCountArgs<ExtArgs>,
+            result: $Utils.Optional<VipCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1693,3741 +1693,6 @@ export namespace Prisma {
   /**
    * Models
    */
-
-  /**
-   * Model User
-   */
-
-  export type AggregateUser = {
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
-
-  export type UserAvgAggregateOutputType = {
-    id: number | null
-    disabled: number | null
-  }
-
-  export type UserSumAggregateOutputType = {
-    id: bigint | null
-    disabled: number | null
-  }
-
-  export type UserMinAggregateOutputType = {
-    id: bigint | null
-    email: string | null
-    avatar: string | null
-    username: string | null
-    password: string | null
-    disabled: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type UserMaxAggregateOutputType = {
-    id: bigint | null
-    email: string | null
-    avatar: string | null
-    username: string | null
-    password: string | null
-    disabled: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type UserCountAggregateOutputType = {
-    id: number
-    email: number
-    avatar: number
-    username: number
-    password: number
-    disabled: number
-    roles: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type UserAvgAggregateInputType = {
-    id?: true
-    disabled?: true
-  }
-
-  export type UserSumAggregateInputType = {
-    id?: true
-    disabled?: true
-  }
-
-  export type UserMinAggregateInputType = {
-    id?: true
-    email?: true
-    avatar?: true
-    username?: true
-    password?: true
-    disabled?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type UserMaxAggregateInputType = {
-    id?: true
-    email?: true
-    avatar?: true
-    username?: true
-    password?: true
-    disabled?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type UserCountAggregateInputType = {
-    id?: true
-    email?: true
-    avatar?: true
-    username?: true
-    password?: true
-    disabled?: true
-    roles?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which User to aggregate.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Users
-    **/
-    _count?: true | UserCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: UserAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: UserSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UserMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UserMaxAggregateInputType
-  }
-
-  export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUser[P]>
-      : GetScalarType<T[P], AggregateUser[P]>
-  }
-
-
-
-
-  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
-    by: UserScalarFieldEnum[] | UserScalarFieldEnum
-    having?: UserScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserCountAggregateInputType | true
-    _avg?: UserAvgAggregateInputType
-    _sum?: UserSumAggregateInputType
-    _min?: UserMinAggregateInputType
-    _max?: UserMaxAggregateInputType
-  }
-
-  export type UserGroupByOutputType = {
-    id: bigint
-    email: string
-    avatar: string
-    username: string
-    password: string
-    disabled: number
-    roles: JsonValue
-    createdAt: Date
-    updatedAt: Date
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
-
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
-            : GetScalarType<T[P], UserGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    email?: boolean
-    avatar?: boolean
-    username?: boolean
-    password?: boolean
-    disabled?: boolean
-    roles?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["user"]>
-
-
-  export type UserSelectScalar = {
-    id?: boolean
-    email?: boolean
-    avatar?: boolean
-    username?: boolean
-    password?: boolean
-    disabled?: boolean
-    roles?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-
-  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: bigint
-      email: string
-      avatar: string
-      username: string
-      password: string
-      disabled: number
-      roles: Prisma.JsonValue
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["user"]>
-    composites: {}
-  }
-
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
-
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: UserCountAggregateInputType | true
-    }
-
-  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
-    /**
-     * Find zero or one User that matches the filter.
-     * @param {UserFindUniqueArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends UserFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one User that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first User that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends UserFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first User that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Users that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Users
-     * const users = await prisma.user.findMany()
-     * 
-     * // Get first 10 Users
-     * const users = await prisma.user.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends UserFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a User.
-     * @param {UserCreateArgs} args - Arguments to create a User.
-     * @example
-     * // Create one User
-     * const User = await prisma.user.create({
-     *   data: {
-     *     // ... data to create a User
-     *   }
-     * })
-     * 
-    **/
-    create<T extends UserCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many Users.
-     * @param {UserCreateManyArgs} args - Arguments to create many Users.
-     * @example
-     * // Create many Users
-     * const user = await prisma.user.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends UserCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a User.
-     * @param {UserDeleteArgs} args - Arguments to delete one User.
-     * @example
-     * // Delete one User
-     * const User = await prisma.user.delete({
-     *   where: {
-     *     // ... filter to delete one User
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends UserDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one User.
-     * @param {UserUpdateArgs} args - Arguments to update one User.
-     * @example
-     * // Update one User
-     * const user = await prisma.user.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends UserUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more Users.
-     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
-     * @example
-     * // Delete a few Users
-     * const { count } = await prisma.user.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends UserDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Users.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Users
-     * const user = await prisma.user.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends UserUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one User.
-     * @param {UserUpsertArgs} args - Arguments to update or create a User.
-     * @example
-     * // Update or create a User
-     * const user = await prisma.user.upsert({
-     *   create: {
-     *     // ... data to create a User
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the User we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends UserUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
-    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of Users.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserCountArgs} args - Arguments to filter Users to count.
-     * @example
-     * // Count the number of Users
-     * const count = await prisma.user.count({
-     *   where: {
-     *     // ... the filter for the Users we want to count
-     *   }
-     * })
-    **/
-    count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a User.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
-
-    /**
-     * Group by User.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends UserGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the User model
-   */
-  readonly fields: UserFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for User.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the User model
-   */ 
-  interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'BigInt'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly avatar: FieldRef<"User", 'String'>
-    readonly username: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
-    readonly disabled: FieldRef<"User", 'Int'>
-    readonly roles: FieldRef<"User", 'Json'>
-    readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly updatedAt: FieldRef<"User", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * User findUnique
-   */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User findUniqueOrThrow
-   */
-  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User findFirst
-   */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Users.
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Users.
-     */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * User findFirstOrThrow
-   */
-  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Users.
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Users.
-     */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * User findMany
-   */
-  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Filter, which Users to fetch.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Users.
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * User create
-   */
-  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * The data needed to create a User.
-     */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
-  }
-
-  /**
-   * User createMany
-   */
-  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Users.
-     */
-    data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * User update
-   */
-  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * The data needed to update a User.
-     */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-    /**
-     * Choose, which User to update.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User updateMany
-   */
-  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Users.
-     */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
-    /**
-     * Filter which Users to update
-     */
-    where?: UserWhereInput
-  }
-
-  /**
-   * User upsert
-   */
-  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * The filter to search for the User to update in case it exists.
-     */
-    where: UserWhereUniqueInput
-    /**
-     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
-     */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
-    /**
-     * In case the User was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-  }
-
-  /**
-   * User delete
-   */
-  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Filter which User to delete.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User deleteMany
-   */
-  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Users to delete
-     */
-    where?: UserWhereInput
-  }
-
-  /**
-   * User without action
-   */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Vip
-   */
-
-  export type AggregateVip = {
-    _count: VipCountAggregateOutputType | null
-    _avg: VipAvgAggregateOutputType | null
-    _sum: VipSumAggregateOutputType | null
-    _min: VipMinAggregateOutputType | null
-    _max: VipMaxAggregateOutputType | null
-  }
-
-  export type VipAvgAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-  }
-
-  export type VipSumAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-  }
-
-  export type VipMinAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-    start_time: Date | null
-    expire_time: Date | null
-  }
-
-  export type VipMaxAggregateOutputType = {
-    userId: number | null
-    vipTypeId: number | null
-    start_time: Date | null
-    expire_time: Date | null
-  }
-
-  export type VipCountAggregateOutputType = {
-    userId: number
-    vipTypeId: number
-    start_time: number
-    expire_time: number
-    _all: number
-  }
-
-
-  export type VipAvgAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-  }
-
-  export type VipSumAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-  }
-
-  export type VipMinAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-    start_time?: true
-    expire_time?: true
-  }
-
-  export type VipMaxAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-    start_time?: true
-    expire_time?: true
-  }
-
-  export type VipCountAggregateInputType = {
-    userId?: true
-    vipTypeId?: true
-    start_time?: true
-    expire_time?: true
-    _all?: true
-  }
-
-  export type VipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Vip to aggregate.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Vips
-    **/
-    _count?: true | VipCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: VipAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VipSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VipMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VipMaxAggregateInputType
-  }
-
-  export type GetVipAggregateType<T extends VipAggregateArgs> = {
-        [P in keyof T & keyof AggregateVip]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVip[P]>
-      : GetScalarType<T[P], AggregateVip[P]>
-  }
-
-
-
-
-  export type VipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VipWhereInput
-    orderBy?: VipOrderByWithAggregationInput | VipOrderByWithAggregationInput[]
-    by: VipScalarFieldEnum[] | VipScalarFieldEnum
-    having?: VipScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VipCountAggregateInputType | true
-    _avg?: VipAvgAggregateInputType
-    _sum?: VipSumAggregateInputType
-    _min?: VipMinAggregateInputType
-    _max?: VipMaxAggregateInputType
-  }
-
-  export type VipGroupByOutputType = {
-    userId: number
-    vipTypeId: number
-    start_time: Date
-    expire_time: Date | null
-    _count: VipCountAggregateOutputType | null
-    _avg: VipAvgAggregateOutputType | null
-    _sum: VipSumAggregateOutputType | null
-    _min: VipMinAggregateOutputType | null
-    _max: VipMaxAggregateOutputType | null
-  }
-
-  type GetVipGroupByPayload<T extends VipGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<VipGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VipGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VipGroupByOutputType[P]>
-            : GetScalarType<T[P], VipGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    userId?: boolean
-    vipTypeId?: boolean
-    start_time?: boolean
-    expire_time?: boolean
-  }, ExtArgs["result"]["vip"]>
-
-
-  export type VipSelectScalar = {
-    userId?: boolean
-    vipTypeId?: boolean
-    start_time?: boolean
-    expire_time?: boolean
-  }
-
-
-  export type $VipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Vip"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      userId: number
-      vipTypeId: number
-      start_time: Date
-      expire_time: Date | null
-    }, ExtArgs["result"]["vip"]>
-    composites: {}
-  }
-
-  type VipGetPayload<S extends boolean | null | undefined | VipDefaultArgs> = $Result.GetResult<Prisma.$VipPayload, S>
-
-  type VipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<VipFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: VipCountAggregateInputType | true
-    }
-
-  export interface VipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vip'], meta: { name: 'Vip' } }
-    /**
-     * Find zero or one Vip that matches the filter.
-     * @param {VipFindUniqueArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends VipFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, VipFindUniqueArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one Vip that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {VipFindUniqueOrThrowArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends VipFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first Vip that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipFindFirstArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends VipFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindFirstArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first Vip that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipFindFirstOrThrowArgs} args - Arguments to find a Vip
-     * @example
-     * // Get one Vip
-     * const vip = await prisma.vip.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends VipFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Vips that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Vips
-     * const vips = await prisma.vip.findMany()
-     * 
-     * // Get first 10 Vips
-     * const vips = await prisma.vip.findMany({ take: 10 })
-     * 
-     * // Only select the `userId`
-     * const vipWithUserIdOnly = await prisma.vip.findMany({ select: { userId: true } })
-     * 
-    **/
-    findMany<T extends VipFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a Vip.
-     * @param {VipCreateArgs} args - Arguments to create a Vip.
-     * @example
-     * // Create one Vip
-     * const Vip = await prisma.vip.create({
-     *   data: {
-     *     // ... data to create a Vip
-     *   }
-     * })
-     * 
-    **/
-    create<T extends VipCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipCreateArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many Vips.
-     * @param {VipCreateManyArgs} args - Arguments to create many Vips.
-     * @example
-     * // Create many Vips
-     * const vip = await prisma.vip.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends VipCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Vip.
-     * @param {VipDeleteArgs} args - Arguments to delete one Vip.
-     * @example
-     * // Delete one Vip
-     * const Vip = await prisma.vip.delete({
-     *   where: {
-     *     // ... filter to delete one Vip
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends VipDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, VipDeleteArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one Vip.
-     * @param {VipUpdateArgs} args - Arguments to update one Vip.
-     * @example
-     * // Update one Vip
-     * const vip = await prisma.vip.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends VipUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipUpdateArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more Vips.
-     * @param {VipDeleteManyArgs} args - Arguments to filter Vips to delete.
-     * @example
-     * // Delete a few Vips
-     * const { count } = await prisma.vip.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends VipDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Vips.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Vips
-     * const vip = await prisma.vip.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends VipUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, VipUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Vip.
-     * @param {VipUpsertArgs} args - Arguments to update or create a Vip.
-     * @example
-     * // Update or create a Vip
-     * const vip = await prisma.vip.upsert({
-     *   create: {
-     *     // ... data to create a Vip
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Vip we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends VipUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, VipUpsertArgs<ExtArgs>>
-    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of Vips.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipCountArgs} args - Arguments to filter Vips to count.
-     * @example
-     * // Count the number of Vips
-     * const count = await prisma.vip.count({
-     *   where: {
-     *     // ... the filter for the Vips we want to count
-     *   }
-     * })
-    **/
-    count<T extends VipCountArgs>(
-      args?: Subset<T, VipCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VipCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Vip.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VipAggregateArgs>(args: Subset<T, VipAggregateArgs>): Prisma.PrismaPromise<GetVipAggregateType<T>>
-
-    /**
-     * Group by Vip.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VipGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VipGroupByArgs['orderBy'] }
-        : { orderBy?: VipGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Vip model
-   */
-  readonly fields: VipFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Vip.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__VipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the Vip model
-   */ 
-  interface VipFieldRefs {
-    readonly userId: FieldRef<"Vip", 'Int'>
-    readonly vipTypeId: FieldRef<"Vip", 'Int'>
-    readonly start_time: FieldRef<"Vip", 'DateTime'>
-    readonly expire_time: FieldRef<"Vip", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Vip findUnique
-   */
-  export type VipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip findUniqueOrThrow
-   */
-  export type VipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip findFirst
-   */
-  export type VipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Vips.
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Vips.
-     */
-    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
-  }
-
-  /**
-   * Vip findFirstOrThrow
-   */
-  export type VipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vip to fetch.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Vips.
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Vips.
-     */
-    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
-  }
-
-  /**
-   * Vip findMany
-   */
-  export type VipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter, which Vips to fetch.
-     */
-    where?: VipWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Vips to fetch.
-     */
-    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Vips.
-     */
-    cursor?: VipWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Vips from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Vips.
-     */
-    skip?: number
-    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
-  }
-
-  /**
-   * Vip create
-   */
-  export type VipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * The data needed to create a Vip.
-     */
-    data: XOR<VipCreateInput, VipUncheckedCreateInput>
-  }
-
-  /**
-   * Vip createMany
-   */
-  export type VipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Vips.
-     */
-    data: VipCreateManyInput | VipCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Vip update
-   */
-  export type VipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * The data needed to update a Vip.
-     */
-    data: XOR<VipUpdateInput, VipUncheckedUpdateInput>
-    /**
-     * Choose, which Vip to update.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip updateMany
-   */
-  export type VipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Vips.
-     */
-    data: XOR<VipUpdateManyMutationInput, VipUncheckedUpdateManyInput>
-    /**
-     * Filter which Vips to update
-     */
-    where?: VipWhereInput
-  }
-
-  /**
-   * Vip upsert
-   */
-  export type VipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * The filter to search for the Vip to update in case it exists.
-     */
-    where: VipWhereUniqueInput
-    /**
-     * In case the Vip found by the `where` argument doesn't exist, create a new Vip with this data.
-     */
-    create: XOR<VipCreateInput, VipUncheckedCreateInput>
-    /**
-     * In case the Vip was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VipUpdateInput, VipUncheckedUpdateInput>
-  }
-
-  /**
-   * Vip delete
-   */
-  export type VipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-    /**
-     * Filter which Vip to delete.
-     */
-    where: VipWhereUniqueInput
-  }
-
-  /**
-   * Vip deleteMany
-   */
-  export type VipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Vips to delete
-     */
-    where?: VipWhereInput
-  }
-
-  /**
-   * Vip without action
-   */
-  export type VipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vip
-     */
-    select?: VipSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * Model VipType
-   */
-
-  export type AggregateVipType = {
-    _count: VipTypeCountAggregateOutputType | null
-    _avg: VipTypeAvgAggregateOutputType | null
-    _sum: VipTypeSumAggregateOutputType | null
-    _min: VipTypeMinAggregateOutputType | null
-    _max: VipTypeMaxAggregateOutputType | null
-  }
-
-  export type VipTypeAvgAggregateOutputType = {
-    id: number | null
-    price: Decimal | null
-    originalPrice: Decimal | null
-    duration: number | null
-    sellType: number | null
-    disabled: number | null
-  }
-
-  export type VipTypeSumAggregateOutputType = {
-    id: number | null
-    price: Decimal | null
-    originalPrice: Decimal | null
-    duration: number | null
-    sellType: number | null
-    disabled: number | null
-  }
-
-  export type VipTypeMinAggregateOutputType = {
-    id: number | null
-    tilte: string | null
-    description: string | null
-    price: Decimal | null
-    originalPrice: Decimal | null
-    duration: number | null
-    sellType: number | null
-    disabled: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VipTypeMaxAggregateOutputType = {
-    id: number | null
-    tilte: string | null
-    description: string | null
-    price: Decimal | null
-    originalPrice: Decimal | null
-    duration: number | null
-    sellType: number | null
-    disabled: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VipTypeCountAggregateOutputType = {
-    id: number
-    tilte: number
-    description: number
-    equity: number
-    price: number
-    originalPrice: number
-    duration: number
-    sellType: number
-    disabled: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type VipTypeAvgAggregateInputType = {
-    id?: true
-    price?: true
-    originalPrice?: true
-    duration?: true
-    sellType?: true
-    disabled?: true
-  }
-
-  export type VipTypeSumAggregateInputType = {
-    id?: true
-    price?: true
-    originalPrice?: true
-    duration?: true
-    sellType?: true
-    disabled?: true
-  }
-
-  export type VipTypeMinAggregateInputType = {
-    id?: true
-    tilte?: true
-    description?: true
-    price?: true
-    originalPrice?: true
-    duration?: true
-    sellType?: true
-    disabled?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VipTypeMaxAggregateInputType = {
-    id?: true
-    tilte?: true
-    description?: true
-    price?: true
-    originalPrice?: true
-    duration?: true
-    sellType?: true
-    disabled?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VipTypeCountAggregateInputType = {
-    id?: true
-    tilte?: true
-    description?: true
-    equity?: true
-    price?: true
-    originalPrice?: true
-    duration?: true
-    sellType?: true
-    disabled?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type VipTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which VipType to aggregate.
-     */
-    where?: VipTypeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipTypes to fetch.
-     */
-    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VipTypeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipTypes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipTypes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned VipTypes
-    **/
-    _count?: true | VipTypeCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: VipTypeAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VipTypeSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VipTypeMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VipTypeMaxAggregateInputType
-  }
-
-  export type GetVipTypeAggregateType<T extends VipTypeAggregateArgs> = {
-        [P in keyof T & keyof AggregateVipType]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVipType[P]>
-      : GetScalarType<T[P], AggregateVipType[P]>
-  }
-
-
-
-
-  export type VipTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VipTypeWhereInput
-    orderBy?: VipTypeOrderByWithAggregationInput | VipTypeOrderByWithAggregationInput[]
-    by: VipTypeScalarFieldEnum[] | VipTypeScalarFieldEnum
-    having?: VipTypeScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VipTypeCountAggregateInputType | true
-    _avg?: VipTypeAvgAggregateInputType
-    _sum?: VipTypeSumAggregateInputType
-    _min?: VipTypeMinAggregateInputType
-    _max?: VipTypeMaxAggregateInputType
-  }
-
-  export type VipTypeGroupByOutputType = {
-    id: number
-    tilte: string
-    description: string
-    equity: JsonValue | null
-    price: Decimal
-    originalPrice: Decimal | null
-    duration: number
-    sellType: number
-    disabled: number
-    createdAt: Date
-    updatedAt: Date
-    _count: VipTypeCountAggregateOutputType | null
-    _avg: VipTypeAvgAggregateOutputType | null
-    _sum: VipTypeSumAggregateOutputType | null
-    _min: VipTypeMinAggregateOutputType | null
-    _max: VipTypeMaxAggregateOutputType | null
-  }
-
-  type GetVipTypeGroupByPayload<T extends VipTypeGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<VipTypeGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VipTypeGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VipTypeGroupByOutputType[P]>
-            : GetScalarType<T[P], VipTypeGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VipTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    tilte?: boolean
-    description?: boolean
-    equity?: boolean
-    price?: boolean
-    originalPrice?: boolean
-    duration?: boolean
-    sellType?: boolean
-    disabled?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["vipType"]>
-
-
-  export type VipTypeSelectScalar = {
-    id?: boolean
-    tilte?: boolean
-    description?: boolean
-    equity?: boolean
-    price?: boolean
-    originalPrice?: boolean
-    duration?: boolean
-    sellType?: boolean
-    disabled?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-
-  export type $VipTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "VipType"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      tilte: string
-      description: string
-      equity: Prisma.JsonValue | null
-      price: Prisma.Decimal
-      originalPrice: Prisma.Decimal | null
-      duration: number
-      sellType: number
-      disabled: number
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["vipType"]>
-    composites: {}
-  }
-
-  type VipTypeGetPayload<S extends boolean | null | undefined | VipTypeDefaultArgs> = $Result.GetResult<Prisma.$VipTypePayload, S>
-
-  type VipTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<VipTypeFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: VipTypeCountAggregateInputType | true
-    }
-
-  export interface VipTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VipType'], meta: { name: 'VipType' } }
-    /**
-     * Find zero or one VipType that matches the filter.
-     * @param {VipTypeFindUniqueArgs} args - Arguments to find a VipType
-     * @example
-     * // Get one VipType
-     * const vipType = await prisma.vipType.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends VipTypeFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, VipTypeFindUniqueArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one VipType that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {VipTypeFindUniqueOrThrowArgs} args - Arguments to find a VipType
-     * @example
-     * // Get one VipType
-     * const vipType = await prisma.vipType.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends VipTypeFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipTypeFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first VipType that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipTypeFindFirstArgs} args - Arguments to find a VipType
-     * @example
-     * // Get one VipType
-     * const vipType = await prisma.vipType.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends VipTypeFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipTypeFindFirstArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first VipType that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipTypeFindFirstOrThrowArgs} args - Arguments to find a VipType
-     * @example
-     * // Get one VipType
-     * const vipType = await prisma.vipType.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends VipTypeFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipTypeFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more VipTypes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipTypeFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all VipTypes
-     * const vipTypes = await prisma.vipType.findMany()
-     * 
-     * // Get first 10 VipTypes
-     * const vipTypes = await prisma.vipType.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const vipTypeWithIdOnly = await prisma.vipType.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends VipTypeFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipTypeFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a VipType.
-     * @param {VipTypeCreateArgs} args - Arguments to create a VipType.
-     * @example
-     * // Create one VipType
-     * const VipType = await prisma.vipType.create({
-     *   data: {
-     *     // ... data to create a VipType
-     *   }
-     * })
-     * 
-    **/
-    create<T extends VipTypeCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipTypeCreateArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many VipTypes.
-     * @param {VipTypeCreateManyArgs} args - Arguments to create many VipTypes.
-     * @example
-     * // Create many VipTypes
-     * const vipType = await prisma.vipType.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends VipTypeCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipTypeCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a VipType.
-     * @param {VipTypeDeleteArgs} args - Arguments to delete one VipType.
-     * @example
-     * // Delete one VipType
-     * const VipType = await prisma.vipType.delete({
-     *   where: {
-     *     // ... filter to delete one VipType
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends VipTypeDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, VipTypeDeleteArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one VipType.
-     * @param {VipTypeUpdateArgs} args - Arguments to update one VipType.
-     * @example
-     * // Update one VipType
-     * const vipType = await prisma.vipType.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends VipTypeUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipTypeUpdateArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more VipTypes.
-     * @param {VipTypeDeleteManyArgs} args - Arguments to filter VipTypes to delete.
-     * @example
-     * // Delete a few VipTypes
-     * const { count } = await prisma.vipType.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends VipTypeDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipTypeDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more VipTypes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipTypeUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many VipTypes
-     * const vipType = await prisma.vipType.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends VipTypeUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, VipTypeUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one VipType.
-     * @param {VipTypeUpsertArgs} args - Arguments to update or create a VipType.
-     * @example
-     * // Update or create a VipType
-     * const vipType = await prisma.vipType.upsert({
-     *   create: {
-     *     // ... data to create a VipType
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the VipType we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends VipTypeUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, VipTypeUpsertArgs<ExtArgs>>
-    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of VipTypes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipTypeCountArgs} args - Arguments to filter VipTypes to count.
-     * @example
-     * // Count the number of VipTypes
-     * const count = await prisma.vipType.count({
-     *   where: {
-     *     // ... the filter for the VipTypes we want to count
-     *   }
-     * })
-    **/
-    count<T extends VipTypeCountArgs>(
-      args?: Subset<T, VipTypeCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VipTypeCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a VipType.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VipTypeAggregateArgs>(args: Subset<T, VipTypeAggregateArgs>): Prisma.PrismaPromise<GetVipTypeAggregateType<T>>
-
-    /**
-     * Group by VipType.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipTypeGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VipTypeGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VipTypeGroupByArgs['orderBy'] }
-        : { orderBy?: VipTypeGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VipTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the VipType model
-   */
-  readonly fields: VipTypeFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for VipType.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__VipTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the VipType model
-   */ 
-  interface VipTypeFieldRefs {
-    readonly id: FieldRef<"VipType", 'Int'>
-    readonly tilte: FieldRef<"VipType", 'String'>
-    readonly description: FieldRef<"VipType", 'String'>
-    readonly equity: FieldRef<"VipType", 'Json'>
-    readonly price: FieldRef<"VipType", 'Decimal'>
-    readonly originalPrice: FieldRef<"VipType", 'Decimal'>
-    readonly duration: FieldRef<"VipType", 'Int'>
-    readonly sellType: FieldRef<"VipType", 'Int'>
-    readonly disabled: FieldRef<"VipType", 'Int'>
-    readonly createdAt: FieldRef<"VipType", 'DateTime'>
-    readonly updatedAt: FieldRef<"VipType", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * VipType findUnique
-   */
-  export type VipTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipType to fetch.
-     */
-    where: VipTypeWhereUniqueInput
-  }
-
-  /**
-   * VipType findUniqueOrThrow
-   */
-  export type VipTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipType to fetch.
-     */
-    where: VipTypeWhereUniqueInput
-  }
-
-  /**
-   * VipType findFirst
-   */
-  export type VipTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipType to fetch.
-     */
-    where?: VipTypeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipTypes to fetch.
-     */
-    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for VipTypes.
-     */
-    cursor?: VipTypeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipTypes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipTypes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of VipTypes.
-     */
-    distinct?: VipTypeScalarFieldEnum | VipTypeScalarFieldEnum[]
-  }
-
-  /**
-   * VipType findFirstOrThrow
-   */
-  export type VipTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipType to fetch.
-     */
-    where?: VipTypeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipTypes to fetch.
-     */
-    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for VipTypes.
-     */
-    cursor?: VipTypeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipTypes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipTypes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of VipTypes.
-     */
-    distinct?: VipTypeScalarFieldEnum | VipTypeScalarFieldEnum[]
-  }
-
-  /**
-   * VipType findMany
-   */
-  export type VipTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipTypes to fetch.
-     */
-    where?: VipTypeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipTypes to fetch.
-     */
-    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing VipTypes.
-     */
-    cursor?: VipTypeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipTypes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipTypes.
-     */
-    skip?: number
-    distinct?: VipTypeScalarFieldEnum | VipTypeScalarFieldEnum[]
-  }
-
-  /**
-   * VipType create
-   */
-  export type VipTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * The data needed to create a VipType.
-     */
-    data: XOR<VipTypeCreateInput, VipTypeUncheckedCreateInput>
-  }
-
-  /**
-   * VipType createMany
-   */
-  export type VipTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many VipTypes.
-     */
-    data: VipTypeCreateManyInput | VipTypeCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * VipType update
-   */
-  export type VipTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * The data needed to update a VipType.
-     */
-    data: XOR<VipTypeUpdateInput, VipTypeUncheckedUpdateInput>
-    /**
-     * Choose, which VipType to update.
-     */
-    where: VipTypeWhereUniqueInput
-  }
-
-  /**
-   * VipType updateMany
-   */
-  export type VipTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update VipTypes.
-     */
-    data: XOR<VipTypeUpdateManyMutationInput, VipTypeUncheckedUpdateManyInput>
-    /**
-     * Filter which VipTypes to update
-     */
-    where?: VipTypeWhereInput
-  }
-
-  /**
-   * VipType upsert
-   */
-  export type VipTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * The filter to search for the VipType to update in case it exists.
-     */
-    where: VipTypeWhereUniqueInput
-    /**
-     * In case the VipType found by the `where` argument doesn't exist, create a new VipType with this data.
-     */
-    create: XOR<VipTypeCreateInput, VipTypeUncheckedCreateInput>
-    /**
-     * In case the VipType was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VipTypeUpdateInput, VipTypeUncheckedUpdateInput>
-  }
-
-  /**
-   * VipType delete
-   */
-  export type VipTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-    /**
-     * Filter which VipType to delete.
-     */
-    where: VipTypeWhereUniqueInput
-  }
-
-  /**
-   * VipType deleteMany
-   */
-  export type VipTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which VipTypes to delete
-     */
-    where?: VipTypeWhereInput
-  }
-
-  /**
-   * VipType without action
-   */
-  export type VipTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipType
-     */
-    select?: VipTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * Model VipExchangeCode
-   */
-
-  export type AggregateVipExchangeCode = {
-    _count: VipExchangeCodeCountAggregateOutputType | null
-    _avg: VipExchangeCodeAvgAggregateOutputType | null
-    _sum: VipExchangeCodeSumAggregateOutputType | null
-    _min: VipExchangeCodeMinAggregateOutputType | null
-    _max: VipExchangeCodeMaxAggregateOutputType | null
-  }
-
-  export type VipExchangeCodeAvgAggregateOutputType = {
-    id: number | null
-    vipTypeTd: number | null
-    creatorId: number | null
-    exchanged: number | null
-  }
-
-  export type VipExchangeCodeSumAggregateOutputType = {
-    id: number | null
-    vipTypeTd: number | null
-    creatorId: number | null
-    exchanged: number | null
-  }
-
-  export type VipExchangeCodeMinAggregateOutputType = {
-    id: number | null
-    code: string | null
-    vipTypeTd: number | null
-    startTime: Date | null
-    expireTime: Date | null
-    creatorId: number | null
-    exchanged: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VipExchangeCodeMaxAggregateOutputType = {
-    id: number | null
-    code: string | null
-    vipTypeTd: number | null
-    startTime: Date | null
-    expireTime: Date | null
-    creatorId: number | null
-    exchanged: number | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VipExchangeCodeCountAggregateOutputType = {
-    id: number
-    code: number
-    vipTypeTd: number
-    startTime: number
-    expireTime: number
-    creatorId: number
-    exchanged: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type VipExchangeCodeAvgAggregateInputType = {
-    id?: true
-    vipTypeTd?: true
-    creatorId?: true
-    exchanged?: true
-  }
-
-  export type VipExchangeCodeSumAggregateInputType = {
-    id?: true
-    vipTypeTd?: true
-    creatorId?: true
-    exchanged?: true
-  }
-
-  export type VipExchangeCodeMinAggregateInputType = {
-    id?: true
-    code?: true
-    vipTypeTd?: true
-    startTime?: true
-    expireTime?: true
-    creatorId?: true
-    exchanged?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VipExchangeCodeMaxAggregateInputType = {
-    id?: true
-    code?: true
-    vipTypeTd?: true
-    startTime?: true
-    expireTime?: true
-    creatorId?: true
-    exchanged?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VipExchangeCodeCountAggregateInputType = {
-    id?: true
-    code?: true
-    vipTypeTd?: true
-    startTime?: true
-    expireTime?: true
-    creatorId?: true
-    exchanged?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type VipExchangeCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which VipExchangeCode to aggregate.
-     */
-    where?: VipExchangeCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipExchangeCodes to fetch.
-     */
-    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VipExchangeCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipExchangeCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipExchangeCodes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned VipExchangeCodes
-    **/
-    _count?: true | VipExchangeCodeCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: VipExchangeCodeAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: VipExchangeCodeSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VipExchangeCodeMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VipExchangeCodeMaxAggregateInputType
-  }
-
-  export type GetVipExchangeCodeAggregateType<T extends VipExchangeCodeAggregateArgs> = {
-        [P in keyof T & keyof AggregateVipExchangeCode]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVipExchangeCode[P]>
-      : GetScalarType<T[P], AggregateVipExchangeCode[P]>
-  }
-
-
-
-
-  export type VipExchangeCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VipExchangeCodeWhereInput
-    orderBy?: VipExchangeCodeOrderByWithAggregationInput | VipExchangeCodeOrderByWithAggregationInput[]
-    by: VipExchangeCodeScalarFieldEnum[] | VipExchangeCodeScalarFieldEnum
-    having?: VipExchangeCodeScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VipExchangeCodeCountAggregateInputType | true
-    _avg?: VipExchangeCodeAvgAggregateInputType
-    _sum?: VipExchangeCodeSumAggregateInputType
-    _min?: VipExchangeCodeMinAggregateInputType
-    _max?: VipExchangeCodeMaxAggregateInputType
-  }
-
-  export type VipExchangeCodeGroupByOutputType = {
-    id: number
-    code: string
-    vipTypeTd: number
-    startTime: Date
-    expireTime: Date
-    creatorId: number
-    exchanged: number
-    createdAt: Date
-    updatedAt: Date
-    _count: VipExchangeCodeCountAggregateOutputType | null
-    _avg: VipExchangeCodeAvgAggregateOutputType | null
-    _sum: VipExchangeCodeSumAggregateOutputType | null
-    _min: VipExchangeCodeMinAggregateOutputType | null
-    _max: VipExchangeCodeMaxAggregateOutputType | null
-  }
-
-  type GetVipExchangeCodeGroupByPayload<T extends VipExchangeCodeGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<VipExchangeCodeGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VipExchangeCodeGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VipExchangeCodeGroupByOutputType[P]>
-            : GetScalarType<T[P], VipExchangeCodeGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VipExchangeCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    code?: boolean
-    vipTypeTd?: boolean
-    startTime?: boolean
-    expireTime?: boolean
-    creatorId?: boolean
-    exchanged?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["vipExchangeCode"]>
-
-
-  export type VipExchangeCodeSelectScalar = {
-    id?: boolean
-    code?: boolean
-    vipTypeTd?: boolean
-    startTime?: boolean
-    expireTime?: boolean
-    creatorId?: boolean
-    exchanged?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-
-  export type $VipExchangeCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "VipExchangeCode"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      code: string
-      vipTypeTd: number
-      startTime: Date
-      expireTime: Date
-      creatorId: number
-      exchanged: number
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["vipExchangeCode"]>
-    composites: {}
-  }
-
-  type VipExchangeCodeGetPayload<S extends boolean | null | undefined | VipExchangeCodeDefaultArgs> = $Result.GetResult<Prisma.$VipExchangeCodePayload, S>
-
-  type VipExchangeCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<VipExchangeCodeFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: VipExchangeCodeCountAggregateInputType | true
-    }
-
-  export interface VipExchangeCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VipExchangeCode'], meta: { name: 'VipExchangeCode' } }
-    /**
-     * Find zero or one VipExchangeCode that matches the filter.
-     * @param {VipExchangeCodeFindUniqueArgs} args - Arguments to find a VipExchangeCode
-     * @example
-     * // Get one VipExchangeCode
-     * const vipExchangeCode = await prisma.vipExchangeCode.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends VipExchangeCodeFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, VipExchangeCodeFindUniqueArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one VipExchangeCode that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {VipExchangeCodeFindUniqueOrThrowArgs} args - Arguments to find a VipExchangeCode
-     * @example
-     * // Get one VipExchangeCode
-     * const vipExchangeCode = await prisma.vipExchangeCode.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first VipExchangeCode that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipExchangeCodeFindFirstArgs} args - Arguments to find a VipExchangeCode
-     * @example
-     * // Get one VipExchangeCode
-     * const vipExchangeCode = await prisma.vipExchangeCode.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends VipExchangeCodeFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipExchangeCodeFindFirstArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first VipExchangeCode that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipExchangeCodeFindFirstOrThrowArgs} args - Arguments to find a VipExchangeCode
-     * @example
-     * // Get one VipExchangeCode
-     * const vipExchangeCode = await prisma.vipExchangeCode.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends VipExchangeCodeFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipExchangeCodeFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more VipExchangeCodes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipExchangeCodeFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all VipExchangeCodes
-     * const vipExchangeCodes = await prisma.vipExchangeCode.findMany()
-     * 
-     * // Get first 10 VipExchangeCodes
-     * const vipExchangeCodes = await prisma.vipExchangeCode.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const vipExchangeCodeWithIdOnly = await prisma.vipExchangeCode.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends VipExchangeCodeFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipExchangeCodeFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a VipExchangeCode.
-     * @param {VipExchangeCodeCreateArgs} args - Arguments to create a VipExchangeCode.
-     * @example
-     * // Create one VipExchangeCode
-     * const VipExchangeCode = await prisma.vipExchangeCode.create({
-     *   data: {
-     *     // ... data to create a VipExchangeCode
-     *   }
-     * })
-     * 
-    **/
-    create<T extends VipExchangeCodeCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipExchangeCodeCreateArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many VipExchangeCodes.
-     * @param {VipExchangeCodeCreateManyArgs} args - Arguments to create many VipExchangeCodes.
-     * @example
-     * // Create many VipExchangeCodes
-     * const vipExchangeCode = await prisma.vipExchangeCode.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends VipExchangeCodeCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipExchangeCodeCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a VipExchangeCode.
-     * @param {VipExchangeCodeDeleteArgs} args - Arguments to delete one VipExchangeCode.
-     * @example
-     * // Delete one VipExchangeCode
-     * const VipExchangeCode = await prisma.vipExchangeCode.delete({
-     *   where: {
-     *     // ... filter to delete one VipExchangeCode
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends VipExchangeCodeDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, VipExchangeCodeDeleteArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one VipExchangeCode.
-     * @param {VipExchangeCodeUpdateArgs} args - Arguments to update one VipExchangeCode.
-     * @example
-     * // Update one VipExchangeCode
-     * const vipExchangeCode = await prisma.vipExchangeCode.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends VipExchangeCodeUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, VipExchangeCodeUpdateArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more VipExchangeCodes.
-     * @param {VipExchangeCodeDeleteManyArgs} args - Arguments to filter VipExchangeCodes to delete.
-     * @example
-     * // Delete a few VipExchangeCodes
-     * const { count } = await prisma.vipExchangeCode.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends VipExchangeCodeDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, VipExchangeCodeDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more VipExchangeCodes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipExchangeCodeUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many VipExchangeCodes
-     * const vipExchangeCode = await prisma.vipExchangeCode.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends VipExchangeCodeUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, VipExchangeCodeUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one VipExchangeCode.
-     * @param {VipExchangeCodeUpsertArgs} args - Arguments to update or create a VipExchangeCode.
-     * @example
-     * // Update or create a VipExchangeCode
-     * const vipExchangeCode = await prisma.vipExchangeCode.upsert({
-     *   create: {
-     *     // ... data to create a VipExchangeCode
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the VipExchangeCode we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends VipExchangeCodeUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, VipExchangeCodeUpsertArgs<ExtArgs>>
-    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of VipExchangeCodes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipExchangeCodeCountArgs} args - Arguments to filter VipExchangeCodes to count.
-     * @example
-     * // Count the number of VipExchangeCodes
-     * const count = await prisma.vipExchangeCode.count({
-     *   where: {
-     *     // ... the filter for the VipExchangeCodes we want to count
-     *   }
-     * })
-    **/
-    count<T extends VipExchangeCodeCountArgs>(
-      args?: Subset<T, VipExchangeCodeCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VipExchangeCodeCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a VipExchangeCode.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipExchangeCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VipExchangeCodeAggregateArgs>(args: Subset<T, VipExchangeCodeAggregateArgs>): Prisma.PrismaPromise<GetVipExchangeCodeAggregateType<T>>
-
-    /**
-     * Group by VipExchangeCode.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VipExchangeCodeGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VipExchangeCodeGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VipExchangeCodeGroupByArgs['orderBy'] }
-        : { orderBy?: VipExchangeCodeGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VipExchangeCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipExchangeCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the VipExchangeCode model
-   */
-  readonly fields: VipExchangeCodeFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for VipExchangeCode.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__VipExchangeCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the VipExchangeCode model
-   */ 
-  interface VipExchangeCodeFieldRefs {
-    readonly id: FieldRef<"VipExchangeCode", 'Int'>
-    readonly code: FieldRef<"VipExchangeCode", 'String'>
-    readonly vipTypeTd: FieldRef<"VipExchangeCode", 'Int'>
-    readonly startTime: FieldRef<"VipExchangeCode", 'DateTime'>
-    readonly expireTime: FieldRef<"VipExchangeCode", 'DateTime'>
-    readonly creatorId: FieldRef<"VipExchangeCode", 'Int'>
-    readonly exchanged: FieldRef<"VipExchangeCode", 'Int'>
-    readonly createdAt: FieldRef<"VipExchangeCode", 'DateTime'>
-    readonly updatedAt: FieldRef<"VipExchangeCode", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * VipExchangeCode findUnique
-   */
-  export type VipExchangeCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipExchangeCode to fetch.
-     */
-    where: VipExchangeCodeWhereUniqueInput
-  }
-
-  /**
-   * VipExchangeCode findUniqueOrThrow
-   */
-  export type VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipExchangeCode to fetch.
-     */
-    where: VipExchangeCodeWhereUniqueInput
-  }
-
-  /**
-   * VipExchangeCode findFirst
-   */
-  export type VipExchangeCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipExchangeCode to fetch.
-     */
-    where?: VipExchangeCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipExchangeCodes to fetch.
-     */
-    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for VipExchangeCodes.
-     */
-    cursor?: VipExchangeCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipExchangeCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipExchangeCodes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of VipExchangeCodes.
-     */
-    distinct?: VipExchangeCodeScalarFieldEnum | VipExchangeCodeScalarFieldEnum[]
-  }
-
-  /**
-   * VipExchangeCode findFirstOrThrow
-   */
-  export type VipExchangeCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipExchangeCode to fetch.
-     */
-    where?: VipExchangeCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipExchangeCodes to fetch.
-     */
-    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for VipExchangeCodes.
-     */
-    cursor?: VipExchangeCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipExchangeCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipExchangeCodes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of VipExchangeCodes.
-     */
-    distinct?: VipExchangeCodeScalarFieldEnum | VipExchangeCodeScalarFieldEnum[]
-  }
-
-  /**
-   * VipExchangeCode findMany
-   */
-  export type VipExchangeCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * Filter, which VipExchangeCodes to fetch.
-     */
-    where?: VipExchangeCodeWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of VipExchangeCodes to fetch.
-     */
-    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing VipExchangeCodes.
-     */
-    cursor?: VipExchangeCodeWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` VipExchangeCodes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` VipExchangeCodes.
-     */
-    skip?: number
-    distinct?: VipExchangeCodeScalarFieldEnum | VipExchangeCodeScalarFieldEnum[]
-  }
-
-  /**
-   * VipExchangeCode create
-   */
-  export type VipExchangeCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * The data needed to create a VipExchangeCode.
-     */
-    data: XOR<VipExchangeCodeCreateInput, VipExchangeCodeUncheckedCreateInput>
-  }
-
-  /**
-   * VipExchangeCode createMany
-   */
-  export type VipExchangeCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many VipExchangeCodes.
-     */
-    data: VipExchangeCodeCreateManyInput | VipExchangeCodeCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * VipExchangeCode update
-   */
-  export type VipExchangeCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * The data needed to update a VipExchangeCode.
-     */
-    data: XOR<VipExchangeCodeUpdateInput, VipExchangeCodeUncheckedUpdateInput>
-    /**
-     * Choose, which VipExchangeCode to update.
-     */
-    where: VipExchangeCodeWhereUniqueInput
-  }
-
-  /**
-   * VipExchangeCode updateMany
-   */
-  export type VipExchangeCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update VipExchangeCodes.
-     */
-    data: XOR<VipExchangeCodeUpdateManyMutationInput, VipExchangeCodeUncheckedUpdateManyInput>
-    /**
-     * Filter which VipExchangeCodes to update
-     */
-    where?: VipExchangeCodeWhereInput
-  }
-
-  /**
-   * VipExchangeCode upsert
-   */
-  export type VipExchangeCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * The filter to search for the VipExchangeCode to update in case it exists.
-     */
-    where: VipExchangeCodeWhereUniqueInput
-    /**
-     * In case the VipExchangeCode found by the `where` argument doesn't exist, create a new VipExchangeCode with this data.
-     */
-    create: XOR<VipExchangeCodeCreateInput, VipExchangeCodeUncheckedCreateInput>
-    /**
-     * In case the VipExchangeCode was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VipExchangeCodeUpdateInput, VipExchangeCodeUncheckedUpdateInput>
-  }
-
-  /**
-   * VipExchangeCode delete
-   */
-  export type VipExchangeCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-    /**
-     * Filter which VipExchangeCode to delete.
-     */
-    where: VipExchangeCodeWhereUniqueInput
-  }
-
-  /**
-   * VipExchangeCode deleteMany
-   */
-  export type VipExchangeCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which VipExchangeCodes to delete
-     */
-    where?: VipExchangeCodeWhereInput
-  }
-
-  /**
-   * VipExchangeCode without action
-   */
-  export type VipExchangeCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the VipExchangeCode
-     */
-    select?: VipExchangeCodeSelect<ExtArgs> | null
-  }
-
 
   /**
    * Model InviteCode
@@ -11932,6 +8197,3763 @@ export namespace Prisma {
 
 
   /**
+   * Model User
+   */
+
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    id: number | null
+    disabled: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    id: bigint | null
+    disabled: number | null
+  }
+
+  export type UserMinAggregateOutputType = {
+    id: bigint | null
+    email: string | null
+    avatar: string | null
+    username: string | null
+    password: string | null
+    disabled: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserMaxAggregateOutputType = {
+    id: bigint | null
+    email: string | null
+    avatar: string | null
+    username: string | null
+    password: string | null
+    disabled: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserCountAggregateOutputType = {
+    id: number
+    email: number
+    avatar: number
+    username: number
+    password: number
+    disabled: number
+    roles: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserAvgAggregateInputType = {
+    id?: true
+    disabled?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    id?: true
+    disabled?: true
+  }
+
+  export type UserMinAggregateInputType = {
+    id?: true
+    email?: true
+    avatar?: true
+    username?: true
+    password?: true
+    disabled?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserMaxAggregateInputType = {
+    id?: true
+    email?: true
+    avatar?: true
+    username?: true
+    password?: true
+    disabled?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserCountAggregateInputType = {
+    id?: true
+    email?: true
+    avatar?: true
+    username?: true
+    password?: true
+    disabled?: true
+    roles?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which User to aggregate.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Users
+    **/
+    _count?: true | UserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
+  }
+
+
+
+
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
+  }
+
+  export type UserGroupByOutputType = {
+    id: bigint
+    email: string
+    avatar: string
+    username: string
+    password: string
+    disabled: number
+    roles: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
+  }
+
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    avatar?: boolean
+    username?: boolean
+    password?: boolean
+    disabled?: boolean
+    roles?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["user"]>
+
+
+  export type UserSelectScalar = {
+    id?: boolean
+    email?: boolean
+    avatar?: boolean
+    username?: boolean
+    password?: boolean
+    disabled?: boolean
+    roles?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      email: string
+      avatar: string
+      username: string
+      password: string
+      disabled: number
+      roles: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["user"]>
+    composites: {}
+  }
+
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserCountAggregateInputType | true
+    }
+
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+    /**
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends UserFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one User that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first User that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends UserFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first User that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @example
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Users that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Users
+     * const users = await prisma.user.findMany()
+     * 
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends UserFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
+     * @example
+     * // Create one User
+     * const User = await prisma.user.create({
+     *   data: {
+     *     // ... data to create a User
+     *   }
+     * })
+     * 
+    **/
+    create<T extends UserCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Users.
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends UserCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * @example
+     * // Delete one User
+     * const User = await prisma.user.delete({
+     *   where: {
+     *     // ... filter to delete one User
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends UserDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * @example
+     * // Update one User
+     * const user = await prisma.user.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends UserUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * @example
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends UserDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends UserUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * @example
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
+     *   create: {
+     *     // ... data to create a User
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends UserUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Users.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @example
+     * // Count the number of Users
+     * const count = await prisma.user.count({
+     *   where: {
+     *     // ... the filter for the Users we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+
+    /**
+     * Group by User.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the User model
+   */
+  readonly fields: UserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for User.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the User model
+   */ 
+  interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'BigInt'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly avatar: FieldRef<"User", 'String'>
+    readonly username: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly disabled: FieldRef<"User", 'Int'>
+    readonly roles: FieldRef<"User", 'Json'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * User findUnique
+   */
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findUniqueOrThrow
+   */
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User findFirst
+   */
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findFirstOrThrow
+   */
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which User to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Users.
+     */
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User findMany
+   */
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter, which Users to fetch.
+     */
+    where?: UserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Users to fetch.
+     */
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Users.
+     */
+    cursor?: UserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Users from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Users.
+     */
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * User create
+   */
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * The data needed to create a User.
+     */
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+  }
+
+  /**
+   * User createMany
+   */
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User update
+   */
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * The data needed to update a User.
+     */
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    /**
+     * Choose, which User to update.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User updateMany
+   */
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+  }
+
+  /**
+   * User upsert
+   */
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * The filter to search for the User to update in case it exists.
+     */
+    where: UserWhereUniqueInput
+    /**
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     */
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    /**
+     * In case the User was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+  }
+
+  /**
+   * User delete
+   */
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Filter which User to delete.
+     */
+    where: UserWhereUniqueInput
+  }
+
+  /**
+   * User deleteMany
+   */
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Users to delete
+     */
+    where?: UserWhereInput
+  }
+
+  /**
+   * User without action
+   */
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model VipExchangeCode
+   */
+
+  export type AggregateVipExchangeCode = {
+    _count: VipExchangeCodeCountAggregateOutputType | null
+    _avg: VipExchangeCodeAvgAggregateOutputType | null
+    _sum: VipExchangeCodeSumAggregateOutputType | null
+    _min: VipExchangeCodeMinAggregateOutputType | null
+    _max: VipExchangeCodeMaxAggregateOutputType | null
+  }
+
+  export type VipExchangeCodeAvgAggregateOutputType = {
+    id: number | null
+    vipTypeTd: number | null
+    creatorId: number | null
+    exchanged: number | null
+  }
+
+  export type VipExchangeCodeSumAggregateOutputType = {
+    id: number | null
+    vipTypeTd: number | null
+    creatorId: number | null
+    exchanged: number | null
+  }
+
+  export type VipExchangeCodeMinAggregateOutputType = {
+    id: number | null
+    code: string | null
+    vipTypeTd: number | null
+    startTime: Date | null
+    expireTime: Date | null
+    creatorId: number | null
+    exchanged: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipExchangeCodeMaxAggregateOutputType = {
+    id: number | null
+    code: string | null
+    vipTypeTd: number | null
+    startTime: Date | null
+    expireTime: Date | null
+    creatorId: number | null
+    exchanged: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipExchangeCodeCountAggregateOutputType = {
+    id: number
+    code: number
+    vipTypeTd: number
+    startTime: number
+    expireTime: number
+    creatorId: number
+    exchanged: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VipExchangeCodeAvgAggregateInputType = {
+    id?: true
+    vipTypeTd?: true
+    creatorId?: true
+    exchanged?: true
+  }
+
+  export type VipExchangeCodeSumAggregateInputType = {
+    id?: true
+    vipTypeTd?: true
+    creatorId?: true
+    exchanged?: true
+  }
+
+  export type VipExchangeCodeMinAggregateInputType = {
+    id?: true
+    code?: true
+    vipTypeTd?: true
+    startTime?: true
+    expireTime?: true
+    creatorId?: true
+    exchanged?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipExchangeCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    vipTypeTd?: true
+    startTime?: true
+    expireTime?: true
+    creatorId?: true
+    exchanged?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipExchangeCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    vipTypeTd?: true
+    startTime?: true
+    expireTime?: true
+    creatorId?: true
+    exchanged?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VipExchangeCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VipExchangeCode to aggregate.
+     */
+    where?: VipExchangeCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipExchangeCodes to fetch.
+     */
+    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VipExchangeCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipExchangeCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipExchangeCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VipExchangeCodes
+    **/
+    _count?: true | VipExchangeCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VipExchangeCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VipExchangeCodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VipExchangeCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VipExchangeCodeMaxAggregateInputType
+  }
+
+  export type GetVipExchangeCodeAggregateType<T extends VipExchangeCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateVipExchangeCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVipExchangeCode[P]>
+      : GetScalarType<T[P], AggregateVipExchangeCode[P]>
+  }
+
+
+
+
+  export type VipExchangeCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VipExchangeCodeWhereInput
+    orderBy?: VipExchangeCodeOrderByWithAggregationInput | VipExchangeCodeOrderByWithAggregationInput[]
+    by: VipExchangeCodeScalarFieldEnum[] | VipExchangeCodeScalarFieldEnum
+    having?: VipExchangeCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VipExchangeCodeCountAggregateInputType | true
+    _avg?: VipExchangeCodeAvgAggregateInputType
+    _sum?: VipExchangeCodeSumAggregateInputType
+    _min?: VipExchangeCodeMinAggregateInputType
+    _max?: VipExchangeCodeMaxAggregateInputType
+  }
+
+  export type VipExchangeCodeGroupByOutputType = {
+    id: number
+    code: string
+    vipTypeTd: number
+    startTime: Date
+    expireTime: Date
+    creatorId: number
+    exchanged: number
+    createdAt: Date
+    updatedAt: Date
+    _count: VipExchangeCodeCountAggregateOutputType | null
+    _avg: VipExchangeCodeAvgAggregateOutputType | null
+    _sum: VipExchangeCodeSumAggregateOutputType | null
+    _min: VipExchangeCodeMinAggregateOutputType | null
+    _max: VipExchangeCodeMaxAggregateOutputType | null
+  }
+
+  type GetVipExchangeCodeGroupByPayload<T extends VipExchangeCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VipExchangeCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VipExchangeCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VipExchangeCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], VipExchangeCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VipExchangeCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    vipTypeTd?: boolean
+    startTime?: boolean
+    expireTime?: boolean
+    creatorId?: boolean
+    exchanged?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["vipExchangeCode"]>
+
+
+  export type VipExchangeCodeSelectScalar = {
+    id?: boolean
+    code?: boolean
+    vipTypeTd?: boolean
+    startTime?: boolean
+    expireTime?: boolean
+    creatorId?: boolean
+    exchanged?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $VipExchangeCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VipExchangeCode"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      code: string
+      vipTypeTd: number
+      startTime: Date
+      expireTime: Date
+      creatorId: number
+      exchanged: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["vipExchangeCode"]>
+    composites: {}
+  }
+
+  type VipExchangeCodeGetPayload<S extends boolean | null | undefined | VipExchangeCodeDefaultArgs> = $Result.GetResult<Prisma.$VipExchangeCodePayload, S>
+
+  type VipExchangeCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<VipExchangeCodeFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: VipExchangeCodeCountAggregateInputType | true
+    }
+
+  export interface VipExchangeCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VipExchangeCode'], meta: { name: 'VipExchangeCode' } }
+    /**
+     * Find zero or one VipExchangeCode that matches the filter.
+     * @param {VipExchangeCodeFindUniqueArgs} args - Arguments to find a VipExchangeCode
+     * @example
+     * // Get one VipExchangeCode
+     * const vipExchangeCode = await prisma.vipExchangeCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends VipExchangeCodeFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, VipExchangeCodeFindUniqueArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one VipExchangeCode that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {VipExchangeCodeFindUniqueOrThrowArgs} args - Arguments to find a VipExchangeCode
+     * @example
+     * // Get one VipExchangeCode
+     * const vipExchangeCode = await prisma.vipExchangeCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first VipExchangeCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipExchangeCodeFindFirstArgs} args - Arguments to find a VipExchangeCode
+     * @example
+     * // Get one VipExchangeCode
+     * const vipExchangeCode = await prisma.vipExchangeCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends VipExchangeCodeFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipExchangeCodeFindFirstArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first VipExchangeCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipExchangeCodeFindFirstOrThrowArgs} args - Arguments to find a VipExchangeCode
+     * @example
+     * // Get one VipExchangeCode
+     * const vipExchangeCode = await prisma.vipExchangeCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends VipExchangeCodeFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipExchangeCodeFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more VipExchangeCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipExchangeCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VipExchangeCodes
+     * const vipExchangeCodes = await prisma.vipExchangeCode.findMany()
+     * 
+     * // Get first 10 VipExchangeCodes
+     * const vipExchangeCodes = await prisma.vipExchangeCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const vipExchangeCodeWithIdOnly = await prisma.vipExchangeCode.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends VipExchangeCodeFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipExchangeCodeFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a VipExchangeCode.
+     * @param {VipExchangeCodeCreateArgs} args - Arguments to create a VipExchangeCode.
+     * @example
+     * // Create one VipExchangeCode
+     * const VipExchangeCode = await prisma.vipExchangeCode.create({
+     *   data: {
+     *     // ... data to create a VipExchangeCode
+     *   }
+     * })
+     * 
+    **/
+    create<T extends VipExchangeCodeCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipExchangeCodeCreateArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many VipExchangeCodes.
+     * @param {VipExchangeCodeCreateManyArgs} args - Arguments to create many VipExchangeCodes.
+     * @example
+     * // Create many VipExchangeCodes
+     * const vipExchangeCode = await prisma.vipExchangeCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends VipExchangeCodeCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipExchangeCodeCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a VipExchangeCode.
+     * @param {VipExchangeCodeDeleteArgs} args - Arguments to delete one VipExchangeCode.
+     * @example
+     * // Delete one VipExchangeCode
+     * const VipExchangeCode = await prisma.vipExchangeCode.delete({
+     *   where: {
+     *     // ... filter to delete one VipExchangeCode
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends VipExchangeCodeDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, VipExchangeCodeDeleteArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one VipExchangeCode.
+     * @param {VipExchangeCodeUpdateArgs} args - Arguments to update one VipExchangeCode.
+     * @example
+     * // Update one VipExchangeCode
+     * const vipExchangeCode = await prisma.vipExchangeCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends VipExchangeCodeUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipExchangeCodeUpdateArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more VipExchangeCodes.
+     * @param {VipExchangeCodeDeleteManyArgs} args - Arguments to filter VipExchangeCodes to delete.
+     * @example
+     * // Delete a few VipExchangeCodes
+     * const { count } = await prisma.vipExchangeCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends VipExchangeCodeDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipExchangeCodeDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VipExchangeCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipExchangeCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VipExchangeCodes
+     * const vipExchangeCode = await prisma.vipExchangeCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends VipExchangeCodeUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, VipExchangeCodeUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one VipExchangeCode.
+     * @param {VipExchangeCodeUpsertArgs} args - Arguments to update or create a VipExchangeCode.
+     * @example
+     * // Update or create a VipExchangeCode
+     * const vipExchangeCode = await prisma.vipExchangeCode.upsert({
+     *   create: {
+     *     // ... data to create a VipExchangeCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VipExchangeCode we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends VipExchangeCodeUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, VipExchangeCodeUpsertArgs<ExtArgs>>
+    ): Prisma__VipExchangeCodeClient<$Result.GetResult<Prisma.$VipExchangeCodePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of VipExchangeCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipExchangeCodeCountArgs} args - Arguments to filter VipExchangeCodes to count.
+     * @example
+     * // Count the number of VipExchangeCodes
+     * const count = await prisma.vipExchangeCode.count({
+     *   where: {
+     *     // ... the filter for the VipExchangeCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends VipExchangeCodeCountArgs>(
+      args?: Subset<T, VipExchangeCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VipExchangeCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VipExchangeCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipExchangeCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VipExchangeCodeAggregateArgs>(args: Subset<T, VipExchangeCodeAggregateArgs>): Prisma.PrismaPromise<GetVipExchangeCodeAggregateType<T>>
+
+    /**
+     * Group by VipExchangeCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipExchangeCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VipExchangeCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VipExchangeCodeGroupByArgs['orderBy'] }
+        : { orderBy?: VipExchangeCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VipExchangeCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipExchangeCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VipExchangeCode model
+   */
+  readonly fields: VipExchangeCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VipExchangeCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VipExchangeCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the VipExchangeCode model
+   */ 
+  interface VipExchangeCodeFieldRefs {
+    readonly id: FieldRef<"VipExchangeCode", 'Int'>
+    readonly code: FieldRef<"VipExchangeCode", 'String'>
+    readonly vipTypeTd: FieldRef<"VipExchangeCode", 'Int'>
+    readonly startTime: FieldRef<"VipExchangeCode", 'DateTime'>
+    readonly expireTime: FieldRef<"VipExchangeCode", 'DateTime'>
+    readonly creatorId: FieldRef<"VipExchangeCode", 'Int'>
+    readonly exchanged: FieldRef<"VipExchangeCode", 'Int'>
+    readonly createdAt: FieldRef<"VipExchangeCode", 'DateTime'>
+    readonly updatedAt: FieldRef<"VipExchangeCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VipExchangeCode findUnique
+   */
+  export type VipExchangeCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipExchangeCode to fetch.
+     */
+    where: VipExchangeCodeWhereUniqueInput
+  }
+
+  /**
+   * VipExchangeCode findUniqueOrThrow
+   */
+  export type VipExchangeCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipExchangeCode to fetch.
+     */
+    where: VipExchangeCodeWhereUniqueInput
+  }
+
+  /**
+   * VipExchangeCode findFirst
+   */
+  export type VipExchangeCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipExchangeCode to fetch.
+     */
+    where?: VipExchangeCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipExchangeCodes to fetch.
+     */
+    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VipExchangeCodes.
+     */
+    cursor?: VipExchangeCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipExchangeCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipExchangeCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VipExchangeCodes.
+     */
+    distinct?: VipExchangeCodeScalarFieldEnum | VipExchangeCodeScalarFieldEnum[]
+  }
+
+  /**
+   * VipExchangeCode findFirstOrThrow
+   */
+  export type VipExchangeCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipExchangeCode to fetch.
+     */
+    where?: VipExchangeCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipExchangeCodes to fetch.
+     */
+    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VipExchangeCodes.
+     */
+    cursor?: VipExchangeCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipExchangeCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipExchangeCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VipExchangeCodes.
+     */
+    distinct?: VipExchangeCodeScalarFieldEnum | VipExchangeCodeScalarFieldEnum[]
+  }
+
+  /**
+   * VipExchangeCode findMany
+   */
+  export type VipExchangeCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipExchangeCodes to fetch.
+     */
+    where?: VipExchangeCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipExchangeCodes to fetch.
+     */
+    orderBy?: VipExchangeCodeOrderByWithRelationInput | VipExchangeCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VipExchangeCodes.
+     */
+    cursor?: VipExchangeCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipExchangeCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipExchangeCodes.
+     */
+    skip?: number
+    distinct?: VipExchangeCodeScalarFieldEnum | VipExchangeCodeScalarFieldEnum[]
+  }
+
+  /**
+   * VipExchangeCode create
+   */
+  export type VipExchangeCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * The data needed to create a VipExchangeCode.
+     */
+    data: XOR<VipExchangeCodeCreateInput, VipExchangeCodeUncheckedCreateInput>
+  }
+
+  /**
+   * VipExchangeCode createMany
+   */
+  export type VipExchangeCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VipExchangeCodes.
+     */
+    data: VipExchangeCodeCreateManyInput | VipExchangeCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VipExchangeCode update
+   */
+  export type VipExchangeCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * The data needed to update a VipExchangeCode.
+     */
+    data: XOR<VipExchangeCodeUpdateInput, VipExchangeCodeUncheckedUpdateInput>
+    /**
+     * Choose, which VipExchangeCode to update.
+     */
+    where: VipExchangeCodeWhereUniqueInput
+  }
+
+  /**
+   * VipExchangeCode updateMany
+   */
+  export type VipExchangeCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VipExchangeCodes.
+     */
+    data: XOR<VipExchangeCodeUpdateManyMutationInput, VipExchangeCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which VipExchangeCodes to update
+     */
+    where?: VipExchangeCodeWhereInput
+  }
+
+  /**
+   * VipExchangeCode upsert
+   */
+  export type VipExchangeCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * The filter to search for the VipExchangeCode to update in case it exists.
+     */
+    where: VipExchangeCodeWhereUniqueInput
+    /**
+     * In case the VipExchangeCode found by the `where` argument doesn't exist, create a new VipExchangeCode with this data.
+     */
+    create: XOR<VipExchangeCodeCreateInput, VipExchangeCodeUncheckedCreateInput>
+    /**
+     * In case the VipExchangeCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VipExchangeCodeUpdateInput, VipExchangeCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * VipExchangeCode delete
+   */
+  export type VipExchangeCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+    /**
+     * Filter which VipExchangeCode to delete.
+     */
+    where: VipExchangeCodeWhereUniqueInput
+  }
+
+  /**
+   * VipExchangeCode deleteMany
+   */
+  export type VipExchangeCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VipExchangeCodes to delete
+     */
+    where?: VipExchangeCodeWhereInput
+  }
+
+  /**
+   * VipExchangeCode without action
+   */
+  export type VipExchangeCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipExchangeCode
+     */
+    select?: VipExchangeCodeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model VipType
+   */
+
+  export type AggregateVipType = {
+    _count: VipTypeCountAggregateOutputType | null
+    _avg: VipTypeAvgAggregateOutputType | null
+    _sum: VipTypeSumAggregateOutputType | null
+    _min: VipTypeMinAggregateOutputType | null
+    _max: VipTypeMaxAggregateOutputType | null
+  }
+
+  export type VipTypeAvgAggregateOutputType = {
+    id: number | null
+    price: Decimal | null
+    originalPrice: Decimal | null
+    duration: number | null
+    sellType: number | null
+    disabled: number | null
+  }
+
+  export type VipTypeSumAggregateOutputType = {
+    id: number | null
+    price: Decimal | null
+    originalPrice: Decimal | null
+    duration: number | null
+    sellType: number | null
+    disabled: number | null
+  }
+
+  export type VipTypeMinAggregateOutputType = {
+    id: number | null
+    tilte: string | null
+    description: string | null
+    price: Decimal | null
+    originalPrice: Decimal | null
+    duration: number | null
+    sellType: number | null
+    disabled: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipTypeMaxAggregateOutputType = {
+    id: number | null
+    tilte: string | null
+    description: string | null
+    price: Decimal | null
+    originalPrice: Decimal | null
+    duration: number | null
+    sellType: number | null
+    disabled: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipTypeCountAggregateOutputType = {
+    id: number
+    tilte: number
+    description: number
+    equity: number
+    price: number
+    originalPrice: number
+    duration: number
+    sellType: number
+    disabled: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VipTypeAvgAggregateInputType = {
+    id?: true
+    price?: true
+    originalPrice?: true
+    duration?: true
+    sellType?: true
+    disabled?: true
+  }
+
+  export type VipTypeSumAggregateInputType = {
+    id?: true
+    price?: true
+    originalPrice?: true
+    duration?: true
+    sellType?: true
+    disabled?: true
+  }
+
+  export type VipTypeMinAggregateInputType = {
+    id?: true
+    tilte?: true
+    description?: true
+    price?: true
+    originalPrice?: true
+    duration?: true
+    sellType?: true
+    disabled?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipTypeMaxAggregateInputType = {
+    id?: true
+    tilte?: true
+    description?: true
+    price?: true
+    originalPrice?: true
+    duration?: true
+    sellType?: true
+    disabled?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipTypeCountAggregateInputType = {
+    id?: true
+    tilte?: true
+    description?: true
+    equity?: true
+    price?: true
+    originalPrice?: true
+    duration?: true
+    sellType?: true
+    disabled?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VipTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VipType to aggregate.
+     */
+    where?: VipTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipTypes to fetch.
+     */
+    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VipTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VipTypes
+    **/
+    _count?: true | VipTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VipTypeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VipTypeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VipTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VipTypeMaxAggregateInputType
+  }
+
+  export type GetVipTypeAggregateType<T extends VipTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateVipType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVipType[P]>
+      : GetScalarType<T[P], AggregateVipType[P]>
+  }
+
+
+
+
+  export type VipTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VipTypeWhereInput
+    orderBy?: VipTypeOrderByWithAggregationInput | VipTypeOrderByWithAggregationInput[]
+    by: VipTypeScalarFieldEnum[] | VipTypeScalarFieldEnum
+    having?: VipTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VipTypeCountAggregateInputType | true
+    _avg?: VipTypeAvgAggregateInputType
+    _sum?: VipTypeSumAggregateInputType
+    _min?: VipTypeMinAggregateInputType
+    _max?: VipTypeMaxAggregateInputType
+  }
+
+  export type VipTypeGroupByOutputType = {
+    id: number
+    tilte: string
+    description: string
+    equity: JsonValue | null
+    price: Decimal
+    originalPrice: Decimal | null
+    duration: number
+    sellType: number
+    disabled: number
+    createdAt: Date
+    updatedAt: Date
+    _count: VipTypeCountAggregateOutputType | null
+    _avg: VipTypeAvgAggregateOutputType | null
+    _sum: VipTypeSumAggregateOutputType | null
+    _min: VipTypeMinAggregateOutputType | null
+    _max: VipTypeMaxAggregateOutputType | null
+  }
+
+  type GetVipTypeGroupByPayload<T extends VipTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VipTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VipTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VipTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], VipTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VipTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tilte?: boolean
+    description?: boolean
+    equity?: boolean
+    price?: boolean
+    originalPrice?: boolean
+    duration?: boolean
+    sellType?: boolean
+    disabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["vipType"]>
+
+
+  export type VipTypeSelectScalar = {
+    id?: boolean
+    tilte?: boolean
+    description?: boolean
+    equity?: boolean
+    price?: boolean
+    originalPrice?: boolean
+    duration?: boolean
+    sellType?: boolean
+    disabled?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $VipTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VipType"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      tilte: string
+      description: string
+      equity: Prisma.JsonValue | null
+      price: Prisma.Decimal
+      originalPrice: Prisma.Decimal | null
+      duration: number
+      sellType: number
+      disabled: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["vipType"]>
+    composites: {}
+  }
+
+  type VipTypeGetPayload<S extends boolean | null | undefined | VipTypeDefaultArgs> = $Result.GetResult<Prisma.$VipTypePayload, S>
+
+  type VipTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<VipTypeFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: VipTypeCountAggregateInputType | true
+    }
+
+  export interface VipTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VipType'], meta: { name: 'VipType' } }
+    /**
+     * Find zero or one VipType that matches the filter.
+     * @param {VipTypeFindUniqueArgs} args - Arguments to find a VipType
+     * @example
+     * // Get one VipType
+     * const vipType = await prisma.vipType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends VipTypeFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, VipTypeFindUniqueArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one VipType that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {VipTypeFindUniqueOrThrowArgs} args - Arguments to find a VipType
+     * @example
+     * // Get one VipType
+     * const vipType = await prisma.vipType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends VipTypeFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipTypeFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first VipType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipTypeFindFirstArgs} args - Arguments to find a VipType
+     * @example
+     * // Get one VipType
+     * const vipType = await prisma.vipType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends VipTypeFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipTypeFindFirstArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first VipType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipTypeFindFirstOrThrowArgs} args - Arguments to find a VipType
+     * @example
+     * // Get one VipType
+     * const vipType = await prisma.vipType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends VipTypeFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipTypeFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more VipTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VipTypes
+     * const vipTypes = await prisma.vipType.findMany()
+     * 
+     * // Get first 10 VipTypes
+     * const vipTypes = await prisma.vipType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const vipTypeWithIdOnly = await prisma.vipType.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends VipTypeFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipTypeFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a VipType.
+     * @param {VipTypeCreateArgs} args - Arguments to create a VipType.
+     * @example
+     * // Create one VipType
+     * const VipType = await prisma.vipType.create({
+     *   data: {
+     *     // ... data to create a VipType
+     *   }
+     * })
+     * 
+    **/
+    create<T extends VipTypeCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipTypeCreateArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many VipTypes.
+     * @param {VipTypeCreateManyArgs} args - Arguments to create many VipTypes.
+     * @example
+     * // Create many VipTypes
+     * const vipType = await prisma.vipType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends VipTypeCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipTypeCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a VipType.
+     * @param {VipTypeDeleteArgs} args - Arguments to delete one VipType.
+     * @example
+     * // Delete one VipType
+     * const VipType = await prisma.vipType.delete({
+     *   where: {
+     *     // ... filter to delete one VipType
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends VipTypeDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, VipTypeDeleteArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one VipType.
+     * @param {VipTypeUpdateArgs} args - Arguments to update one VipType.
+     * @example
+     * // Update one VipType
+     * const vipType = await prisma.vipType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends VipTypeUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipTypeUpdateArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more VipTypes.
+     * @param {VipTypeDeleteManyArgs} args - Arguments to filter VipTypes to delete.
+     * @example
+     * // Delete a few VipTypes
+     * const { count } = await prisma.vipType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends VipTypeDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipTypeDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VipTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VipTypes
+     * const vipType = await prisma.vipType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends VipTypeUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, VipTypeUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one VipType.
+     * @param {VipTypeUpsertArgs} args - Arguments to update or create a VipType.
+     * @example
+     * // Update or create a VipType
+     * const vipType = await prisma.vipType.upsert({
+     *   create: {
+     *     // ... data to create a VipType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VipType we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends VipTypeUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, VipTypeUpsertArgs<ExtArgs>>
+    ): Prisma__VipTypeClient<$Result.GetResult<Prisma.$VipTypePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of VipTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipTypeCountArgs} args - Arguments to filter VipTypes to count.
+     * @example
+     * // Count the number of VipTypes
+     * const count = await prisma.vipType.count({
+     *   where: {
+     *     // ... the filter for the VipTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends VipTypeCountArgs>(
+      args?: Subset<T, VipTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VipTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VipType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VipTypeAggregateArgs>(args: Subset<T, VipTypeAggregateArgs>): Prisma.PrismaPromise<GetVipTypeAggregateType<T>>
+
+    /**
+     * Group by VipType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VipTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VipTypeGroupByArgs['orderBy'] }
+        : { orderBy?: VipTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VipTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VipType model
+   */
+  readonly fields: VipTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VipType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VipTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the VipType model
+   */ 
+  interface VipTypeFieldRefs {
+    readonly id: FieldRef<"VipType", 'Int'>
+    readonly tilte: FieldRef<"VipType", 'String'>
+    readonly description: FieldRef<"VipType", 'String'>
+    readonly equity: FieldRef<"VipType", 'Json'>
+    readonly price: FieldRef<"VipType", 'Decimal'>
+    readonly originalPrice: FieldRef<"VipType", 'Decimal'>
+    readonly duration: FieldRef<"VipType", 'Int'>
+    readonly sellType: FieldRef<"VipType", 'Int'>
+    readonly disabled: FieldRef<"VipType", 'Int'>
+    readonly createdAt: FieldRef<"VipType", 'DateTime'>
+    readonly updatedAt: FieldRef<"VipType", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VipType findUnique
+   */
+  export type VipTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipType to fetch.
+     */
+    where: VipTypeWhereUniqueInput
+  }
+
+  /**
+   * VipType findUniqueOrThrow
+   */
+  export type VipTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipType to fetch.
+     */
+    where: VipTypeWhereUniqueInput
+  }
+
+  /**
+   * VipType findFirst
+   */
+  export type VipTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipType to fetch.
+     */
+    where?: VipTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipTypes to fetch.
+     */
+    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VipTypes.
+     */
+    cursor?: VipTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VipTypes.
+     */
+    distinct?: VipTypeScalarFieldEnum | VipTypeScalarFieldEnum[]
+  }
+
+  /**
+   * VipType findFirstOrThrow
+   */
+  export type VipTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipType to fetch.
+     */
+    where?: VipTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipTypes to fetch.
+     */
+    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VipTypes.
+     */
+    cursor?: VipTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VipTypes.
+     */
+    distinct?: VipTypeScalarFieldEnum | VipTypeScalarFieldEnum[]
+  }
+
+  /**
+   * VipType findMany
+   */
+  export type VipTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * Filter, which VipTypes to fetch.
+     */
+    where?: VipTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VipTypes to fetch.
+     */
+    orderBy?: VipTypeOrderByWithRelationInput | VipTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VipTypes.
+     */
+    cursor?: VipTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VipTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VipTypes.
+     */
+    skip?: number
+    distinct?: VipTypeScalarFieldEnum | VipTypeScalarFieldEnum[]
+  }
+
+  /**
+   * VipType create
+   */
+  export type VipTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * The data needed to create a VipType.
+     */
+    data: XOR<VipTypeCreateInput, VipTypeUncheckedCreateInput>
+  }
+
+  /**
+   * VipType createMany
+   */
+  export type VipTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VipTypes.
+     */
+    data: VipTypeCreateManyInput | VipTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VipType update
+   */
+  export type VipTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * The data needed to update a VipType.
+     */
+    data: XOR<VipTypeUpdateInput, VipTypeUncheckedUpdateInput>
+    /**
+     * Choose, which VipType to update.
+     */
+    where: VipTypeWhereUniqueInput
+  }
+
+  /**
+   * VipType updateMany
+   */
+  export type VipTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VipTypes.
+     */
+    data: XOR<VipTypeUpdateManyMutationInput, VipTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which VipTypes to update
+     */
+    where?: VipTypeWhereInput
+  }
+
+  /**
+   * VipType upsert
+   */
+  export type VipTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * The filter to search for the VipType to update in case it exists.
+     */
+    where: VipTypeWhereUniqueInput
+    /**
+     * In case the VipType found by the `where` argument doesn't exist, create a new VipType with this data.
+     */
+    create: XOR<VipTypeCreateInput, VipTypeUncheckedCreateInput>
+    /**
+     * In case the VipType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VipTypeUpdateInput, VipTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * VipType delete
+   */
+  export type VipTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+    /**
+     * Filter which VipType to delete.
+     */
+    where: VipTypeWhereUniqueInput
+  }
+
+  /**
+   * VipType deleteMany
+   */
+  export type VipTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VipTypes to delete
+     */
+    where?: VipTypeWhereInput
+  }
+
+  /**
+   * VipType without action
+   */
+  export type VipTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VipType
+     */
+    select?: VipTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Vip
+   */
+
+  export type AggregateVip = {
+    _count: VipCountAggregateOutputType | null
+    _avg: VipAvgAggregateOutputType | null
+    _sum: VipSumAggregateOutputType | null
+    _min: VipMinAggregateOutputType | null
+    _max: VipMaxAggregateOutputType | null
+  }
+
+  export type VipAvgAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+  }
+
+  export type VipSumAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+  }
+
+  export type VipMinAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+    start_time: Date | null
+    expire_time: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipMaxAggregateOutputType = {
+    userId: number | null
+    vipTypeId: number | null
+    start_time: Date | null
+    expire_time: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VipCountAggregateOutputType = {
+    userId: number
+    vipTypeId: number
+    start_time: number
+    expire_time: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VipAvgAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+  }
+
+  export type VipSumAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+  }
+
+  export type VipMinAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+    start_time?: true
+    expire_time?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipMaxAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+    start_time?: true
+    expire_time?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VipCountAggregateInputType = {
+    userId?: true
+    vipTypeId?: true
+    start_time?: true
+    expire_time?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vip to aggregate.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Vips
+    **/
+    _count?: true | VipCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VipAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VipSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VipMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VipMaxAggregateInputType
+  }
+
+  export type GetVipAggregateType<T extends VipAggregateArgs> = {
+        [P in keyof T & keyof AggregateVip]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVip[P]>
+      : GetScalarType<T[P], AggregateVip[P]>
+  }
+
+
+
+
+  export type VipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VipWhereInput
+    orderBy?: VipOrderByWithAggregationInput | VipOrderByWithAggregationInput[]
+    by: VipScalarFieldEnum[] | VipScalarFieldEnum
+    having?: VipScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VipCountAggregateInputType | true
+    _avg?: VipAvgAggregateInputType
+    _sum?: VipSumAggregateInputType
+    _min?: VipMinAggregateInputType
+    _max?: VipMaxAggregateInputType
+  }
+
+  export type VipGroupByOutputType = {
+    userId: number
+    vipTypeId: number
+    start_time: Date
+    expire_time: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: VipCountAggregateOutputType | null
+    _avg: VipAvgAggregateOutputType | null
+    _sum: VipSumAggregateOutputType | null
+    _min: VipMinAggregateOutputType | null
+    _max: VipMaxAggregateOutputType | null
+  }
+
+  type GetVipGroupByPayload<T extends VipGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VipGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VipGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VipGroupByOutputType[P]>
+            : GetScalarType<T[P], VipGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    vipTypeId?: boolean
+    start_time?: boolean
+    expire_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["vip"]>
+
+
+  export type VipSelectScalar = {
+    userId?: boolean
+    vipTypeId?: boolean
+    start_time?: boolean
+    expire_time?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+
+  export type $VipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Vip"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      userId: number
+      vipTypeId: number
+      start_time: Date
+      expire_time: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["vip"]>
+    composites: {}
+  }
+
+  type VipGetPayload<S extends boolean | null | undefined | VipDefaultArgs> = $Result.GetResult<Prisma.$VipPayload, S>
+
+  type VipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<VipFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: VipCountAggregateInputType | true
+    }
+
+  export interface VipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Vip'], meta: { name: 'Vip' } }
+    /**
+     * Find zero or one Vip that matches the filter.
+     * @param {VipFindUniqueArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends VipFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, VipFindUniqueArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Vip that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {VipFindUniqueOrThrowArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends VipFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Vip that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipFindFirstArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends VipFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindFirstArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Vip that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipFindFirstOrThrowArgs} args - Arguments to find a Vip
+     * @example
+     * // Get one Vip
+     * const vip = await prisma.vip.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends VipFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Vips that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Vips
+     * const vips = await prisma.vip.findMany()
+     * 
+     * // Get first 10 Vips
+     * const vips = await prisma.vip.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const vipWithUserIdOnly = await prisma.vip.findMany({ select: { userId: true } })
+     * 
+    **/
+    findMany<T extends VipFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Vip.
+     * @param {VipCreateArgs} args - Arguments to create a Vip.
+     * @example
+     * // Create one Vip
+     * const Vip = await prisma.vip.create({
+     *   data: {
+     *     // ... data to create a Vip
+     *   }
+     * })
+     * 
+    **/
+    create<T extends VipCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipCreateArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Vips.
+     * @param {VipCreateManyArgs} args - Arguments to create many Vips.
+     * @example
+     * // Create many Vips
+     * const vip = await prisma.vip.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+    **/
+    createMany<T extends VipCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Vip.
+     * @param {VipDeleteArgs} args - Arguments to delete one Vip.
+     * @example
+     * // Delete one Vip
+     * const Vip = await prisma.vip.delete({
+     *   where: {
+     *     // ... filter to delete one Vip
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends VipDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, VipDeleteArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Vip.
+     * @param {VipUpdateArgs} args - Arguments to update one Vip.
+     * @example
+     * // Update one Vip
+     * const vip = await prisma.vip.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends VipUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, VipUpdateArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Vips.
+     * @param {VipDeleteManyArgs} args - Arguments to filter Vips to delete.
+     * @example
+     * // Delete a few Vips
+     * const { count } = await prisma.vip.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends VipDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, VipDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Vips.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Vips
+     * const vip = await prisma.vip.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends VipUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, VipUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Vip.
+     * @param {VipUpsertArgs} args - Arguments to update or create a Vip.
+     * @example
+     * // Update or create a Vip
+     * const vip = await prisma.vip.upsert({
+     *   create: {
+     *     // ... data to create a Vip
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Vip we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends VipUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, VipUpsertArgs<ExtArgs>>
+    ): Prisma__VipClient<$Result.GetResult<Prisma.$VipPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Vips.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipCountArgs} args - Arguments to filter Vips to count.
+     * @example
+     * // Count the number of Vips
+     * const count = await prisma.vip.count({
+     *   where: {
+     *     // ... the filter for the Vips we want to count
+     *   }
+     * })
+    **/
+    count<T extends VipCountArgs>(
+      args?: Subset<T, VipCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VipCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Vip.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VipAggregateArgs>(args: Subset<T, VipAggregateArgs>): Prisma.PrismaPromise<GetVipAggregateType<T>>
+
+    /**
+     * Group by Vip.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VipGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VipGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VipGroupByArgs['orderBy'] }
+        : { orderBy?: VipGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Vip model
+   */
+  readonly fields: VipFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Vip.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Vip model
+   */ 
+  interface VipFieldRefs {
+    readonly userId: FieldRef<"Vip", 'Int'>
+    readonly vipTypeId: FieldRef<"Vip", 'Int'>
+    readonly start_time: FieldRef<"Vip", 'DateTime'>
+    readonly expire_time: FieldRef<"Vip", 'DateTime'>
+    readonly createdAt: FieldRef<"Vip", 'DateTime'>
+    readonly updatedAt: FieldRef<"Vip", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Vip findUnique
+   */
+  export type VipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip findUniqueOrThrow
+   */
+  export type VipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip findFirst
+   */
+  export type VipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vips.
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vips.
+     */
+    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
+  }
+
+  /**
+   * Vip findFirstOrThrow
+   */
+  export type VipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vip to fetch.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vips.
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vips.
+     */
+    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
+  }
+
+  /**
+   * Vip findMany
+   */
+  export type VipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter, which Vips to fetch.
+     */
+    where?: VipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vips to fetch.
+     */
+    orderBy?: VipOrderByWithRelationInput | VipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Vips.
+     */
+    cursor?: VipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vips from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vips.
+     */
+    skip?: number
+    distinct?: VipScalarFieldEnum | VipScalarFieldEnum[]
+  }
+
+  /**
+   * Vip create
+   */
+  export type VipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Vip.
+     */
+    data: XOR<VipCreateInput, VipUncheckedCreateInput>
+  }
+
+  /**
+   * Vip createMany
+   */
+  export type VipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Vips.
+     */
+    data: VipCreateManyInput | VipCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Vip update
+   */
+  export type VipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Vip.
+     */
+    data: XOR<VipUpdateInput, VipUncheckedUpdateInput>
+    /**
+     * Choose, which Vip to update.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip updateMany
+   */
+  export type VipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Vips.
+     */
+    data: XOR<VipUpdateManyMutationInput, VipUncheckedUpdateManyInput>
+    /**
+     * Filter which Vips to update
+     */
+    where?: VipWhereInput
+  }
+
+  /**
+   * Vip upsert
+   */
+  export type VipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Vip to update in case it exists.
+     */
+    where: VipWhereUniqueInput
+    /**
+     * In case the Vip found by the `where` argument doesn't exist, create a new Vip with this data.
+     */
+    create: XOR<VipCreateInput, VipUncheckedCreateInput>
+    /**
+     * In case the Vip was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VipUpdateInput, VipUncheckedUpdateInput>
+  }
+
+  /**
+   * Vip delete
+   */
+  export type VipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+    /**
+     * Filter which Vip to delete.
+     */
+    where: VipWhereUniqueInput
+  }
+
+  /**
+   * Vip deleteMany
+   */
+  export type VipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vips to delete
+     */
+    where?: VipWhereInput
+  }
+
+  /**
+   * Vip without action
+   */
+  export type VipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Vip
+     */
+    select?: VipSelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11943,63 +11965,6 @@ export namespace Prisma {
   };
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-  export const UserScalarFieldEnum: {
-    id: 'id',
-    email: 'email',
-    avatar: 'avatar',
-    username: 'username',
-    password: 'password',
-    disabled: 'disabled',
-    roles: 'roles',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-  export const VipScalarFieldEnum: {
-    userId: 'userId',
-    vipTypeId: 'vipTypeId',
-    start_time: 'start_time',
-    expire_time: 'expire_time'
-  };
-
-  export type VipScalarFieldEnum = (typeof VipScalarFieldEnum)[keyof typeof VipScalarFieldEnum]
-
-
-  export const VipTypeScalarFieldEnum: {
-    id: 'id',
-    tilte: 'tilte',
-    description: 'description',
-    equity: 'equity',
-    price: 'price',
-    originalPrice: 'originalPrice',
-    duration: 'duration',
-    sellType: 'sellType',
-    disabled: 'disabled',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type VipTypeScalarFieldEnum = (typeof VipTypeScalarFieldEnum)[keyof typeof VipTypeScalarFieldEnum]
-
-
-  export const VipExchangeCodeScalarFieldEnum: {
-    id: 'id',
-    code: 'code',
-    vipTypeTd: 'vipTypeTd',
-    startTime: 'startTime',
-    expireTime: 'expireTime',
-    creatorId: 'creatorId',
-    exchanged: 'exchanged',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type VipExchangeCodeScalarFieldEnum = (typeof VipExchangeCodeScalarFieldEnum)[keyof typeof VipExchangeCodeScalarFieldEnum]
 
 
   export const InviteCodeScalarFieldEnum: {
@@ -12099,6 +12064,65 @@ export namespace Prisma {
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
+  export const UserScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    avatar: 'avatar',
+    username: 'username',
+    password: 'password',
+    disabled: 'disabled',
+    roles: 'roles',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const VipExchangeCodeScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    vipTypeTd: 'vipTypeTd',
+    startTime: 'startTime',
+    expireTime: 'expireTime',
+    creatorId: 'creatorId',
+    exchanged: 'exchanged',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VipExchangeCodeScalarFieldEnum = (typeof VipExchangeCodeScalarFieldEnum)[keyof typeof VipExchangeCodeScalarFieldEnum]
+
+
+  export const VipTypeScalarFieldEnum: {
+    id: 'id',
+    tilte: 'tilte',
+    description: 'description',
+    equity: 'equity',
+    price: 'price',
+    originalPrice: 'originalPrice',
+    duration: 'duration',
+    sellType: 'sellType',
+    disabled: 'disabled',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VipTypeScalarFieldEnum = (typeof VipTypeScalarFieldEnum)[keyof typeof VipTypeScalarFieldEnum]
+
+
+  export const VipScalarFieldEnum: {
+    userId: 'userId',
+    vipTypeId: 'vipTypeId',
+    start_time: 'start_time',
+    expire_time: 'expire_time',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VipScalarFieldEnum = (typeof VipScalarFieldEnum)[keyof typeof VipScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -12122,6 +12146,14 @@ export namespace Prisma {
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -12131,24 +12163,9 @@ export namespace Prisma {
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
   /**
    * Field references 
    */
-
-
-  /**
-   * Reference to a field of type 'BigInt'
-   */
-  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
-    
 
 
   /**
@@ -12166,13 +12183,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -12180,9 +12190,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
     
 
 
@@ -12195,287 +12219,6 @@ export namespace Prisma {
    * Deep Input Types
    */
 
-
-  export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    id?: BigIntFilter<"User"> | bigint | number
-    email?: StringFilter<"User"> | string
-    avatar?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    disabled?: IntFilter<"User"> | number
-    roles?: JsonFilter<"User">
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-  }
-
-  export type UserOrderByWithRelationInput = {
-    id?: SortOrder
-    email?: SortOrder
-    avatar?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-    disabled?: SortOrder
-    roles?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    email?: StringFilter<"User"> | string
-    avatar?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    disabled?: IntFilter<"User"> | number
-    roles?: JsonFilter<"User">
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-  }, "id" | "id">
-
-  export type UserOrderByWithAggregationInput = {
-    id?: SortOrder
-    email?: SortOrder
-    avatar?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-    disabled?: SortOrder
-    roles?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _avg?: UserAvgOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
-    _sum?: UserSumOrderByAggregateInput
-  }
-
-  export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"User"> | bigint | number
-    email?: StringWithAggregatesFilter<"User"> | string
-    avatar?: StringWithAggregatesFilter<"User"> | string
-    username?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
-    disabled?: IntWithAggregatesFilter<"User"> | number
-    roles?: JsonWithAggregatesFilter<"User">
-    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-  }
-
-  export type VipWhereInput = {
-    AND?: VipWhereInput | VipWhereInput[]
-    OR?: VipWhereInput[]
-    NOT?: VipWhereInput | VipWhereInput[]
-    userId?: IntFilter<"Vip"> | number
-    vipTypeId?: IntFilter<"Vip"> | number
-    start_time?: DateTimeFilter<"Vip"> | Date | string
-    expire_time?: DateTimeNullableFilter<"Vip"> | Date | string | null
-  }
-
-  export type VipOrderByWithRelationInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrderInput | SortOrder
-  }
-
-  export type VipWhereUniqueInput = Prisma.AtLeast<{
-    userId?: number
-    AND?: VipWhereInput | VipWhereInput[]
-    OR?: VipWhereInput[]
-    NOT?: VipWhereInput | VipWhereInput[]
-    vipTypeId?: IntFilter<"Vip"> | number
-    start_time?: DateTimeFilter<"Vip"> | Date | string
-    expire_time?: DateTimeNullableFilter<"Vip"> | Date | string | null
-  }, "userId" | "userId">
-
-  export type VipOrderByWithAggregationInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrderInput | SortOrder
-    _count?: VipCountOrderByAggregateInput
-    _avg?: VipAvgOrderByAggregateInput
-    _max?: VipMaxOrderByAggregateInput
-    _min?: VipMinOrderByAggregateInput
-    _sum?: VipSumOrderByAggregateInput
-  }
-
-  export type VipScalarWhereWithAggregatesInput = {
-    AND?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
-    OR?: VipScalarWhereWithAggregatesInput[]
-    NOT?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
-    userId?: IntWithAggregatesFilter<"Vip"> | number
-    vipTypeId?: IntWithAggregatesFilter<"Vip"> | number
-    start_time?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
-    expire_time?: DateTimeNullableWithAggregatesFilter<"Vip"> | Date | string | null
-  }
-
-  export type VipTypeWhereInput = {
-    AND?: VipTypeWhereInput | VipTypeWhereInput[]
-    OR?: VipTypeWhereInput[]
-    NOT?: VipTypeWhereInput | VipTypeWhereInput[]
-    id?: IntFilter<"VipType"> | number
-    tilte?: StringFilter<"VipType"> | string
-    description?: StringFilter<"VipType"> | string
-    equity?: JsonNullableFilter<"VipType">
-    price?: DecimalFilter<"VipType"> | Decimal | DecimalJsLike | number | string
-    originalPrice?: DecimalNullableFilter<"VipType"> | Decimal | DecimalJsLike | number | string | null
-    duration?: IntFilter<"VipType"> | number
-    sellType?: IntFilter<"VipType"> | number
-    disabled?: IntFilter<"VipType"> | number
-    createdAt?: DateTimeFilter<"VipType"> | Date | string
-    updatedAt?: DateTimeFilter<"VipType"> | Date | string
-  }
-
-  export type VipTypeOrderByWithRelationInput = {
-    id?: SortOrder
-    tilte?: SortOrder
-    description?: SortOrder
-    equity?: SortOrderInput | SortOrder
-    price?: SortOrder
-    originalPrice?: SortOrderInput | SortOrder
-    duration?: SortOrder
-    sellType?: SortOrder
-    disabled?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipTypeWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: VipTypeWhereInput | VipTypeWhereInput[]
-    OR?: VipTypeWhereInput[]
-    NOT?: VipTypeWhereInput | VipTypeWhereInput[]
-    tilte?: StringFilter<"VipType"> | string
-    description?: StringFilter<"VipType"> | string
-    equity?: JsonNullableFilter<"VipType">
-    price?: DecimalFilter<"VipType"> | Decimal | DecimalJsLike | number | string
-    originalPrice?: DecimalNullableFilter<"VipType"> | Decimal | DecimalJsLike | number | string | null
-    duration?: IntFilter<"VipType"> | number
-    sellType?: IntFilter<"VipType"> | number
-    disabled?: IntFilter<"VipType"> | number
-    createdAt?: DateTimeFilter<"VipType"> | Date | string
-    updatedAt?: DateTimeFilter<"VipType"> | Date | string
-  }, "id" | "id">
-
-  export type VipTypeOrderByWithAggregationInput = {
-    id?: SortOrder
-    tilte?: SortOrder
-    description?: SortOrder
-    equity?: SortOrderInput | SortOrder
-    price?: SortOrder
-    originalPrice?: SortOrderInput | SortOrder
-    duration?: SortOrder
-    sellType?: SortOrder
-    disabled?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: VipTypeCountOrderByAggregateInput
-    _avg?: VipTypeAvgOrderByAggregateInput
-    _max?: VipTypeMaxOrderByAggregateInput
-    _min?: VipTypeMinOrderByAggregateInput
-    _sum?: VipTypeSumOrderByAggregateInput
-  }
-
-  export type VipTypeScalarWhereWithAggregatesInput = {
-    AND?: VipTypeScalarWhereWithAggregatesInput | VipTypeScalarWhereWithAggregatesInput[]
-    OR?: VipTypeScalarWhereWithAggregatesInput[]
-    NOT?: VipTypeScalarWhereWithAggregatesInput | VipTypeScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"VipType"> | number
-    tilte?: StringWithAggregatesFilter<"VipType"> | string
-    description?: StringWithAggregatesFilter<"VipType"> | string
-    equity?: JsonNullableWithAggregatesFilter<"VipType">
-    price?: DecimalWithAggregatesFilter<"VipType"> | Decimal | DecimalJsLike | number | string
-    originalPrice?: DecimalNullableWithAggregatesFilter<"VipType"> | Decimal | DecimalJsLike | number | string | null
-    duration?: IntWithAggregatesFilter<"VipType"> | number
-    sellType?: IntWithAggregatesFilter<"VipType"> | number
-    disabled?: IntWithAggregatesFilter<"VipType"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"VipType"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"VipType"> | Date | string
-  }
-
-  export type VipExchangeCodeWhereInput = {
-    AND?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
-    OR?: VipExchangeCodeWhereInput[]
-    NOT?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
-    id?: IntFilter<"VipExchangeCode"> | number
-    code?: StringFilter<"VipExchangeCode"> | string
-    vipTypeTd?: IntFilter<"VipExchangeCode"> | number
-    startTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
-    expireTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
-    creatorId?: IntFilter<"VipExchangeCode"> | number
-    exchanged?: IntFilter<"VipExchangeCode"> | number
-    createdAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
-    updatedAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
-  }
-
-  export type VipExchangeCodeOrderByWithRelationInput = {
-    id?: SortOrder
-    code?: SortOrder
-    vipTypeTd?: SortOrder
-    startTime?: SortOrder
-    expireTime?: SortOrder
-    creatorId?: SortOrder
-    exchanged?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipExchangeCodeWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
-    OR?: VipExchangeCodeWhereInput[]
-    NOT?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
-    code?: StringFilter<"VipExchangeCode"> | string
-    vipTypeTd?: IntFilter<"VipExchangeCode"> | number
-    startTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
-    expireTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
-    creatorId?: IntFilter<"VipExchangeCode"> | number
-    exchanged?: IntFilter<"VipExchangeCode"> | number
-    createdAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
-    updatedAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
-  }, "id" | "id">
-
-  export type VipExchangeCodeOrderByWithAggregationInput = {
-    id?: SortOrder
-    code?: SortOrder
-    vipTypeTd?: SortOrder
-    startTime?: SortOrder
-    expireTime?: SortOrder
-    creatorId?: SortOrder
-    exchanged?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: VipExchangeCodeCountOrderByAggregateInput
-    _avg?: VipExchangeCodeAvgOrderByAggregateInput
-    _max?: VipExchangeCodeMaxOrderByAggregateInput
-    _min?: VipExchangeCodeMinOrderByAggregateInput
-    _sum?: VipExchangeCodeSumOrderByAggregateInput
-  }
-
-  export type VipExchangeCodeScalarWhereWithAggregatesInput = {
-    AND?: VipExchangeCodeScalarWhereWithAggregatesInput | VipExchangeCodeScalarWhereWithAggregatesInput[]
-    OR?: VipExchangeCodeScalarWhereWithAggregatesInput[]
-    NOT?: VipExchangeCodeScalarWhereWithAggregatesInput | VipExchangeCodeScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"VipExchangeCode"> | number
-    code?: StringWithAggregatesFilter<"VipExchangeCode"> | string
-    vipTypeTd?: IntWithAggregatesFilter<"VipExchangeCode"> | number
-    startTime?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
-    expireTime?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
-    creatorId?: IntWithAggregatesFilter<"VipExchangeCode"> | number
-    exchanged?: IntWithAggregatesFilter<"VipExchangeCode"> | number
-    createdAt?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
-  }
 
   export type InviteCodeWhereInput = {
     AND?: InviteCodeWhereInput | InviteCodeWhereInput[]
@@ -12955,313 +12698,295 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"role"> | Date | string
   }
 
-  export type UserCreateInput = {
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: BigIntFilter<"User"> | bigint | number
+    email?: StringFilter<"User"> | string
+    avatar?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    disabled?: IntFilter<"User"> | number
+    roles?: JsonFilter<"User">
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+  }
+
+  export type UserOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    avatar?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    disabled?: SortOrder
+    roles?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
-    email: string
-    avatar: string
-    username: string
-    password: string
-    disabled?: number
-    roles: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    email?: StringFilter<"User"> | string
+    avatar?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    disabled?: IntFilter<"User"> | number
+    roles?: JsonFilter<"User">
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+  }, "id" | "id">
+
+  export type UserOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    avatar?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    disabled?: SortOrder
+    roles?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
-  export type UserUncheckedCreateInput = {
-    id?: bigint | number
-    email: string
-    avatar: string
-    username: string
-    password: string
-    disabled?: number
-    roles: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"User"> | bigint | number
+    email?: StringWithAggregatesFilter<"User"> | string
+    avatar?: StringWithAggregatesFilter<"User"> | string
+    username?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
+    disabled?: IntWithAggregatesFilter<"User"> | number
+    roles?: JsonWithAggregatesFilter<"User">
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
-  export type UserUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    disabled?: IntFieldUpdateOperationsInput | number
-    roles?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type VipExchangeCodeWhereInput = {
+    AND?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
+    OR?: VipExchangeCodeWhereInput[]
+    NOT?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
+    id?: IntFilter<"VipExchangeCode"> | number
+    code?: StringFilter<"VipExchangeCode"> | string
+    vipTypeTd?: IntFilter<"VipExchangeCode"> | number
+    startTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
+    expireTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
+    creatorId?: IntFilter<"VipExchangeCode"> | number
+    exchanged?: IntFilter<"VipExchangeCode"> | number
+    createdAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
+    updatedAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
   }
 
-  export type UserUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    disabled?: IntFieldUpdateOperationsInput | number
-    roles?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type VipExchangeCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    vipTypeTd?: SortOrder
+    startTime?: SortOrder
+    expireTime?: SortOrder
+    creatorId?: SortOrder
+    exchanged?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type UserCreateManyInput = {
-    id?: bigint | number
-    email: string
-    avatar: string
-    username: string
-    password: string
-    disabled?: number
-    roles: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    disabled?: IntFieldUpdateOperationsInput | number
-    roles?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    email?: StringFieldUpdateOperationsInput | string
-    avatar?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    disabled?: IntFieldUpdateOperationsInput | number
-    roles?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipCreateInput = {
-    userId: number
-    vipTypeId: number
-    start_time: Date | string
-    expire_time?: Date | string | null
-  }
-
-  export type VipUncheckedCreateInput = {
-    userId: number
-    vipTypeId: number
-    start_time: Date | string
-    expire_time?: Date | string | null
-  }
-
-  export type VipUpdateInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type VipUncheckedUpdateInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type VipCreateManyInput = {
-    userId: number
-    vipTypeId: number
-    start_time: Date | string
-    expire_time?: Date | string | null
-  }
-
-  export type VipUpdateManyMutationInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type VipUncheckedUpdateManyInput = {
-    userId?: IntFieldUpdateOperationsInput | number
-    vipTypeId?: IntFieldUpdateOperationsInput | number
-    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
-    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type VipTypeCreateInput = {
-    tilte: string
-    description: string
-    equity?: NullableJsonNullValueInput | InputJsonValue
-    price: Decimal | DecimalJsLike | number | string
-    originalPrice?: Decimal | DecimalJsLike | number | string | null
-    duration: number
-    sellType?: number
-    disabled?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VipTypeUncheckedCreateInput = {
+  export type VipExchangeCodeWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    tilte: string
-    description: string
-    equity?: NullableJsonNullValueInput | InputJsonValue
-    price: Decimal | DecimalJsLike | number | string
-    originalPrice?: Decimal | DecimalJsLike | number | string | null
-    duration: number
-    sellType?: number
-    disabled?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    AND?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
+    OR?: VipExchangeCodeWhereInput[]
+    NOT?: VipExchangeCodeWhereInput | VipExchangeCodeWhereInput[]
+    code?: StringFilter<"VipExchangeCode"> | string
+    vipTypeTd?: IntFilter<"VipExchangeCode"> | number
+    startTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
+    expireTime?: DateTimeFilter<"VipExchangeCode"> | Date | string
+    creatorId?: IntFilter<"VipExchangeCode"> | number
+    exchanged?: IntFilter<"VipExchangeCode"> | number
+    createdAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
+    updatedAt?: DateTimeFilter<"VipExchangeCode"> | Date | string
+  }, "id" | "id">
+
+  export type VipExchangeCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    vipTypeTd?: SortOrder
+    startTime?: SortOrder
+    expireTime?: SortOrder
+    creatorId?: SortOrder
+    exchanged?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VipExchangeCodeCountOrderByAggregateInput
+    _avg?: VipExchangeCodeAvgOrderByAggregateInput
+    _max?: VipExchangeCodeMaxOrderByAggregateInput
+    _min?: VipExchangeCodeMinOrderByAggregateInput
+    _sum?: VipExchangeCodeSumOrderByAggregateInput
   }
 
-  export type VipTypeUpdateInput = {
-    tilte?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    equity?: NullableJsonNullValueInput | InputJsonValue
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration?: IntFieldUpdateOperationsInput | number
-    sellType?: IntFieldUpdateOperationsInput | number
-    disabled?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type VipExchangeCodeScalarWhereWithAggregatesInput = {
+    AND?: VipExchangeCodeScalarWhereWithAggregatesInput | VipExchangeCodeScalarWhereWithAggregatesInput[]
+    OR?: VipExchangeCodeScalarWhereWithAggregatesInput[]
+    NOT?: VipExchangeCodeScalarWhereWithAggregatesInput | VipExchangeCodeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"VipExchangeCode"> | number
+    code?: StringWithAggregatesFilter<"VipExchangeCode"> | string
+    vipTypeTd?: IntWithAggregatesFilter<"VipExchangeCode"> | number
+    startTime?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
+    expireTime?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
+    creatorId?: IntWithAggregatesFilter<"VipExchangeCode"> | number
+    exchanged?: IntWithAggregatesFilter<"VipExchangeCode"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"VipExchangeCode"> | Date | string
   }
 
-  export type VipTypeUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    tilte?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    equity?: NullableJsonNullValueInput | InputJsonValue
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration?: IntFieldUpdateOperationsInput | number
-    sellType?: IntFieldUpdateOperationsInput | number
-    disabled?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type VipTypeWhereInput = {
+    AND?: VipTypeWhereInput | VipTypeWhereInput[]
+    OR?: VipTypeWhereInput[]
+    NOT?: VipTypeWhereInput | VipTypeWhereInput[]
+    id?: IntFilter<"VipType"> | number
+    tilte?: StringFilter<"VipType"> | string
+    description?: StringFilter<"VipType"> | string
+    equity?: JsonNullableFilter<"VipType">
+    price?: DecimalFilter<"VipType"> | Decimal | DecimalJsLike | number | string
+    originalPrice?: DecimalNullableFilter<"VipType"> | Decimal | DecimalJsLike | number | string | null
+    duration?: IntFilter<"VipType"> | number
+    sellType?: IntFilter<"VipType"> | number
+    disabled?: IntFilter<"VipType"> | number
+    createdAt?: DateTimeFilter<"VipType"> | Date | string
+    updatedAt?: DateTimeFilter<"VipType"> | Date | string
   }
 
-  export type VipTypeCreateManyInput = {
+  export type VipTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    tilte?: SortOrder
+    description?: SortOrder
+    equity?: SortOrderInput | SortOrder
+    price?: SortOrder
+    originalPrice?: SortOrderInput | SortOrder
+    duration?: SortOrder
+    sellType?: SortOrder
+    disabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipTypeWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    tilte: string
-    description: string
-    equity?: NullableJsonNullValueInput | InputJsonValue
-    price: Decimal | DecimalJsLike | number | string
-    originalPrice?: Decimal | DecimalJsLike | number | string | null
-    duration: number
-    sellType?: number
-    disabled?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    AND?: VipTypeWhereInput | VipTypeWhereInput[]
+    OR?: VipTypeWhereInput[]
+    NOT?: VipTypeWhereInput | VipTypeWhereInput[]
+    tilte?: StringFilter<"VipType"> | string
+    description?: StringFilter<"VipType"> | string
+    equity?: JsonNullableFilter<"VipType">
+    price?: DecimalFilter<"VipType"> | Decimal | DecimalJsLike | number | string
+    originalPrice?: DecimalNullableFilter<"VipType"> | Decimal | DecimalJsLike | number | string | null
+    duration?: IntFilter<"VipType"> | number
+    sellType?: IntFilter<"VipType"> | number
+    disabled?: IntFilter<"VipType"> | number
+    createdAt?: DateTimeFilter<"VipType"> | Date | string
+    updatedAt?: DateTimeFilter<"VipType"> | Date | string
+  }, "id" | "id">
+
+  export type VipTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    tilte?: SortOrder
+    description?: SortOrder
+    equity?: SortOrderInput | SortOrder
+    price?: SortOrder
+    originalPrice?: SortOrderInput | SortOrder
+    duration?: SortOrder
+    sellType?: SortOrder
+    disabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VipTypeCountOrderByAggregateInput
+    _avg?: VipTypeAvgOrderByAggregateInput
+    _max?: VipTypeMaxOrderByAggregateInput
+    _min?: VipTypeMinOrderByAggregateInput
+    _sum?: VipTypeSumOrderByAggregateInput
   }
 
-  export type VipTypeUpdateManyMutationInput = {
-    tilte?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    equity?: NullableJsonNullValueInput | InputJsonValue
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration?: IntFieldUpdateOperationsInput | number
-    sellType?: IntFieldUpdateOperationsInput | number
-    disabled?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type VipTypeScalarWhereWithAggregatesInput = {
+    AND?: VipTypeScalarWhereWithAggregatesInput | VipTypeScalarWhereWithAggregatesInput[]
+    OR?: VipTypeScalarWhereWithAggregatesInput[]
+    NOT?: VipTypeScalarWhereWithAggregatesInput | VipTypeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"VipType"> | number
+    tilte?: StringWithAggregatesFilter<"VipType"> | string
+    description?: StringWithAggregatesFilter<"VipType"> | string
+    equity?: JsonNullableWithAggregatesFilter<"VipType">
+    price?: DecimalWithAggregatesFilter<"VipType"> | Decimal | DecimalJsLike | number | string
+    originalPrice?: DecimalNullableWithAggregatesFilter<"VipType"> | Decimal | DecimalJsLike | number | string | null
+    duration?: IntWithAggregatesFilter<"VipType"> | number
+    sellType?: IntWithAggregatesFilter<"VipType"> | number
+    disabled?: IntWithAggregatesFilter<"VipType"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"VipType"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"VipType"> | Date | string
   }
 
-  export type VipTypeUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    tilte?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    equity?: NullableJsonNullValueInput | InputJsonValue
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    duration?: IntFieldUpdateOperationsInput | number
-    sellType?: IntFieldUpdateOperationsInput | number
-    disabled?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type VipWhereInput = {
+    AND?: VipWhereInput | VipWhereInput[]
+    OR?: VipWhereInput[]
+    NOT?: VipWhereInput | VipWhereInput[]
+    userId?: IntFilter<"Vip"> | number
+    vipTypeId?: IntFilter<"Vip"> | number
+    start_time?: DateTimeFilter<"Vip"> | Date | string
+    expire_time?: DateTimeNullableFilter<"Vip"> | Date | string | null
+    createdAt?: DateTimeFilter<"Vip"> | Date | string
+    updatedAt?: DateTimeFilter<"Vip"> | Date | string
   }
 
-  export type VipExchangeCodeCreateInput = {
-    code: string
-    vipTypeTd: number
-    startTime: Date | string
-    expireTime: Date | string
-    creatorId: number
-    exchanged?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type VipOrderByWithRelationInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type VipExchangeCodeUncheckedCreateInput = {
-    id?: number
-    code: string
-    vipTypeTd: number
-    startTime: Date | string
-    expireTime: Date | string
-    creatorId: number
-    exchanged?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type VipWhereUniqueInput = Prisma.AtLeast<{
+    userId?: number
+    AND?: VipWhereInput | VipWhereInput[]
+    OR?: VipWhereInput[]
+    NOT?: VipWhereInput | VipWhereInput[]
+    vipTypeId?: IntFilter<"Vip"> | number
+    start_time?: DateTimeFilter<"Vip"> | Date | string
+    expire_time?: DateTimeNullableFilter<"Vip"> | Date | string | null
+    createdAt?: DateTimeFilter<"Vip"> | Date | string
+    updatedAt?: DateTimeFilter<"Vip"> | Date | string
+  }, "userId" | "userId">
+
+  export type VipOrderByWithAggregationInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VipCountOrderByAggregateInput
+    _avg?: VipAvgOrderByAggregateInput
+    _max?: VipMaxOrderByAggregateInput
+    _min?: VipMinOrderByAggregateInput
+    _sum?: VipSumOrderByAggregateInput
   }
 
-  export type VipExchangeCodeUpdateInput = {
-    code?: StringFieldUpdateOperationsInput | string
-    vipTypeTd?: IntFieldUpdateOperationsInput | number
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    creatorId?: IntFieldUpdateOperationsInput | number
-    exchanged?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipExchangeCodeUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
-    vipTypeTd?: IntFieldUpdateOperationsInput | number
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    creatorId?: IntFieldUpdateOperationsInput | number
-    exchanged?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipExchangeCodeCreateManyInput = {
-    id?: number
-    code: string
-    vipTypeTd: number
-    startTime: Date | string
-    expireTime: Date | string
-    creatorId: number
-    exchanged?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VipExchangeCodeUpdateManyMutationInput = {
-    code?: StringFieldUpdateOperationsInput | string
-    vipTypeTd?: IntFieldUpdateOperationsInput | number
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    creatorId?: IntFieldUpdateOperationsInput | number
-    exchanged?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VipExchangeCodeUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
-    vipTypeTd?: IntFieldUpdateOperationsInput | number
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    creatorId?: IntFieldUpdateOperationsInput | number
-    exchanged?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type VipScalarWhereWithAggregatesInput = {
+    AND?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
+    OR?: VipScalarWhereWithAggregatesInput[]
+    NOT?: VipScalarWhereWithAggregatesInput | VipScalarWhereWithAggregatesInput[]
+    userId?: IntWithAggregatesFilter<"Vip"> | number
+    vipTypeId?: IntWithAggregatesFilter<"Vip"> | number
+    start_time?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
+    expire_time?: DateTimeNullableWithAggregatesFilter<"Vip"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Vip"> | Date | string
   }
 
   export type InviteCodeCreateInput = {
@@ -13784,15 +13509,327 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  export type UserCreateInput = {
+    id?: bigint | number
+    email: string
+    avatar: string
+    username: string
+    password: string
+    disabled?: number
+    roles: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUncheckedCreateInput = {
+    id?: bigint | number
+    email: string
+    avatar: string
+    username: string
+    password: string
+    disabled?: number
+    roles: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    disabled?: IntFieldUpdateOperationsInput | number
+    roles?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    disabled?: IntFieldUpdateOperationsInput | number
+    roles?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateManyInput = {
+    id?: bigint | number
+    email: string
+    avatar: string
+    username: string
+    password: string
+    disabled?: number
+    roles: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    disabled?: IntFieldUpdateOperationsInput | number
+    roles?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    disabled?: IntFieldUpdateOperationsInput | number
+    roles?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipExchangeCodeCreateInput = {
+    code: string
+    vipTypeTd: number
+    startTime: Date | string
+    expireTime: Date | string
+    creatorId: number
+    exchanged?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipExchangeCodeUncheckedCreateInput = {
+    id?: number
+    code: string
+    vipTypeTd: number
+    startTime: Date | string
+    expireTime: Date | string
+    creatorId: number
+    exchanged?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipExchangeCodeUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    vipTypeTd?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: IntFieldUpdateOperationsInput | number
+    exchanged?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipExchangeCodeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    vipTypeTd?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: IntFieldUpdateOperationsInput | number
+    exchanged?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipExchangeCodeCreateManyInput = {
+    id?: number
+    code: string
+    vipTypeTd: number
+    startTime: Date | string
+    expireTime: Date | string
+    creatorId: number
+    exchanged?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipExchangeCodeUpdateManyMutationInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    vipTypeTd?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: IntFieldUpdateOperationsInput | number
+    exchanged?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipExchangeCodeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    vipTypeTd?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    expireTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: IntFieldUpdateOperationsInput | number
+    exchanged?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipTypeCreateInput = {
+    tilte: string
+    description: string
+    equity?: NullableJsonNullValueInput | InputJsonValue
+    price: Decimal | DecimalJsLike | number | string
+    originalPrice?: Decimal | DecimalJsLike | number | string | null
+    duration: number
+    sellType?: number
+    disabled?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipTypeUncheckedCreateInput = {
+    id?: number
+    tilte: string
+    description: string
+    equity?: NullableJsonNullValueInput | InputJsonValue
+    price: Decimal | DecimalJsLike | number | string
+    originalPrice?: Decimal | DecimalJsLike | number | string | null
+    duration: number
+    sellType?: number
+    disabled?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipTypeUpdateInput = {
+    tilte?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    equity?: NullableJsonNullValueInput | InputJsonValue
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    sellType?: IntFieldUpdateOperationsInput | number
+    disabled?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipTypeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tilte?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    equity?: NullableJsonNullValueInput | InputJsonValue
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    sellType?: IntFieldUpdateOperationsInput | number
+    disabled?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipTypeCreateManyInput = {
+    id?: number
+    tilte: string
+    description: string
+    equity?: NullableJsonNullValueInput | InputJsonValue
+    price: Decimal | DecimalJsLike | number | string
+    originalPrice?: Decimal | DecimalJsLike | number | string | null
+    duration: number
+    sellType?: number
+    disabled?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipTypeUpdateManyMutationInput = {
+    tilte?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    equity?: NullableJsonNullValueInput | InputJsonValue
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    sellType?: IntFieldUpdateOperationsInput | number
+    disabled?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipTypeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tilte?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    equity?: NullableJsonNullValueInput | InputJsonValue
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    originalPrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    sellType?: IntFieldUpdateOperationsInput | number
+    disabled?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipCreateInput = {
+    userId: number
+    vipTypeId: number
+    start_time: Date | string
+    expire_time?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipUncheckedCreateInput = {
+    userId: number
+    vipTypeId: number
+    start_time: Date | string
+    expire_time?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipUpdateInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipUncheckedUpdateInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipCreateManyInput = {
+    userId: number
+    vipTypeId: number
+    start_time: Date | string
+    expire_time?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VipUpdateManyMutationInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VipUncheckedUpdateManyInput = {
+    userId?: IntFieldUpdateOperationsInput | number
+    vipTypeId?: IntFieldUpdateOperationsInput | number
+    start_time?: DateTimeFieldUpdateOperationsInput | Date | string
+    expire_time?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -13819,98 +13856,53 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
   }
-  export type JsonFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type UserCountOrderByAggregateInput = {
-    id?: SortOrder
-    email?: SortOrder
-    avatar?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-    disabled?: SortOrder
-    roles?: SortOrder
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type InviteCodeCountOrderByAggregateInput = {
+    code?: SortOrder
+    userId?: SortOrder
+    expireTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type UserAvgOrderByAggregateInput = {
-    id?: SortOrder
-    disabled?: SortOrder
+  export type InviteCodeAvgOrderByAggregateInput = {
+    userId?: SortOrder
   }
 
-  export type UserMaxOrderByAggregateInput = {
-    id?: SortOrder
-    email?: SortOrder
-    avatar?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-    disabled?: SortOrder
+  export type InviteCodeMaxOrderByAggregateInput = {
+    code?: SortOrder
+    userId?: SortOrder
+    expireTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type UserMinOrderByAggregateInput = {
-    id?: SortOrder
-    email?: SortOrder
-    avatar?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-    disabled?: SortOrder
+  export type InviteCodeMinOrderByAggregateInput = {
+    code?: SortOrder
+    userId?: SortOrder
+    expireTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type UserSumOrderByAggregateInput = {
-    id?: SortOrder
-    disabled?: SortOrder
-  }
-
-  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
+  export type InviteCodeSumOrderByAggregateInput = {
+    userId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -13945,92 +13937,6 @@ export namespace Prisma {
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
   }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type VipCountOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrder
-  }
-
-  export type VipAvgOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-  }
-
-  export type VipMaxOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrder
-  }
-
-  export type VipMinOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-    start_time?: SortOrder
-    expire_time?: SortOrder
-  }
-
-  export type VipSumOrderByAggregateInput = {
-    userId?: SortOrder
-    vipTypeId?: SortOrder
-  }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
@@ -14045,246 +13951,16 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
-  export type JsonNullableFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type VipTypeCountOrderByAggregateInput = {
-    id?: SortOrder
-    tilte?: SortOrder
-    description?: SortOrder
-    equity?: SortOrder
-    price?: SortOrder
-    originalPrice?: SortOrder
-    duration?: SortOrder
-    sellType?: SortOrder
-    disabled?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipTypeAvgOrderByAggregateInput = {
-    id?: SortOrder
-    price?: SortOrder
-    originalPrice?: SortOrder
-    duration?: SortOrder
-    sellType?: SortOrder
-    disabled?: SortOrder
-  }
-
-  export type VipTypeMaxOrderByAggregateInput = {
-    id?: SortOrder
-    tilte?: SortOrder
-    description?: SortOrder
-    price?: SortOrder
-    originalPrice?: SortOrder
-    duration?: SortOrder
-    sellType?: SortOrder
-    disabled?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipTypeMinOrderByAggregateInput = {
-    id?: SortOrder
-    tilte?: SortOrder
-    description?: SortOrder
-    price?: SortOrder
-    originalPrice?: SortOrder
-    duration?: SortOrder
-    sellType?: SortOrder
-    disabled?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipTypeSumOrderByAggregateInput = {
-    id?: SortOrder
-    price?: SortOrder
-    originalPrice?: SortOrder
-    duration?: SortOrder
-    sellType?: SortOrder
-    disabled?: SortOrder
-  }
-  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedJsonNullableFilter<$PrismaModel>
-    _max?: NestedJsonNullableFilter<$PrismaModel>
-  }
-
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
-  }
-
-  export type VipExchangeCodeCountOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    vipTypeTd?: SortOrder
-    startTime?: SortOrder
-    expireTime?: SortOrder
-    creatorId?: SortOrder
-    exchanged?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipExchangeCodeAvgOrderByAggregateInput = {
-    id?: SortOrder
-    vipTypeTd?: SortOrder
-    creatorId?: SortOrder
-    exchanged?: SortOrder
-  }
-
-  export type VipExchangeCodeMaxOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    vipTypeTd?: SortOrder
-    startTime?: SortOrder
-    expireTime?: SortOrder
-    creatorId?: SortOrder
-    exchanged?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipExchangeCodeMinOrderByAggregateInput = {
-    id?: SortOrder
-    code?: SortOrder
-    vipTypeTd?: SortOrder
-    startTime?: SortOrder
-    expireTime?: SortOrder
-    creatorId?: SortOrder
-    exchanged?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VipExchangeCodeSumOrderByAggregateInput = {
-    id?: SortOrder
-    vipTypeTd?: SortOrder
-    creatorId?: SortOrder
-    exchanged?: SortOrder
-  }
-
-  export type InviteCodeCountOrderByAggregateInput = {
-    code?: SortOrder
-    userId?: SortOrder
-    expireTime?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type InviteCodeAvgOrderByAggregateInput = {
-    userId?: SortOrder
-  }
-
-  export type InviteCodeMaxOrderByAggregateInput = {
-    code?: SortOrder
-    userId?: SortOrder
-    expireTime?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type InviteCodeMinOrderByAggregateInput = {
-    code?: SortOrder
-    userId?: SortOrder
-    expireTime?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type InviteCodeSumOrderByAggregateInput = {
-    userId?: SortOrder
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type InviteUserCountOrderByAggregateInput = {
@@ -14324,6 +14000,42 @@ export namespace Prisma {
     id?: SortOrder
     initiatorId?: SortOrder
     receiverId?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+  export type JsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -14388,6 +14100,31 @@ export namespace Prisma {
     templateId?: SortOrder
     isPublic?: SortOrder
     exportCount?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14488,6 +14225,17 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
   export type orderCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -14536,6 +14284,22 @@ export namespace Prisma {
     price?: SortOrder
     payType?: SortOrder
     orderStatus?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type permissionCountOrderByAggregateInput = {
@@ -14623,12 +14387,294 @@ export namespace Prisma {
     creatorId?: SortOrder
   }
 
-  export type BigIntFieldUpdateOperationsInput = {
-    set?: bigint | number
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    avatar?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    disabled?: SortOrder
+    roles?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    id?: SortOrder
+    disabled?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    avatar?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    disabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    avatar?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    disabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    id?: SortOrder
+    disabled?: SortOrder
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type VipExchangeCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    vipTypeTd?: SortOrder
+    startTime?: SortOrder
+    expireTime?: SortOrder
+    creatorId?: SortOrder
+    exchanged?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipExchangeCodeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    vipTypeTd?: SortOrder
+    creatorId?: SortOrder
+    exchanged?: SortOrder
+  }
+
+  export type VipExchangeCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    vipTypeTd?: SortOrder
+    startTime?: SortOrder
+    expireTime?: SortOrder
+    creatorId?: SortOrder
+    exchanged?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipExchangeCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    vipTypeTd?: SortOrder
+    startTime?: SortOrder
+    expireTime?: SortOrder
+    creatorId?: SortOrder
+    exchanged?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipExchangeCodeSumOrderByAggregateInput = {
+    id?: SortOrder
+    vipTypeTd?: SortOrder
+    creatorId?: SortOrder
+    exchanged?: SortOrder
+  }
+  export type JsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type VipTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    tilte?: SortOrder
+    description?: SortOrder
+    equity?: SortOrder
+    price?: SortOrder
+    originalPrice?: SortOrder
+    duration?: SortOrder
+    sellType?: SortOrder
+    disabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipTypeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+    originalPrice?: SortOrder
+    duration?: SortOrder
+    sellType?: SortOrder
+    disabled?: SortOrder
+  }
+
+  export type VipTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tilte?: SortOrder
+    description?: SortOrder
+    price?: SortOrder
+    originalPrice?: SortOrder
+    duration?: SortOrder
+    sellType?: SortOrder
+    disabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    tilte?: SortOrder
+    description?: SortOrder
+    price?: SortOrder
+    originalPrice?: SortOrder
+    duration?: SortOrder
+    sellType?: SortOrder
+    disabled?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipTypeSumOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+    originalPrice?: SortOrder
+    duration?: SortOrder
+    sellType?: SortOrder
+    disabled?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type VipCountOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipAvgOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+  }
+
+  export type VipMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipMinOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
+    start_time?: SortOrder
+    expire_time?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VipSumOrderByAggregateInput = {
+    userId?: SortOrder
+    vipTypeId?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14643,28 +14689,12 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
 
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -14679,15 +14709,28 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type NestedBigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -14715,42 +14758,15 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -14785,52 +14801,16 @@ export namespace Prisma {
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
   }
-  export type NestedJsonFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue
-    lte?: InputJsonValue
-    gt?: InputJsonValue
-    gte?: InputJsonValue
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14858,35 +14838,38 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
-  export type NestedJsonNullableFilter<$PrismaModel = never> = 
+  export type NestedJsonFilter<$PrismaModel = never> = 
     | PatchUndefined<
-        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
     equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     path?: string
     string_contains?: string | StringFieldRefInput<$PrismaModel>
@@ -14900,38 +14883,6 @@ export namespace Prisma {
     gt?: InputJsonValue
     gte?: InputJsonValue
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14992,27 +14943,114 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
 
 
   /**
    * Aliases for legacy arg types
    */
-    /**
-     * @deprecated Use UserDefaultArgs instead
-     */
-    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use VipDefaultArgs instead
-     */
-    export type VipArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use VipTypeDefaultArgs instead
-     */
-    export type VipTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use VipExchangeCodeDefaultArgs instead
-     */
-    export type VipExchangeCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipExchangeCodeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use InviteCodeDefaultArgs instead
      */
@@ -15041,6 +15079,22 @@ export namespace Prisma {
      * @deprecated Use roleDefaultArgs instead
      */
     export type roleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = roleDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserDefaultArgs instead
+     */
+    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use VipExchangeCodeDefaultArgs instead
+     */
+    export type VipExchangeCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipExchangeCodeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use VipTypeDefaultArgs instead
+     */
+    export type VipTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use VipDefaultArgs instead
+     */
+    export type VipArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VipDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

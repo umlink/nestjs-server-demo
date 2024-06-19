@@ -6,11 +6,22 @@ import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+import * as path from 'path';
+import { EnvConfig } from '@/modules/config/interfaces';
 
 /**
  * ⚠️底层使用 fastify
  */
-const DEFAULT_PORT: number = 8088;
+const envFile = path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`);
+let envConfig: EnvConfig;
+try {
+  envConfig = dotenv.parse(fs.readFileSync(envFile));
+} catch {
+  console.log(`请检查配置文件${envFile}是否存在`);
+}
+/*------------------------------------------------------------------------------------------*/
 async function mainApp() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -59,7 +70,7 @@ async function mainApp() {
   SwaggerModule.setup('/swagger-api', app, document);
 
   /*------------------------------------------------------------------------------*/
-  await app.listen(DEFAULT_PORT, '0.0.0.0');
+  await app.listen(envConfig.SERVER_PORT, '0.0.0.0');
   /*------------------------------------------------------------------------------*/
 }
-mainApp().then(() => Logger.log(`server started by 0.0.0.0:${DEFAULT_PORT}`));
+mainApp().then(() => Logger.log(`server started by 0.0.0.0:${envConfig.SERVER_PORT}`));

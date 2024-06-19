@@ -6,7 +6,7 @@ import { RequiredRoles } from '@/decorator/roles.decorator';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from '@/modules/users/entities/user.entity';
 import { RolesEnums } from '@/constants/enums';
-import { Prisma } from '@/prisma/client';
+import { Prisma } from 'prisma/client';
 
 @ApiTags('User')
 @Controller('user')

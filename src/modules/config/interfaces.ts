@@ -1,6 +1,8 @@
 export type EnvConfig = {
   NODE_ENV: string;
 
+  SERVER_PORT: string;
+
   JWT_SECRET: string;
   JWT_AUTH_KEY: string;
   JWT_EXPIRES_IN: string;

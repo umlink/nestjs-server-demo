@@ -7,8 +7,8 @@ model VipExchangeCode {
   expireTime DateTime @map("expire_time") @db.DateTime(0)
   creatorId  Int      @map("creator_id")
   exchanged  Int      @default(0) @db.TinyInt
-  createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
-  updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.DateTime
+  createdAt  DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
 
   @@index([id], map: "vip_exchange_code_id_index")
   @@map("vip_exchange_code")

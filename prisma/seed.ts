@@ -1,8 +1,9 @@
-console.log(process.cwd());
 import { PrismaClient } from './client';
 
 const prisma = new PrismaClient();
-
+/**
+ * 这种方法可以初始化一些简单数据
+ */
 async function initData() {
   await prisma.role.createMany({
     data: [

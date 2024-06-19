@@ -2,6 +2,10 @@ export type EnvConfig = {
   NODE_ENV: string;
 
   SERVER_PORT: string;
+  SERVER_HOST: string;
+
+  API_PREFIX: string;
+  API_ENABLED_SWAGGER: string;
 
   JWT_SECRET: string;
   JWT_AUTH_KEY: string;

@@ -30,7 +30,7 @@
   },
   "prisma": {
     "schema": "prisma/schema",
-    "seed": "ts-node ./prisma/init-data"
+    "seed": "ts-node prisma/seed"
   },
   "dependencies": {
     "@fastify/csrf-protection": "^6.4.1",

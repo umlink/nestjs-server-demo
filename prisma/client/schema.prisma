@@ -4,6 +4,11 @@ generator client {
   relationMode = "prisma"
 }
 
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output   = "./docs"
+}
+
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
@@ -144,27 +149,27 @@ model order {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model permission {
-  id         Int      @id @default(autoincrement())
-  role_id    Int      @map("role_id")
-  name       String   @db.VarChar(32)
-  enum       String   @db.VarChar(32)
-  desc       String   @db.VarChar(128)
-  creator_id Int      @map("creator_id")
-  createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
-  updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
+  id        Int      @id @default(autoincrement())
+  role_id   Int      @map("role_id")
+  name      String   @db.VarChar(32)
+  enum      String   @db.VarChar(32)
+  desc      String   @db.VarChar(128)
+  creatorId Int      @map("creator_id")
+  createdAt DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
+  updatedAt DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
 
   @@index([id], map: "permission_id_index")
   @@index([role_id], map: "permission_role_id_index")
 }
 
 model role {
-  id         Int      @id @default(autoincrement())
-  enum       String   @unique(map: "role_enum_uindex") @db.VarChar(32)
-  name       String   @db.VarChar(64)
-  desc       String   @db.VarChar(512)
-  creator_id Int      @map("creator_id")
-  createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
-  updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
+  id        Int      @id @default(autoincrement())
+  enum      String   @unique(map: "role_enum_uindex") @db.VarChar(32)
+  name      String   @db.VarChar(64)
+  desc      String   @db.VarChar(512)
+  creatorId Int      @map("creator_id")
+  createdAt DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
+  updatedAt DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
 
   @@index([id], map: "role_id_index")
 }

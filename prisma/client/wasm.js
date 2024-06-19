@@ -225,7 +225,7 @@ exports.Prisma.PermissionScalarFieldEnum = {
   name: 'name',
   enum: 'enum',
   desc: 'desc',
-  creator_id: 'creator_id',
+  creatorId: 'creatorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -235,7 +235,7 @@ exports.Prisma.RoleScalarFieldEnum = {
   enum: 'enum',
   name: 'name',
   desc: 'desc',
-  creator_id: 'creator_id',
+  creatorId: 'creatorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

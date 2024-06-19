@@ -13,7 +13,7 @@ import { ConfigService } from '@/modules/config/config.service';
 import { consoleLogOption, getLogTransportByLevel, throttleOptions } from '@/utils/modules-utils';
 import { WinstonModule } from 'nest-winston';
 import { UploadModule } from './modules/upload/upload.module';
-import * as Transport from 'winston-transport';
+import Transport from 'winston-transport';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
 
@@ -62,7 +62,7 @@ import 'winston-daily-rotate-file';
   ],
   providers,
 })
-// 设置中间件，可指定路由可方法
+// 设置中间件，可指定路由可方法, 这种方式可以注入 service，函数式中间行无法注入 service.
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });

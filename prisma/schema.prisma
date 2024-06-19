@@ -3,6 +3,10 @@ generator client {
   output       = "./client"
   relationMode = "prisma"
 }
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+  output   = "./docs"
+}
 
 datasource db {
   provider     = "mysql"
@@ -149,7 +153,7 @@ model permission {
   name       String   @db.VarChar(32)
   enum       String   @db.VarChar(32)
   desc       String   @db.VarChar(128)
-  creator_id Int      @map("creator_id")
+  creatorId Int      @map("creator_id")
   createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
   updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
 
@@ -162,7 +166,7 @@ model role {
   enum       String   @unique(map: "role_enum_uindex") @db.VarChar(32)
   name       String   @db.VarChar(64)
   desc       String   @db.VarChar(512)
-  creator_id Int      @map("creator_id")
+  creatorId Int      @map("creator_id")
   createdAt  DateTime @default(dbgenerated("NOW()")) @map("created_at") @db.DateTime
   updatedAt  DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @map("updated_at") @db.Timestamp()
 

@@ -1,16 +1,16 @@
-import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, RegisterUserDto } from './dto/create-user.dto';
-import { getIOSTime } from '@/utils/time-utils';
+import { RegisterUserDto } from './dto/create-user.dto';
 import { RequiredRoles } from '@/decorator/roles.decorator';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserEntity } from '@/modules/users/entities/user.entity';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { UserBaseInfoRes } from '@/modules/users/entities/user.entity';
 import { RolesEnums } from '@/constants/enums';
 import { Prisma } from '@prisma/client';
 import { User } from '@/decorator/user.decorators';
 import { AuthUser } from '@/decorator/interface';
 import { RegisterUserRes } from './vo/user.entity';
 import { Public } from '@/decorator/auth.decorators';
+import { Api } from '@/decorator/api.decorator';
 
 @ApiTags('User')
 @Controller('user')
@@ -19,9 +19,7 @@ export class UsersController {
 
   @Post('/register')
   @Public()
-  @ApiOperation({ summary: '用户注册' })
-  @ApiBody({ type: RegisterUserDto })
-  @ApiResponse({ type: RegisterUserRes, status: 200 })
+  @Api({ summary: '用户注册', reqType: RegisterUserDto, resType: RegisterUserRes })
   async register(@Body() user: RegisterUserDto) {
     const options = {
       ...user,
@@ -33,14 +31,14 @@ export class UsersController {
 
   @Get('/info')
   @ApiOperation({ summary: '获取用户详情' })
-  @ApiResponse({ type: UserEntity, status: 200 })
+  @Api({ summary: '获取用户详情', resType: UserBaseInfoRes })
   async getUserDetail(@User() user: AuthUser) {
     const ret = await this.userService.getUserById(user.id);
     return ret;
   }
 
   @Post('/delete/:id')
-  @ApiOperation({ summary: '删除用户' })
+  @Api()
   @RequiredRoles([RolesEnums.Admin, RolesEnums.SuperAdmin])
   async delUserById(@Param('id', ParseIntPipe) id: number) {
     const res = await this.userService.delUser(id);
@@ -48,18 +46,5 @@ export class UsersController {
       throw new HttpException('用户不存在', HttpStatus.NOT_ACCEPTABLE);
     }
     return null;
-  }
-
-  @Post('/create')
-  @ApiBody({ type: CreateUserDto })
-  @ApiOperation({ summary: '创建用户' })
-  async addUser(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
-    const user = {
-      ...createUserDto,
-      roles: ['USER'] as Prisma.JsonArray,
-      createdAt: getIOSTime(),
-    };
-    const ret = await this.userService.addUser(user);
-    return new UserEntity(ret);
   }
 }

@@ -2,7 +2,6 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from './modules/config/config.module';
-import { TestModule } from './modules/test/test.modules';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { CacheModule } from '@nestjs/cache-manager';
@@ -12,7 +11,6 @@ import providers from '@/providers';
 import { ConfigService } from '@/modules/config/config.service';
 import { consoleLogOption, getLogTransportByLevel, throttleOptions } from '@/utils/modules-utils';
 import { WinstonModule } from 'nest-winston';
-import { UploadModule } from './modules/upload/upload.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
@@ -55,10 +53,8 @@ import 'winston-daily-rotate-file';
     }),
     ScheduleModule.forRoot(),
     PrismaModule,
-    TestModule,
     AuthModule,
     UsersModule,
-    UploadModule,
   ],
   providers,
 })

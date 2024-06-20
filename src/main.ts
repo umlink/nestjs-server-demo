@@ -10,6 +10,7 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
 import { EnvConfig } from '@/modules/config/interfaces';
+import { addResponseWrapper } from '@/utils/modules-utils';
 
 /**
  * ⚠️底层使用 fastify
@@ -60,10 +61,12 @@ async function mainApp() {
       .setVersion('1.0')
       .addTag('🤣Nestjs Service')
       .build();
-    const document = SwaggerModule.createDocument(app, config, {
-      ignoreGlobalPrefix: false, // 忽略设置 setGlobalPrefix
-      operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
-    });
+    const document = addResponseWrapper(
+      SwaggerModule.createDocument(app, config, {
+        ignoreGlobalPrefix: false, // 忽略设置 setGlobalPrefix
+        operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
+      }),
+    );
     SwaggerModule.setup('/swagger-api', app, document);
   }
 

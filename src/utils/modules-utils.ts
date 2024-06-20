@@ -3,6 +3,7 @@ import winston from 'winston';
 import { ThrottlerOptions } from '@nestjs/throttler';
 import { ConsoleTransportOptions } from 'winston/lib/winston/transports';
 import * as Transport from 'winston-transport';
+import { OpenAPIObject } from '@nestjs/swagger';
 
 export const throttleOptions = (configService: ConfigService): ThrottlerOptions[] => {
   return [
@@ -65,3 +66,70 @@ export const consoleLogOption: ConsoleTransportOptions = {
     ),
   ),
 };
+
+export function addResponseWrapper(doc: OpenAPIObject) {
+  for (const path of Object.keys(doc.paths)) {
+    const pathItem = doc.paths[path];
+    if (!pathItem) {
+      continue;
+    }
+    for (const method of Object.keys(pathItem)) {
+      const responses = doc.paths[path][method].responses;
+      if (!responses) {
+        continue;
+      }
+      for (const status of Object.keys(responses)) {
+        const json = responses[status].content?.['application/json'];
+        if (!json) {
+          responses[status].content = {
+            'application/json': {
+              schema: {
+                $ref: '#/components/schemas/Response',
+              },
+            },
+          };
+          continue;
+        }
+        const schema = json.schema;
+        json.schema = {
+          allOf: [
+            {
+              $ref: '#/components/schemas/Response',
+            },
+            {
+              type: 'object',
+              properties: {
+                data: schema,
+              },
+              required: ['data'],
+            },
+          ],
+        };
+      }
+    }
+  }
+
+  doc.components.schemas.Response = {
+    type: 'object',
+    properties: {
+      code: {
+        type: 'integer',
+        description: '状态码',
+        example: 200,
+        format: 'int32',
+      },
+      message: {
+        type: 'string',
+        description: '提示信息',
+        example: 'Ok',
+      },
+      success: {
+        type: 'boolean',
+        example: true,
+      },
+    },
+    required: ['code', 'message', 'success'],
+  };
+
+  return doc;
+}

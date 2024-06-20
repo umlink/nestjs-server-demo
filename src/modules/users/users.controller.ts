@@ -36,15 +36,4 @@ export class UsersController {
     const ret = await this.userService.getUserById(user.id);
     return ret;
   }
-
-  @Post('/delete/:id')
-  @Api()
-  @RequiredRoles([RolesEnums.Admin, RolesEnums.SuperAdmin])
-  async delUserById(@Param('id', ParseIntPipe) id: number) {
-    const res = await this.userService.delUser(id);
-    if (!res) {
-      throw new HttpException('用户不存在', HttpStatus.NOT_ACCEPTABLE);
-    }
-    return null;
-  }
 }

@@ -19,7 +19,11 @@ export class UsersController {
 
   @Post('/register')
   @Public()
-  @Api({ summary: '用户注册', reqType: RegisterUserDto, resType: RegisterUserRes })
+  @Api({
+    summary: '用户注册',
+    reqType: RegisterUserDto,
+    resType: RegisterUserRes,
+  })
   async register(@Body() user: RegisterUserDto) {
     const options = {
       ...user,

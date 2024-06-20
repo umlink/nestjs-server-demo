@@ -1,27 +1,42 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Logger, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, RegisterUserDto } from './dto/create-user.dto';
 import { getIOSTime } from '@/utils/time-utils';
 import { RequiredRoles } from '@/decorator/roles.decorator';
-import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from '@/modules/users/entities/user.entity';
 import { RolesEnums } from '@/constants/enums';
 import { Prisma } from '@prisma/client';
+import { User } from '@/decorator/user.decorators';
+import { AuthUser } from '@/decorator/interface';
+import { RegisterUserVo } from './vo/user.entity';
+import { ResVO } from '@/interface/response-vo';
+import { Public } from '@/decorator/auth.decorators';
 
 @ApiTags('User')
 @Controller('user')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
-  @Get('/detail/:id')
+  @Post('/register')
+  @Public()
+  @ApiOperation({ summary: '用户注册' })
+  @ApiBody({ type: RegisterUserDto })
+  @ApiResponse({ type: ResVO<RegisterUserVo> })
+  async register(@Body() user: RegisterUserDto): Promise<RegisterUserVo> {
+    const options = {
+      ...user,
+      roles: [RolesEnums.User] as Prisma.JsonArray, // 注册用户默认为普通用户
+    };
+    const id = await this.userService.register(options);
+    return { id: String(id) };
+  }
+
+  @Get('/info')
   @ApiOperation({ summary: '获取用户详情' })
-  async getUserDetail(@Param('id', ParseIntPipe) id: number): Promise<UserEntity> {
-    Logger.error('1111111 error');
-    Logger.error('2222222error msg', { a: 1, b: 2 });
-    Logger.debug('3333333debug msg', { a: 1, b: 2 });
-    Logger.log('4444444 info msg', { a: 1, b: 2 });
-    Logger.warn('4warn msg', { a: 1, b: 2 });
-    const ret = await this.userService.getUserById(id);
+  @ApiResponse({ type: ResVO<UserEntity> })
+  async getUserDetail(@User() user: AuthUser): Promise<UserEntity> {
+    const ret = await this.userService.getUserById(user.id);
     return new UserEntity(ret);
   }
 
@@ -44,7 +59,6 @@ export class UsersController {
       ...createUserDto,
       roles: ['USER'] as Prisma.JsonArray,
       createdAt: getIOSTime(),
-      updatedAt: getIOSTime(),
     };
     const ret = await this.userService.addUser(user);
     return new UserEntity(ret);

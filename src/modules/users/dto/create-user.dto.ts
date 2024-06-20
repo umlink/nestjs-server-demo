@@ -17,3 +17,13 @@ export class CreateUserDto {
   @ApiProperty({ description: '邮箱' })
   email: string;
 }
+
+export class RegisterUserDto {
+  @IsString()
+  @Length(2, 10)
+  username: string;
+
+  @IsNotEmpty()
+  @Length(6, 32)
+  password: string;
+}

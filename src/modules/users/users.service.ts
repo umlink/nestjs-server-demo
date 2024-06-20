@@ -13,7 +13,6 @@ export class UsersService {
       where,
       select: {
         id: true,
-        email: true,
         username: true,
         password: true,
       },
@@ -22,7 +21,23 @@ export class UsersService {
   async getUserById(id: number): Promise<UserEntity> {
     return this.prisma.user.findUnique({
       where: { id },
+      select: {
+        id: true,
+        username: true,
+        avatar: true,
+        email: true,
+        roles: true,
+      },
     });
+  }
+  async register(user: Prisma.UserCreateInput) {
+    const res = await this.prisma.user.create({
+      data: user,
+      select: {
+        id: true,
+      },
+    });
+    return res?.id;
   }
   async addUser(user: Prisma.UserCreateInput) {
     return this.prisma.user.create({

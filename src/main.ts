@@ -33,7 +33,9 @@ async function mainApp() {
   app.useLogger(logger);
 
   // 保护应用免受一些众所周知的 Web 漏洞的攻击
-  await app.register(helmet);
+  await app.register(helmet, {
+    contentSecurityPolicy: false,
+  });
 
   // CSRF 保护
   await app.register(fastifyCsrf);
@@ -68,6 +70,7 @@ async function mainApp() {
       .build();
     const document = SwaggerModule.createDocument(app, config, {
       ignoreGlobalPrefix: false, // 忽略设置 setGlobalPrefix
+      operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
     });
     SwaggerModule.setup('/swagger-api', app, document);
   }

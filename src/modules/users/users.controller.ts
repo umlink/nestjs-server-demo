@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, RegisterUserDto } from './dto/create-user.dto';
 import { getIOSTime } from '@/utils/time-utils';
@@ -10,7 +10,6 @@ import { Prisma } from '@prisma/client';
 import { User } from '@/decorator/user.decorators';
 import { AuthUser } from '@/decorator/interface';
 import { RegisterUserVo } from './vo/user.entity';
-import { ResVO } from '@/interface/response-vo';
 import { Public } from '@/decorator/auth.decorators';
 
 @ApiTags('User')
@@ -22,8 +21,8 @@ export class UsersController {
   @Public()
   @ApiOperation({ summary: '用户注册' })
   @ApiBody({ type: RegisterUserDto })
-  @ApiResponse({ type: ResVO<RegisterUserVo> })
-  async register(@Body() user: RegisterUserDto): Promise<RegisterUserVo> {
+  @ApiResponse({ type: RegisterUserVo })
+  async register(@Body() user: RegisterUserDto) {
     const options = {
       ...user,
       roles: [RolesEnums.User] as Prisma.JsonArray, // 注册用户默认为普通用户
@@ -34,10 +33,10 @@ export class UsersController {
 
   @Get('/info')
   @ApiOperation({ summary: '获取用户详情' })
-  @ApiResponse({ type: ResVO<UserEntity> })
-  async getUserDetail(@User() user: AuthUser): Promise<UserEntity> {
+  @ApiResponse({ type: UserEntity, status: 200 })
+  async getUserDetail(@User() user: AuthUser) {
     const ret = await this.userService.getUserById(user.id);
-    return new UserEntity(ret);
+    return ret;
   }
 
   @Post('/delete/:id')

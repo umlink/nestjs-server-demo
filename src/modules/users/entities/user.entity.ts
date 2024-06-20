@@ -1,16 +1,19 @@
-import { Prisma } from '@prisma/client';
+import { RolesEnums } from '@/constants/enums';
+import { ResVO } from '@/interface/response-vo';
 import { Transform } from 'class-transformer';
 import dayjs from 'dayjs';
+export class UserEntity extends ResVO {
+  data: {
+    id: bigint;
+    username: string;
+    email: string;
+    avatar: string;
+    roles: RolesEnums[];
+  };
 
-export class UserEntity {
-  id: bigint;
-  username: string;
-  email: string;
-  avatar: string;
-  roles: Prisma.JsonValue;
-
-  constructor(partial: Partial<UserEntity>) {
-    Object.assign(this, partial);
+  constructor(data) {
+    super();
+    this.data = data;
   }
 }
 

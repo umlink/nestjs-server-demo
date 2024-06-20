@@ -1,8 +1,7 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { RegisterUserDto } from './dto/create-user.dto';
-import { RequiredRoles } from '@/decorator/roles.decorator';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { UserBaseInfoRes } from '@/modules/users/entities/user.entity';
 import { RolesEnums } from '@/constants/enums';
 import { Prisma } from '@prisma/client';
@@ -34,10 +33,8 @@ export class UsersController {
   }
 
   @Get('/info')
-  @ApiOperation({ summary: '获取用户详情' })
   @Api({ summary: '获取用户详情', resType: UserBaseInfoRes })
   async getUserDetail(@User() user: AuthUser) {
-    const ret = await this.userService.getUserById(user.id);
-    return ret;
+    return this.userService.getUserById(user.id);
   }
 }

@@ -14,15 +14,7 @@ import { EnvConfig } from '@/modules/config/interfaces';
 /**
  * ⚠️底层使用 fastify
  */
-const envFile = path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`);
 let envConfig: EnvConfig;
-try {
-  envConfig = dotenv.parse(fs.readFileSync(envFile));
-  mainApp().then(() => Logger.log(`server started by 0.0.0.0:${envConfig.SERVER_PORT}`));
-} catch {
-  console.log(`请检查配置文件【${envFile}】是否存在`);
-}
-/*------------------------------------------------------------------------------------------*/
 async function mainApp() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -78,4 +70,13 @@ async function mainApp() {
   /*------------------------------------------------------------------------------*/
   await app.listen(envConfig.SERVER_PORT, envConfig.SERVER_HOST);
   /*------------------------------------------------------------------------------*/
+}
+
+const envFile = path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`);
+try {
+  envConfig = dotenv.parse(fs.readFileSync(envFile));
+  console.log(envConfig);
+  mainApp().then(() => Logger.log(`server started by 0.0.0.0:${envConfig.SERVER_PORT}`));
+} catch {
+  console.log(`请检查配置文件【${envFile}】是否存在`);
 }

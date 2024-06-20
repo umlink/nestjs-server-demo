@@ -9,7 +9,7 @@ import { RolesEnums } from '@/constants/enums';
 import { Prisma } from '@prisma/client';
 import { User } from '@/decorator/user.decorators';
 import { AuthUser } from '@/decorator/interface';
-import { RegisterUserVo } from './vo/user.entity';
+import { RegisterUserRes } from './vo/user.entity';
 import { Public } from '@/decorator/auth.decorators';
 
 @ApiTags('User')
@@ -21,7 +21,7 @@ export class UsersController {
   @Public()
   @ApiOperation({ summary: '用户注册' })
   @ApiBody({ type: RegisterUserDto })
-  @ApiResponse({ type: RegisterUserVo })
+  @ApiResponse({ type: RegisterUserRes, status: 200 })
   async register(@Body() user: RegisterUserDto) {
     const options = {
       ...user,

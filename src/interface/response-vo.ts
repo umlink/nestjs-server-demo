@@ -1,6 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ResVO {
+  @ApiProperty()
+  data: any;
+
   @ApiProperty({ type: 'number', default: 200 })
   code: number;
 

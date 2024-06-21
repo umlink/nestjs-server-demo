@@ -12,6 +12,8 @@ import { ConfigService } from '@/modules/config/config.service';
 import { consoleLogOption, getLogTransportByLevel, throttleOptions } from '@/utils/modules-utils';
 import { WinstonModule } from 'nest-winston';
 import { RolesModule } from '@/modules/roles/roles.module';
+import { ResumeModule } from './modules/resume/resume.module';
+import { TemplateModule } from './modules/template/template.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
 
@@ -56,6 +58,8 @@ import winston from 'winston';
     AuthModule,
     UsersModule,
     RolesModule,
+    ResumeModule,
+    TemplateModule,
   ],
   providers,
 })

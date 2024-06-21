@@ -34,7 +34,7 @@ export class ResumeController {
     return this.resumeService.update(+id, updateResumeDto);
   }
 
-  @Post('/remove')
+  @Post('/remove/:id')
   removeResume(@Param('id') id: string) {
     return this.resumeService.remove(+id);
   }

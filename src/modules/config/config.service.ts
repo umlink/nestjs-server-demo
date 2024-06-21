@@ -18,4 +18,8 @@ export class ConfigService {
   get(key: keyof EnvConfig): string {
     return this.envConfig[key];
   }
+
+  getAll() {
+    return this.envConfig;
+  }
 }

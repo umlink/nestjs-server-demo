@@ -6,24 +6,23 @@ import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
-import * as path from 'path';
-import { EnvConfig } from '@/modules/config/interfaces';
 import { addResponseWrapper } from '@/utils/modules-utils';
+import { ConfigService } from '@/modules/config/config.service';
 
 /**
  * ⚠️底层使用 fastify
  */
-let envConfig: EnvConfig;
 async function mainApp() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(), // 开启默认日志
   );
   // 开启 NestWinston 日志
-  const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
-  app.useLogger(logger);
+  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+
+  // 获取配置信息
+  const configService = app.get(ConfigService);
+  console.log(configService.getAll());
 
   // 保护应用免受一些众所周知的 Web 漏洞的攻击
   await app.register(helmet, {
@@ -37,7 +36,7 @@ async function mainApp() {
   app.enableCors();
 
   // 设置接口统一前缀
-  app.setGlobalPrefix(envConfig.API_PREFIX);
+  app.setGlobalPrefix(configService.get('API_PREFIX'));
 
   /**
    * 参数校验
@@ -53,8 +52,9 @@ async function mainApp() {
   );
   /**
    * 开启方式后期需定制处理，一般情况下线上需关闭
-   */
-  if (envConfig.API_ENABLED_SWAGGER === 'True') {
+   * tips: api.json 内容默认访问路由为 [basePath] + '-json', 即 `/swagger-api-json`
+   * */
+  if (configService.get('API_ENABLED_SWAGGER') === 'True') {
     const config = new DocumentBuilder()
       .setTitle('Swagger API')
       .setDescription('这里是关于 swagger api 文档的描述')
@@ -71,15 +71,11 @@ async function mainApp() {
   }
 
   /*------------------------------------------------------------------------------*/
-  await app.listen(envConfig.SERVER_PORT, envConfig.SERVER_HOST);
+  await app.listen(configService.get('SERVER_PORT'), configService.get('SERVER_HOST'));
   /*------------------------------------------------------------------------------*/
+  return configService;
 }
 
-const envFile = path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`);
-try {
-  envConfig = dotenv.parse(fs.readFileSync(envFile));
-  console.log(envConfig);
-  mainApp().then(() => Logger.log(`server started by 0.0.0.0:${envConfig.SERVER_PORT}`));
-} catch {
-  console.log(`请检查配置文件【${envFile}】是否存在`);
-}
+mainApp().then((configService) => {
+  Logger.log(`server started by ${configService.get('SERVER_HOST')}:${configService.get('SERVER_PORT')}`);
+});

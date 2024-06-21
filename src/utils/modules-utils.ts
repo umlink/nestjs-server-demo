@@ -66,7 +66,18 @@ export const consoleLogOption: ConsoleTransportOptions = {
     ),
   ),
 };
-
+/**
+ * 返回体结构包装
+ * 方便 ts 生成 api 文档，以及方便 各api 平台识别
+ * resVo
+ * =>
+ * {
+ *   code: 200,
+ *   message: 'OK',
+ *   data: resVo,
+ *   success: true
+ * }
+ * */
 export function addResponseWrapper(doc: OpenAPIObject) {
   for (const path of Object.keys(doc.paths)) {
     const pathItem = doc.paths[path];

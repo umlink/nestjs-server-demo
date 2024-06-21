@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/modules/prisma/prisma.service';
-import { TemplateQuery } from '@/modules/template/dto/query-template.dto';
+import { TemplateQueryDto } from '@/modules/template/dto/query-template.dto';
 
 @Injectable()
 export class TemplateService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(query: TemplateQuery) {
+  async findAll(query: TemplateQueryDto) {
     const where = {
       isVip: query.isVip,
       keywords: { array_contains: query.keywords },

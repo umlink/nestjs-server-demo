@@ -1,9 +1,10 @@
-import { Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { TemplateService } from './template.service';
 import { NotLogin } from '@/decorator/auth.decorators';
 import { Api } from '@/decorator/api.decorator';
 import { TemplateItemVO, TemplateListVo } from '@/modules/template/entities/template.entity';
 import { ApiTags } from '@nestjs/swagger';
+import { TemplateQueryDto } from '@/modules/template/dto/query-template.dto';
 
 @Controller('template')
 @ApiTags('简历模板')
@@ -14,23 +15,14 @@ export class TemplateController {
   @NotLogin()
   @Api({
     summary: '获取所有建立模板列表',
+    reqType: TemplateQueryDto,
     resType: TemplateListVo,
   })
-  findAll(
-    @Query('pageSize', new DefaultValuePipe(0), ParseIntPipe) pageSize: number,
-    @Query('pageNum', new DefaultValuePipe(0), ParseIntPipe) pageNum: number,
-    @Query('isVip', ParseIntPipe) isVip?: number,
-    @Query('keywords') keywords?: string,
-  ) {
-    return this.templateService.findAll({
-      pageSize,
-      pageNum,
-      isVip,
-      keywords,
-    });
+  findAll(@Body() query: TemplateQueryDto) {
+    return this.templateService.findAll(query);
   }
 
-  @Get('/:id')
+  @Get('/info/:id')
   @NotLogin()
   @Api({ summary: '简历详情', resType: TemplateItemVO })
   findOne(@Param('id') id: string) {

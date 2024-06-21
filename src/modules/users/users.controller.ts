@@ -23,6 +23,7 @@ export class UsersController {
     resType: String,
   })
   async postRegister(@Body() user: RegisterUserDto) {
+    console.log(user);
     const options = {
       ...user,
       roles: [RolesEnums.User] as Prisma.JsonArray, // 注册用户默认为普通用户

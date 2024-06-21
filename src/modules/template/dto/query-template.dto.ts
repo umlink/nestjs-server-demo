@@ -1,11 +1,16 @@
-import { Transform } from 'class-transformer';
+import { IsInt } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class TemplateQuery {
-  @Transform((v) => +v)
+export class TemplateQueryDto {
+  @IsInt()
   pageNum: number;
-  @Transform((v) => +v)
+
+  @IsInt()
   pageSize: number;
-  @Transform((v) => +v)
+
+  @ApiProperty({ required: false })
   isVip?: number;
+
+  @ApiProperty({ required: false })
   keywords?: string;
 }

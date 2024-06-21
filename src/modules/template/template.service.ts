@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTemplateDto } from './dto/create-template.dto';
-import { UpdateTemplateDto } from './dto/update-template.dto';
+import { PrismaService } from '@/modules/prisma/prisma.service';
+import { TemplateQuery } from '@/modules/template/dto/query-template.dto';
 
 @Injectable()
 export class TemplateService {
-  create(createTemplateDto: CreateTemplateDto) {
-    return 'This action adds a new template';
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return `This action returns all template`;
+  async findAll(query: TemplateQuery) {
+    const where = {
+      isVip: query.isVip,
+      keywords: { array_contains: query.keywords },
+    };
+
+    return await Promise.all([
+      this.prisma.resumeTemplate.findMany({
+        skip: (query.pageNum - 1) * query.pageSize,
+        take: query.pageSize,
+        orderBy: { id: 'asc' },
+        where,
+      }),
+      this.prisma.resumeTemplate.count({ where }),
+    ]).then((list) => {
+      return {
+        list: list[0],
+        total: list[1],
+        pageNum: query.pageNum,
+        pageSize: query.pageSize,
+      };
+    });
   }
 
   findOne(id: number) {
     return `This action returns a #${id} template`;
-  }
-
-  update(id: number, updateTemplateDto: UpdateTemplateDto) {
-    return `This action updates a #${id} template`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} template`;
   }
 }

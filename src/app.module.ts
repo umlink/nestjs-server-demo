@@ -14,7 +14,6 @@ import { WinstonModule } from 'nest-winston';
 import { RolesModule } from '@/modules/roles/roles.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
-import 'winston-daily-rotate-file';
 
 @Module({
   imports: [

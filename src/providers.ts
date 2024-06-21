@@ -9,10 +9,10 @@ import { ResponseInterceptor } from '@/interceptor/response.interceptor';
 import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor';
 import { ClassSerializerInterceptor } from '@nestjs/common';
 import { HttpExceptionFilter } from '@/filters/http-exception.filters';
-import { TaskDemoService } from '@/schedule/taskDemo.service';
+// import { TaskDemoService } from '@/schedule/taskDemo.service';
 
 const appModules: Provider[] = [
-  TaskDemoService, // 定时任务
+  // TaskDemoService, // 定时任务
   {
     provide: APP_GUARD,
     useClass: JwtAuthGuard, // 授权认证

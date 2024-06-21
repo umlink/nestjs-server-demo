@@ -4,6 +4,7 @@ import { ThrottlerOptions } from '@nestjs/throttler';
 import { ConsoleTransportOptions } from 'winston/lib/winston/transports';
 import * as Transport from 'winston-transport';
 import { OpenAPIObject } from '@nestjs/swagger';
+import 'winston-daily-rotate-file';
 
 export const throttleOptions = (configService: ConfigService): ThrottlerOptions[] => {
   return [

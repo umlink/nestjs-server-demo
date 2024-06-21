@@ -31,6 +31,6 @@ export class TemplateService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} template`;
+    return this.prisma.resumeTemplate.findFirst({ where: { id } });
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { TemplateService } from './template.service';
 import { NotLogin } from '@/decorator/auth.decorators';
 import { Api } from '@/decorator/api.decorator';
@@ -11,7 +11,7 @@ import { TemplateQueryDto } from '@/modules/template/dto/query-template.dto';
 export class TemplateController {
   constructor(private readonly templateService: TemplateService) {}
 
-  @Post('/all')
+  @Post('/list')
   @NotLogin()
   @Api({
     summary: '获取所有建立模板列表',
@@ -22,10 +22,10 @@ export class TemplateController {
     return this.templateService.findAll(query);
   }
 
-  @Get('/info/:id')
+  @Post('/info/:id')
   @NotLogin()
   @Api({ summary: '简历详情', resType: TemplateItemVO })
-  findOne(@Param('id') id: string) {
-    return this.templateService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.templateService.findOne(id);
   }
 }

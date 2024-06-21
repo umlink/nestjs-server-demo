@@ -11,6 +11,7 @@ import providers from '@/providers';
 import { ConfigService } from '@/modules/config/config.service';
 import { consoleLogOption, getLogTransportByLevel, throttleOptions } from '@/utils/modules-utils';
 import { WinstonModule } from 'nest-winston';
+import { RolesModule } from '@/modules/roles/roles.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
@@ -55,6 +56,7 @@ import 'winston-daily-rotate-file';
     PrismaModule,
     AuthModule,
     UsersModule,
+    RolesModule,
   ],
   providers,
 })

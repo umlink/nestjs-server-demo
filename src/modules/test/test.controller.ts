@@ -2,7 +2,7 @@ import { Controller, Get, Inject } from '@nestjs/common';
 import { ConfigService } from '../config/config.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
-import { Public } from '@/decorator/auth.decorators';
+import { NotLogin } from '@/decorator/auth.decorators';
 import { RequiredRoles } from '@/decorator/roles.decorator';
 import { RolesEnums } from '@/constants/enums';
 
@@ -23,7 +23,7 @@ export class TestController {
     return this.configService.get('NODE_ENV');
   }
   @Get('/addCache')
-  @Public()
+  @NotLogin()
   async addCache() {
     await this.cacheManager.set('cache-key', {
       name: 'cache',
@@ -32,12 +32,12 @@ export class TestController {
     return '缓存设置成功';
   }
   @Get('/getCache')
-  @Public()
+  @NotLogin()
   async getCache(): Promise<CacheTypeDemo> {
     return await this.cacheManager.get<CacheTypeDemo>('cache-key');
   }
   @Get('/admin')
-  @RequiredRoles([RolesEnums.Admin, RolesEnums.SuperAdmin]) // 只有管理员和超管可以访问
+  @RequiredRoles(RolesEnums.Admin, RolesEnums.SuperAdmin) // 只有管理员和超管可以访问
   getTest2(): string {
     return this.configService.get('NODE_ENV');
   }

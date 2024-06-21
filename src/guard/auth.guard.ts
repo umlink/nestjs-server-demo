@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IS_PUBLIC_KEY } from '@/decorator/auth.decorators';
+import { NOT_LOGIN_KEY } from '@/decorator/auth.decorators';
 import { Reflector } from '@nestjs/core';
 import { ConfigService } from '@/modules/config/config.service';
 
@@ -13,11 +13,11 @@ export class JwtAuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+    const notLogin = this.reflector.getAllAndOverride<boolean>(NOT_LOGIN_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
-    if (isPublic) return true;
+    if (notLogin) return true;
 
     const request = context.switchToHttp().getRequest();
     const token = request.headers[this.config.get('JWT_AUTH_KEY')];

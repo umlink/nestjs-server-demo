@@ -7,7 +7,7 @@ import { RolesEnums } from '@/constants/enums';
 import { Prisma } from '@prisma/client';
 import { User } from '@/decorator/user.decorators';
 import { AuthUser } from '@/decorator/interface';
-import { Public } from '@/decorator/auth.decorators';
+import { NotLogin } from '@/decorator/auth.decorators';
 import { Api } from '@/decorator/api.decorator';
 
 @ApiTags('User')
@@ -16,7 +16,7 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post('/register')
-  @Public()
+  @NotLogin()
   @Api({
     summary: '用户注册',
     reqType: RegisterUserDto,

@@ -1,6 +1,6 @@
 import { Provider } from '@nestjs/common/interfaces/modules/provider.interface';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { JwtAuthGuard } from '@/modules/auth/auth.guard';
+import { JwtAuthGuard } from '@/guard/auth.guard';
 import { RolesGuard } from '@/guard/roles.guard';
 import { VipGuard } from '@/guard/vip.guard';
 import { ThrottlerGuard } from '@nestjs/throttler';
@@ -9,10 +9,8 @@ import { ResponseInterceptor } from '@/interceptor/response.interceptor';
 import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor';
 import { ClassSerializerInterceptor } from '@nestjs/common';
 import { HttpExceptionFilter } from '@/filters/http-exception.filters';
-// import { TaskDemoService } from '@/schedule/taskDemo.service';
 
 const appModules: Provider[] = [
-  // TaskDemoService, // 定时任务
   {
     provide: APP_GUARD,
     useClass: JwtAuthGuard, // 授权认证

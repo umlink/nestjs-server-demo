@@ -9,6 +9,7 @@ import { User } from '@/decorator/user.decorators';
 import { AuthUser } from '@/decorator/interface';
 import { NotLogin } from '@/decorator/auth.decorators';
 import { Api } from '@/decorator/api.decorator';
+import { errorHandler } from '@/utils/prisma-utils';
 
 @ApiTags('User')
 @Controller('user')
@@ -22,18 +23,17 @@ export class UsersController {
     reqType: RegisterUserDto,
     resType: String,
   })
-  async postRegister(@Body() user: RegisterUserDto) {
-    console.log(user);
+  postRegister(@Body() user: RegisterUserDto) {
     const options = {
       ...user,
       roles: [RolesEnums.User] as Prisma.JsonArray, // 注册用户默认为普通用户
     };
-    return await this.userService.register(options);
+    return this.userService.register(options);
   }
 
   @Get('/info')
   @Api({ summary: '获取用户详情', resType: UserBaseInfoVO })
   async getUserInfo(@User() user: AuthUser) {
-    return this.userService.getUserById(user.id);
+    return this.userService.getUserById(user.id).catch(errorHandler);
   }
 }

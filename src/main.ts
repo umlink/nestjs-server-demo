@@ -57,7 +57,7 @@ async function mainApp() {
   if (configService.get('API_ENABLED_SWAGGER') === 'True') {
     const config = new DocumentBuilder()
       .setTitle('Swagger API')
-      .setDescription('这里是关于 swagger api 文档的描述')
+      .setDescription('Easy简历前台接口')
       .setVersion('1.0')
       .addTag('🤣Nestjs Service')
       .build();

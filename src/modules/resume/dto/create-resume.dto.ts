@@ -1,8 +1,16 @@
 import { Prisma } from '@prisma/client';
+import { IsInt, IsObject, IsString } from 'class-validator';
 
 export class CreateResumeDto {
+  @IsString()
   title: string;
-  content: Prisma.JsonValue;
+
+  @IsObject()
+  content: Prisma.InputJsonValue;
+
+  @IsInt()
   templateId: number;
+
+  @IsString()
   themeColor: string;
 }

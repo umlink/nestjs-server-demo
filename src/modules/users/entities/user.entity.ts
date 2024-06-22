@@ -1,7 +1,7 @@
 import { RolesEnums } from '@/constants/enums';
 
 export class UserBaseInfoVO {
-  id: bigint;
+  id: number;
   username: string;
   email: string;
   avatar: string;

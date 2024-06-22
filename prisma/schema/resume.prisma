@@ -1,13 +1,14 @@
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model resume {
-  id          Int      @id @unique(map: "id")
+  id          BigInt   @id @unique(map: "id")
   title       String   @db.VarChar(64)
   content     Json
   userId      Int      @map("user_id")
   templateId  Int?     @map("template_id")
   themeColor  String   @map("theme_color") @db.VarChar(10)
-  isPublic    Int      @default(0) @map("is_public") @db.TinyInt
-  exportCount Int      @map("export_count")
+  isPublic    Int?     @default(0) @map("is_public") @db.TinyInt
+  exportCount Int?     @default(0) @map("export_count")
+  deleted     Int?     @default(0) @map("deleted") @db.TinyInt
   createdAt   DateTime @default(now()) @map("created_at") @db.DateTime(0)
   updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
 

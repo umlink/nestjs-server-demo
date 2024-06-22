@@ -14,3 +14,7 @@ export enum PermissionEnums {
   Update = 'Update',
   Delete = 'Delete',
 }
+
+export enum PrismaEnum {
+  NoData = 'P2025',
+}

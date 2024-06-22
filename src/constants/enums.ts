@@ -21,5 +21,6 @@ export enum PermissionEnums {
  */
 export enum PrismaEnum {
   NoData = 'P2025',
+  Unique = 'P2002',
   TooLong = 'P2000',
 }

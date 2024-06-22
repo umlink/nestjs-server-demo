@@ -43,8 +43,14 @@ export class ResumeService {
     return this.prisma.resume.findUnique({ where: { id, userId } });
   }
 
-  update(id: number, updateResumeDto: UpdateResumeDto) {
-    return `This action updates a #${id} resume`;
+  update(userId: number, updateResumeDto: UpdateResumeDto) {
+    return this.prisma.resume.update({
+      data: updateResumeDto,
+      where: {
+        id: updateResumeDto.id,
+        userId,
+      },
+    });
   }
 
   remove(id: number, userId: number) {

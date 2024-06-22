@@ -8,7 +8,7 @@ import { User } from '@/decorator/user.decorators';
 import { UserBaseInfoVO } from '@/modules/users/entities/user.entity';
 import { ResumeItemVO, ResumeListVO } from '@/modules/resume/vo/resume.entity';
 import { QueryResumeDto } from '@/modules/resume/dto/query-resume.dto';
-import { PrismaEnum } from '@/constants/enums';
+import { errorHandler } from '@/utils/prisma-utils';
 
 @Controller('resume')
 @ApiTags('简历')
@@ -31,7 +31,7 @@ export class ResumeController {
     resType: ResumeItemVO,
   })
   async getResumeInfo(@Param('id', ParseIntPipe) id: number, @User() user: UserBaseInfoVO) {
-    const resume = await this.resumeService.findOne(id, user.id);
+    const resume = await this.resumeService.findOne(id, user.id).catch(errorHandler);
     if (!resume) {
       throw new HttpException('未找到该简历', HttpStatus.BAD_REQUEST);
     }
@@ -39,18 +39,22 @@ export class ResumeController {
   }
 
   @Post('/update')
-  updateResume(@Param('id') id: string, @Body() updateResumeDto: UpdateResumeDto) {
-    return this.resumeService.update(+id, updateResumeDto);
+  @Api({
+    summary: '更新我的简历',
+    reqType: UpdateResumeDto,
+  })
+  async updateResume(@User() user: UserBaseInfoVO, @Body() updateResumeDto: UpdateResumeDto) {
+    const resume = await this.resumeService.update(user.id, updateResumeDto).catch(errorHandler);
+    if (resume) return null;
   }
 
   @Post('/remove/:id')
+  @Api({
+    summary: '删除我的简历',
+  })
   async removeResume(@Param('id') id: string, @User() user: UserBaseInfoVO) {
     console.log(id, user);
-    return this.resumeService.remove(+id, user.id).catch((res) => {
-      if (res.code === PrismaEnum.NoData) {
-        throw new HttpException('删除失败：未找到该数据', HttpStatus.BAD_REQUEST);
-      }
-    });
+    return this.resumeService.remove(+id, user.id).catch(errorHandler);
   }
 
   @Post('/list')

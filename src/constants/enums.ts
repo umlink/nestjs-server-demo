@@ -15,6 +15,11 @@ export enum PermissionEnums {
   Delete = 'Delete',
 }
 
+/**
+ * https://prisma.nodejs.cn/orm/reference/error-reference#%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%81
+ * 处理错误码
+ */
 export enum PrismaEnum {
   NoData = 'P2025',
+  TooLong = 'P2000',
 }

@@ -24,3 +24,8 @@ export enum PrismaEnum {
   Unique = 'P2002',
   TooLong = 'P2000',
 }
+
+export enum SellTypeEnum {
+  Public = 'PUBLIC',
+  System = 'SYSTEM',
+}

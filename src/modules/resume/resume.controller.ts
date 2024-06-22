@@ -9,6 +9,7 @@ import { UserBaseInfoVO } from '@/modules/users/entities/user.entity';
 import { ResumeItemVO, ResumeListVO } from '@/modules/resume/vo/resume.entity';
 import { QueryResumeDto } from '@/modules/resume/dto/query-resume.dto';
 import { errorHandler } from '@/utils/prisma-utils';
+import { RequiredVip } from '@/decorator/vip.decorators';
 
 @Controller('resume')
 @ApiTags('简历')
@@ -21,8 +22,20 @@ export class ResumeController {
     reqType: CreateResumeDto,
     resType: Number,
   })
+  @RequiredVip()
   createResume(@Body() createResumeDto: CreateResumeDto, @User() user: UserBaseInfoVO) {
     return this.resumeService.create(createResumeDto, user.id);
+  }
+
+  @Post('/update')
+  @RequiredVip()
+  @Api({
+    summary: '更新我的简历',
+    reqType: UpdateResumeDto,
+  })
+  async updateResume(@User() user: UserBaseInfoVO, @Body() updateResumeDto: UpdateResumeDto) {
+    const resume = await this.resumeService.update(user.id, updateResumeDto).catch(errorHandler);
+    if (resume) return null;
   }
 
   @Post('/info/:id')
@@ -36,16 +49,6 @@ export class ResumeController {
       throw new HttpException('未找到该简历', HttpStatus.BAD_REQUEST);
     }
     return resume;
-  }
-
-  @Post('/update')
-  @Api({
-    summary: '更新我的简历',
-    reqType: UpdateResumeDto,
-  })
-  async updateResume(@User() user: UserBaseInfoVO, @Body() updateResumeDto: UpdateResumeDto) {
-    const resume = await this.resumeService.update(user.id, updateResumeDto).catch(errorHandler);
-    if (resume) return null;
   }
 
   @Post('/remove/:id')

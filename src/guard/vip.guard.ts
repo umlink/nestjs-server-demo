@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { IS_VIP_KEY } from '@/decorator/vip.decorators';
 
@@ -11,13 +11,9 @@ export class VipGuard implements CanActivate {
     if (isVip) {
       const request = context.switchToHttp().getRequest();
       if (request.user.isVip) {
-        /**
-         * 如果是会员
-         * 可检测会员到期时间等其它逻辑
-         */
         return true;
       }
-      throw new UnauthorizedException('权限不足');
+      throw new ForbiddenException('权限不足');
     }
     return true;
   }

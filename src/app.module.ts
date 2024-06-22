@@ -14,6 +14,7 @@ import { WinstonModule } from 'nest-winston';
 import { RolesModule } from '@/modules/roles/roles.module';
 import { ResumeModule } from './modules/resume/resume.module';
 import { TemplateModule } from './modules/template/template.module';
+import { VipTypeModule } from './modules/vip-type/vip-type.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
 
@@ -60,6 +61,7 @@ import winston from 'winston';
     RolesModule,
     ResumeModule,
     TemplateModule,
+    VipTypeModule,
   ],
   providers,
 })

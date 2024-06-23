@@ -4,6 +4,9 @@ export type EnvConfig = {
   SERVER_PORT: string;
   SERVER_HOST: string;
 
+  MAIL_USER_EMAIL: string;
+  MAIL_AUTH_CODE: string;
+
   API_PREFIX: string;
   API_ENABLED_SWAGGER: string;
 

@@ -13,14 +13,23 @@ export class JwtAuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    const token = request.headers[this.config.get('JWT_AUTH_KEY')];
+
     const notLogin = this.reflector.getAllAndOverride<boolean>(NOT_LOGIN_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);
-    if (notLogin) return true;
+    if (notLogin) {
+      // 无需登录，但存在 token 也进行解析
+      request['user'] = await this.jwtService
+        .verifyAsync(token, {
+          secret: this.config.get('JWT_SECRET'),
+        })
+        .catch();
+      return true;
+    }
 
-    const request = context.switchToHttp().getRequest();
-    const token = request.headers[this.config.get('JWT_AUTH_KEY')];
     if (!token) {
       throw new UnauthorizedException();
     }

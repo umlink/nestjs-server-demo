@@ -34,6 +34,7 @@ export class UsersController {
   @Get('/info')
   @Api({ summary: '获取用户详情', resType: UserBaseInfoVO })
   async getUserInfo(@User() user: AuthUser) {
+    console.log(user);
     return this.userService.getUserById(user.id).catch(errorHandler);
   }
 }

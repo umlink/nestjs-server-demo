@@ -3,6 +3,7 @@ import { CreateResumeDto } from './dto/create-resume.dto';
 import { UpdateResumeDto } from './dto/update-resume.dto';
 import { PrismaService } from '@/modules/prisma/prisma.service';
 import { genSnowUUId } from '@/utils/id.gen';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ResumeService {
@@ -39,8 +40,8 @@ export class ResumeService {
     });
   }
 
-  findOne(id: number, userId: number) {
-    return this.prisma.resume.findUnique({ where: { id, userId } });
+  findOne(where: Prisma.resumeWhereInput) {
+    return this.prisma.resume.findFirst({ where });
   }
 
   update(userId: number, updateResumeDto: UpdateResumeDto) {

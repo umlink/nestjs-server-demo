@@ -10,6 +10,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { LoginVO } from '@/modules/auth/vo/login.vo';
 import { VipService } from '@/modules/vip/vip.service';
 import { getFutureDay, getIOSTime } from '@/utils/time-utils';
+import { VipTypeService } from '@/modules/vip-type/vip-type.service';
 
 @ApiTags('登录授权')
 @Controller('auth')
@@ -21,6 +22,9 @@ export class AuthController {
 
   @Inject(VipService)
   private readonly vipServer: VipService;
+
+  @Inject(VipService)
+  private readonly vipTypeServer: VipTypeService;
 
   @Inject(EmailService)
   private mailServer: EmailService;
@@ -37,6 +41,8 @@ export class AuthController {
     if (!code) {
       throw new BadRequestException('验证码不存在或已过期');
     }
+    // 删除验证码
+    await this.cache.del(loginDto.email);
     const res = await this.authService.loginByEmailCode(loginDto.email, loginDto.code);
     if (res.code) {
       await this.mailServer.sendMail({
@@ -44,16 +50,15 @@ export class AuthController {
         subject: '登录密码',
         html: `<p>您的初始登录密码为: <b>${res.code}</b> ，有妥善保存，可在个人中心中修改密码</p>`,
       });
-      // 第一次登录赠送 1 天会员
+      // 第一次登录赠送会员,赠送会员售卖类型为 GIFT 的会员
+      const giftVip = await this.vipTypeServer.getGiftVip();
       await this.vipServer.create({
         userId: res.user.id,
-        vipTypeId: 1,
+        vipTypeId: giftVip.duration,
         startTime: getIOSTime(),
-        expireTime: getFutureDay(1),
+        expireTime: getFutureDay(giftVip.duration),
       });
     }
-    // 删除验证码
-    await this.cache.del(loginDto.email);
     return {
       token: res.access_token,
       isRegister: !!res.code,

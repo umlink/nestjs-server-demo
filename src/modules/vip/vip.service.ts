@@ -6,6 +6,7 @@ import { Prisma } from '@prisma/client';
 @Injectable()
 export class VipService {
   constructor(private readonly prisma: PrismaService) {}
+
   create(data: Prisma.VipCreateInput) {
     return this.prisma.vip.create({ data });
   }

@@ -1,0 +1,5 @@
+enum vip_type_sell_type {
+  SELL
+  GIFT
+  PRIVATE
+}

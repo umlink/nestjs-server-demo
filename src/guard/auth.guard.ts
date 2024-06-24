@@ -14,7 +14,9 @@ export class JwtAuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const token = request.headers[this.config.get('JWT_AUTH_KEY')];
+
+    // const token = request.headers[this.config.get('JWT_AUTH_KEY')];
+    const token = request.cookies[this.config.get('JWT_AUTH_KEY')];
 
     const notLogin = this.reflector.getAllAndOverride<boolean>(NOT_LOGIN_KEY, [
       context.getHandler(),

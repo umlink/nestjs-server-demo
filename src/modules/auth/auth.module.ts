@@ -20,7 +20,7 @@ import { VipTypeModule } from '@/modules/vip-type/vip-type.module';
       useFactory(config: ConfigService) {
         return {
           secret: config.get('JWT_SECRET'),
-          signOptions: { expiresIn: config.get('JWT_EXPIRES_IN') },
+          signOptions: { expiresIn: config.get('JWT_EXPIRES_IN') + 'd' },
         };
       },
     }),

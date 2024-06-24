@@ -25,8 +25,6 @@ async function mainApp() {
   const configService = app.get(ConfigService);
   console.log(configService.getAll());
 
-  const maxDate = +configService.get('JWT_EXPIRES_IN').split('d')[0];
-
   // 保护应用免受一些众所周知的 Web 漏洞的攻击
   await app.register(helmet, {
     contentSecurityPolicy: false,
@@ -76,7 +74,7 @@ async function mainApp() {
   await app.register(fastifyCookie, {
     secret: 'EasyResume', // for cookies signature
     httpOnly: true,
-    maxAge: 60 * 60 * 24 * maxDate,
+    maxAge: 60 * 60 * 24 * Number(configService.get('JWT_EXPIRES_IN')),
   });
 
   /*------------------------------------------------------------------------------*/

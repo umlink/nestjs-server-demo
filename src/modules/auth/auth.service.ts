@@ -16,11 +16,11 @@ export class AuthService {
     private vipServer: VipService,
   ) {}
 
-  async loginByEmailCode(email: string, code: number) {
+  async loginByEmailCode(email: string, code: string) {
     let user = await this.usersService.getUserByEmail({
       email,
     });
-    let pwd: number;
+    let pwd: string;
     if (!user) {
       user = await this.usersService.registerByEmail({
         username: email,

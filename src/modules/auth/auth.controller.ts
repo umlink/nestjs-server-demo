@@ -60,7 +60,7 @@ export class AuthController {
       });
     }
     return {
-      token: res.access_token,
+      access_token: res.access_token,
       isRegister: !!res.code,
     };
   }

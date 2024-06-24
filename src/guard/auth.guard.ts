@@ -24,11 +24,13 @@ export class JwtAuthGuard implements CanActivate {
     ]);
     if (notLogin) {
       // 无需登录，但存在 token 也进行解析
-      request['user'] = await this.jwtService
-        .verifyAsync(token, {
-          secret: this.config.get('JWT_SECRET'),
-        })
-        .catch();
+      if (token) {
+        request['user'] = await this.jwtService
+          .verifyAsync(token, {
+            secret: this.config.get('JWT_SECRET'),
+          })
+          .catch();
+      }
       return true;
     }
 

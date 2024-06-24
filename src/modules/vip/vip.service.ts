@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UpdateVipDto } from './dto/update-vip.dto';
 import { PrismaService } from '@/modules/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import { getIOSTime } from '@/utils/time-utils';
 
 @Injectable()
 export class VipService {
@@ -9,6 +10,17 @@ export class VipService {
 
   create(data: Prisma.VipCreateInput) {
     return this.prisma.vip.create({ data });
+  }
+
+  findValidityVip(userId: number) {
+    return this.prisma.vip.findFirst({
+      where: {
+        userId,
+        expireTime: {
+          gt: getIOSTime(),
+        },
+      },
+    });
   }
 
   findAll() {

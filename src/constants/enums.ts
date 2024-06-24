@@ -26,6 +26,7 @@ export enum PrismaEnum {
 }
 
 export enum SellTypeEnum {
-  Public = 'PUBLIC',
-  System = 'SYSTEM',
+  SELL = 'SELL',
+  GIFT = 'GIFT',
+  PRIVATE = 'PRIVATE',
 }

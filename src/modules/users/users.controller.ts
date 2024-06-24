@@ -11,6 +11,7 @@ import { NotLogin } from '@/decorator/auth.decorators';
 import { Api } from '@/decorator/api.decorator';
 import { errorHandler } from '@/utils/prisma-utils';
 import { VipService } from '@/modules/vip/vip.service';
+import { JwtService } from '@nestjs/jwt';
 
 @ApiTags('User')
 @Controller('user')
@@ -19,6 +20,8 @@ export class UsersController {
   private readonly userService: UsersService;
   @Inject(VipService)
   private readonly vipServer: VipService;
+  @Inject(JwtService)
+  private jwtService: JwtService;
 
   @Post('/register')
   @NotLogin()
@@ -40,10 +43,18 @@ export class UsersController {
   async getUserInfo(@User() user: AuthUser) {
     let ret = await this.userService.getUserById(user.id).catch(errorHandler);
     const vip = await this.vipServer.findValidityVip(user.id);
+    const isVip = +Boolean(vip);
     return {
       ...ret,
-      isVip: +Boolean(vip),
-      access_token: '11111',
+      isVip,
+      access_token: this.jwtService.sign({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        roles: user.roles,
+        isVip,
+      }),
     };
   }
 }

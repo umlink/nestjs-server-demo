@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreateVipDto } from './dto/create-vip.dto';
 import { UpdateVipDto } from './dto/update-vip.dto';
+import { PrismaService } from '@/modules/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class VipService {
-  create(createVipDto: CreateVipDto) {
-    return 'This action adds a new vip';
+  constructor(private readonly prisma: PrismaService) {}
+  create(data: Prisma.VipCreateInput) {
+    return this.prisma.vip.create({ data });
   }
 
   findAll() {

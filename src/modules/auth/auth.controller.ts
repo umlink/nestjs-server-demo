@@ -8,6 +8,8 @@ import { Api } from '@/decorator/api.decorator';
 import { EmailService } from '@/modules/email/email.service';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginVO } from '@/modules/auth/vo/login.vo';
+import { VipService } from '@/modules/vip/vip.service';
+import { getFutureDay, getIOSTime } from '@/utils/time-utils';
 
 @ApiTags('登录授权')
 @Controller('auth')
@@ -16,6 +18,9 @@ export class AuthController {
 
   @Inject(CACHE_MANAGER)
   private cache: Cache;
+
+  @Inject(VipService)
+  private readonly vipServer: VipService;
 
   @Inject(EmailService)
   private mailServer: EmailService;
@@ -27,19 +32,28 @@ export class AuthController {
     reqType: EmailCodeLoginDto,
     resType: LoginVO,
   })
-  async emailCodeLogin(@Body() logDto: EmailCodeLoginDto) {
-    const code = await this.cache.get(logDto.email);
+  async emailCodeLogin(@Body() loginDto: EmailCodeLoginDto) {
+    const code = await this.cache.get(loginDto.email);
     if (!code) {
       throw new BadRequestException('验证码不存在或已过期');
     }
-    const res = await this.authService.loginByEmailCode(logDto.email, logDto.code);
+    const res = await this.authService.loginByEmailCode(loginDto.email, loginDto.code);
     if (res.code) {
       await this.mailServer.sendMail({
-        to: logDto.email,
+        to: loginDto.email,
         subject: '登录密码',
         html: `<p>您的初始登录密码为: <b>${res.code}</b> ，有妥善保存，可在个人中心中修改密码</p>`,
       });
+      // 第一次登录赠送 1 天会员
+      await this.vipServer.create({
+        userId: res.user.id,
+        vipTypeId: 1,
+        startTime: getIOSTime(),
+        expireTime: getFutureDay(1),
+      });
     }
+    // 删除验证码
+    await this.cache.del(loginDto.email);
     return {
       token: res.access_token,
       isRegister: !!res.code,

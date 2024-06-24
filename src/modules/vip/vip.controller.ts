@@ -1,16 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { VipService } from './vip.service';
-import { CreateVipDto } from './dto/create-vip.dto';
 import { UpdateVipDto } from './dto/update-vip.dto';
 
 @Controller('vip')
 export class VipController {
   constructor(private readonly vipService: VipService) {}
-
-  @Post()
-  create(@Body() createVipDto: CreateVipDto) {
-    return this.vipService.create(createVipDto);
-  }
 
   @Get()
   findAll() {

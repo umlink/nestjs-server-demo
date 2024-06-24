@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { RegisterUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -14,7 +14,8 @@ import { errorHandler } from '@/utils/prisma-utils';
 @ApiTags('User')
 @Controller('user')
 export class UsersController {
-  constructor(private readonly userService: UsersService) {}
+  @Inject(UsersService)
+  private readonly userService: UsersService;
 
   @Post('/register')
   @NotLogin()

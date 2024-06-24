@@ -29,6 +29,7 @@ export class AuthService {
       pwd = code;
     }
     return {
+      user,
       access_token: this.jwtService.sign(user),
       code: pwd,
     };

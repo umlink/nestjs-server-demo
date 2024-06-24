@@ -22,7 +22,7 @@ export class ResumeService {
   }
 
   async findAll(query: { userId: number; pageSize: number; pageNum: number }) {
-    const where = { userId: query.userId };
+    const where = { userId: query.userId, deleted: 0 };
     return await Promise.all([
       this.prisma.resume.findMany({
         skip: (query.pageNum - 1) * query.pageSize,
@@ -41,7 +41,12 @@ export class ResumeService {
   }
 
   findOne(where: Prisma.resumeWhereInput) {
-    return this.prisma.resume.findFirst({ where });
+    return this.prisma.resume.findFirst({
+      where: {
+        ...where,
+        deleted: 0,
+      },
+    });
   }
 
   update(userId: number, updateResumeDto: UpdateResumeDto) {

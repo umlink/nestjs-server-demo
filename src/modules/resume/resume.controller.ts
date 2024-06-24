@@ -21,7 +21,7 @@ import { RequiredVip } from '@/decorator/vip.decorators';
 import { NotLogin } from '@/decorator/auth.decorators';
 import { AuthUser } from '@/decorator/interface';
 
-@ApiTags('简历')
+@ApiTags('Resume')
 @Controller('resume')
 export class ResumeController {
   constructor(private readonly resumeService: ResumeService) {}

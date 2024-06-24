@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { VipTypeService } from './vip-type.service';
 import { CreateVipTypeDto } from './dto/create-vip-type.dto';
 import { UpdateVipTypeDto } from './dto/update-vip-type.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('VipType')
 @Controller('vip-type')
 export class VipTypeController {
   constructor(private readonly vipTypeService: VipTypeService) {}

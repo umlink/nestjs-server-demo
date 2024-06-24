@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { VipService } from './vip.service';
 import { UpdateVipDto } from './dto/update-vip.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Vip')
 @Controller('vip')
 export class VipController {
   constructor(private readonly vipService: VipService) {}

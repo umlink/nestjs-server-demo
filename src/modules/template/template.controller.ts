@@ -6,8 +6,8 @@ import { TemplateItemVO, TemplateListVo } from '@/modules/template/entities/temp
 import { ApiTags } from '@nestjs/swagger';
 import { TemplateQueryDto } from '@/modules/template/dto/query-template.dto';
 
+@ApiTags('Template')
 @Controller('template')
-@ApiTags('简历模板')
 export class TemplateController {
   constructor(private readonly templateService: TemplateService) {}
 

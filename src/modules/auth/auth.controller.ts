@@ -12,7 +12,7 @@ import { VipService } from '@/modules/vip/vip.service';
 import { getFutureDay, getIOSTime } from '@/utils/time-utils';
 import { VipTypeService } from '@/modules/vip-type/vip-type.service';
 
-@ApiTags('登录授权')
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}

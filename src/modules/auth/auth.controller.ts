@@ -72,10 +72,10 @@ export class AuthController {
     reqType: EmailPwdLoginDto,
     resType: LoginVO,
   })
-  async emailPwdLogin(@Body() logDto: EmailPwdLoginDto) {
+  async emailPwdLogin(@Body() loginDto: EmailPwdLoginDto) {
     const res = await this.authService.loginByEmailPwd({
-      email: logDto.email,
-      password: logDto.password,
+      email: loginDto.email,
+      password: loginDto.password,
     });
     return {
       access_token: res.access_token,

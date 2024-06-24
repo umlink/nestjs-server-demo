@@ -4,6 +4,7 @@ import { getReasonPhrase } from 'http-status-codes';
 import { Logger } from 'winston';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { getReqMainInfo } from '@/utils/logger-utils';
+import { ConfigService } from '@/modules/config/config.service';
 
 /**
  * 格式化输出内容
@@ -12,7 +13,11 @@ import { getReqMainInfo } from '@/utils/logger-utils';
  */
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
-  constructor(@Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger) {}
+  @Inject(WINSTON_MODULE_PROVIDER)
+  private readonly logger: Logger;
+  @Inject(ConfigService)
+  private readonly configService: ConfigService;
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const ctx = context.switchToHttp();
     const response = ctx.getResponse();
@@ -24,6 +29,10 @@ export class ResponseInterceptor implements NestInterceptor {
           url: getReqMainInfo(ctx.getRequest()).url,
           res: data,
         });
+        // 需要更新的地方不断更新用户信息
+        if (data.access_token) {
+          response.setCookie(this.configService.get('JWT_AUTH_KEY'), data.access_token);
+        }
         return {
           code,
           message,

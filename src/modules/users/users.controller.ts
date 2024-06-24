@@ -43,6 +43,7 @@ export class UsersController {
     return {
       ...ret,
       isVip: +Boolean(vip),
+      access_token: '11111',
     };
   }
 }

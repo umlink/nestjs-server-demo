@@ -78,7 +78,7 @@ export class AuthController {
       password: logDto.password,
     });
     return {
-      token: res.access_token,
+      access_token: res.access_token,
       isRegister: false,
     };
   }

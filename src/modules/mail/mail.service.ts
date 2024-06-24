@@ -4,13 +4,13 @@ import { ConfigService } from '@/modules/config/config.service';
 
 @Injectable()
 export class MailService {
-  transporter: Transporter;
+  private transporter: Transporter;
 
   constructor(private configService: ConfigService) {
     this.transporter = createTransport({
-      host: 'smtp.163.com',
-      port: 465,
-      secure: false,
+      host: this.configService.get('MAIL_SERVER_HOST'),
+      port: this.configService.get('MAIL_SERVER_PORT'),
+      secure: this.configService.get('MAIL_SERVER_SECURE') === 'True',
       auth: {
         user: this.configService.get('MAIL_USER_EMAIL'),
         pass: this.configService.get('MAIL_AUTH_CODE'),
@@ -19,18 +19,14 @@ export class MailService {
   }
 
   async sendMail({ to, subject, html }) {
-    await this.transporter
-      .sendMail({
-        from: {
-          name: '系统邮件',
-          address: this.configService.get('MAIL_USER_EMAIL'),
-        },
-        to,
-        subject,
-        html,
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    await this.transporter.sendMail({
+      from: {
+        name: this.configService.get('MAIL_FORM_NAME'),
+        address: this.configService.get('MAIL_USER_EMAIL'),
+      },
+      to,
+      subject,
+      html,
+    });
   }
 }

@@ -1,6 +1,6 @@
 model User {
   id        Int      @id @unique(map: "id") @default(autoincrement())
-  email     String?  @db.VarChar(64)
+  email     String?  @unique(map: "email") @db.VarChar(64)
   avatar    String?  @db.VarChar(128)
   username  String   @db.VarChar(32)
   password  String   @db.VarChar(128)

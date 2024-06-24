@@ -6,4 +6,5 @@ export class UserBaseInfoVO {
   avatar: string;
   isVip: number;
   roles: RolesEnums[];
+  accessToken: string;
 }

@@ -7,7 +7,7 @@ import { Cache } from 'cache-manager';
 import { Api } from '@/decorator/api.decorator';
 import { EmailService } from '@/modules/email/email.service';
 import { ApiTags } from '@nestjs/swagger';
-import { LoginVO } from '@/modules/auth/vo/login.vo';
+import { LoginResVo } from '@/modules/auth/entity/login.entity';
 import { VipService } from '@/modules/vip/vip.service';
 import { getFutureDay, getIOSTime } from '@/utils/time-utils';
 import { VipTypeService } from '@/modules/vip-type/vip-type.service';
@@ -34,9 +34,9 @@ export class AuthController {
   @Api({
     summary: '邮箱验证码登录/注册',
     reqType: EmailCodeLoginDto,
-    resType: LoginVO,
+    resType: LoginResVo,
   })
-  async emailCodeLogin(@Body() loginDto: EmailCodeLoginDto) {
+  async emailCodeLogin(@Body() loginDto: EmailCodeLoginDto): Promise<LoginResVo> {
     const code = await this.cache.get(loginDto.email);
     if (!code) {
       throw new BadRequestException('验证码不存在或已过期');
@@ -60,7 +60,7 @@ export class AuthController {
       });
     }
     return {
-      access_token: res.access_token,
+      accessToken: res.access_token,
       isRegister: !!res.code,
     };
   }
@@ -70,7 +70,7 @@ export class AuthController {
   @Api({
     summary: '邮箱密码登录',
     reqType: EmailPwdLoginDto,
-    resType: LoginVO,
+    resType: LoginResVo,
   })
   async emailPwdLogin(@Body() loginDto: EmailPwdLoginDto) {
     const res = await this.authService.loginByEmailPwd({
@@ -78,7 +78,7 @@ export class AuthController {
       password: loginDto.password,
     });
     return {
-      access_token: res.access_token,
+      accessToken: res.access_token,
       isRegister: false,
     };
   }

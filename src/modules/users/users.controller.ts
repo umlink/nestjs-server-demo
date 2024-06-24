@@ -41,13 +41,13 @@ export class UsersController {
   @Get('/info')
   @Api({ summary: '获取用户详情', resType: UserBaseInfoVO })
   async getUserInfo(@User() user: AuthUser) {
-    let ret = await this.userService.getUserById(user.id).catch(errorHandler);
+    const ret = await this.userService.getUserById(user.id).catch(errorHandler);
     const vip = await this.vipServer.findValidityVip(user.id);
     const isVip = +Boolean(vip);
     return {
       ...ret,
       isVip,
-      access_token: this.jwtService.sign({
+      accessToken: this.jwtService.sign({
         id: user.id,
         username: user.username,
         email: user.email,

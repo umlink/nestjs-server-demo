@@ -4,7 +4,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import fastifyCsrf from '@fastify/csrf-protection';
 import helmet from '@fastify/helmet';
-import fastifyCookie from 'fastify-cookie';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { addResponseWrapper } from '@/utils/modules-utils';
@@ -70,12 +69,6 @@ async function mainApp() {
     );
     SwaggerModule.setup('/swagger-api', app, document);
   }
-
-  await app.register(fastifyCookie, {
-    secret: 'EasyResume', // for cookies signature
-    httpOnly: true,
-    maxAge: 60 * 60 * 24 * Number(configService.get('JWT_EXPIRES_IN')),
-  });
 
   /*------------------------------------------------------------------------------*/
   await app.listen(configService.get('SERVER_PORT'), configService.get('SERVER_HOST'));

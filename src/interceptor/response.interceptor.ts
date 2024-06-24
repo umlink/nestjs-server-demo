@@ -29,11 +29,6 @@ export class ResponseInterceptor implements NestInterceptor {
           url: getReqMainInfo(ctx.getRequest()).url,
           res: data,
         });
-        // 更新用户信息
-        if (data.access_token) {
-          response.setCookie(this.configService.get('JWT_AUTH_KEY'), data.access_token);
-          delete data.access_token;
-        }
         return {
           code,
           message,

@@ -53,7 +53,6 @@
     "crypto": "^1.0.1",
     "dayjs": "^1.11.11",
     "dotenv": "^16.4.5",
-    "fastify-cookie": "^5.7.0",
     "fastify-swagger": "^5.2.0",
     "http-status-codes": "^2.3.0",
     "nest-winston": "^1.10.0",

@@ -7,13 +7,15 @@ import { getIOSTime } from '@/utils/time-utils';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getUserByName(where: Prisma.UserWhereInput) {
+  async getUserByEmail(where: Prisma.UserWhereInput) {
     return this.prisma.user.findFirst({
       where,
       select: {
         id: true,
         username: true,
-        password: true,
+        avatar: true,
+        email: true,
+        roles: true,
       },
     });
   }
@@ -37,6 +39,18 @@ export class UsersService {
       },
     });
     return res?.id;
+  }
+  async registerByEmail(user: Prisma.UserCreateInput) {
+    return this.prisma.user.create({
+      data: user,
+      select: {
+        id: true,
+        username: true,
+        avatar: true,
+        email: true,
+        roles: true,
+      },
+    });
   }
   async addUser(user: Prisma.UserCreateInput) {
     return this.prisma.user.create({

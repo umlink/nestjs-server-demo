@@ -11,6 +11,8 @@ export type EnvConfig = {
   MAIL_SERVER_SECURE: string;
   MAIL_FORM_NAME: string;
 
+  MD5_SALT: string;
+
   API_PREFIX: string;
   API_ENABLED_SWAGGER: string;
 

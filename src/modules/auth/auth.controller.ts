@@ -1,20 +1,66 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Inject, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { NotLogin } from '@/decorator/auth.decorators';
-import { User } from '@/decorator/user.decorators';
-import { UserBaseInfoVO } from '@/modules/users/entities/user.entity';
+import { EmailCodeLoginDto, EmailPwdLoginDto } from '@/modules/auth/dto/login.dto';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
+import { Api } from '@/decorator/api.decorator';
+import { EmailService } from '@/modules/email/email.service';
+import { ApiTags } from '@nestjs/swagger';
+import { LoginVO } from '@/modules/auth/vo/login.vo';
 
+@ApiTags('登录授权')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('login')
+  @Inject(CACHE_MANAGER)
+  private cache: Cache;
+
+  @Inject(EmailService)
+  private mailServer: EmailService;
+
+  @Post('email-code')
   @NotLogin()
-  signIn(@Body() signInDto: Record<string, any>) {
-    return this.authService.login(signInDto.username, signInDto.password);
+  @Api({
+    summary: '邮箱验证码登录/注册',
+    reqType: EmailCodeLoginDto,
+    resType: LoginVO,
+  })
+  async emailCodeLogin(@Body() logDto: EmailCodeLoginDto) {
+    const code = await this.cache.get(logDto.email);
+    if (!code) {
+      throw new BadRequestException('验证码不存在或已过期');
+    }
+    const res = await this.authService.loginByEmailCode(logDto.email, logDto.code);
+    if (res.code) {
+      await this.mailServer.sendMail({
+        to: logDto.email,
+        subject: '登录密码',
+        html: `<p>您的初始登录密码为: <b>${res.code}</b> ，有妥善保存，可在个人中心中修改密码</p>`,
+      });
+    }
+    return {
+      token: res.access_token,
+      isRegister: !!res.code,
+    };
   }
-  @Get('profile')
-  getProfile(@User() user: UserBaseInfoVO) {
-    return user;
+
+  @Post('email-pwd')
+  @NotLogin()
+  @Api({
+    summary: '邮箱密码登录',
+    reqType: EmailPwdLoginDto,
+    resType: LoginVO,
+  })
+  async emailPwdLogin(@Body() logDto: EmailPwdLoginDto) {
+    const res = await this.authService.loginByEmailPwd({
+      email: logDto.email,
+      password: logDto.password,
+    });
+    return {
+      token: res.access_token,
+      isRegister: false,
+    };
   }
 }

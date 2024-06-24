@@ -3,7 +3,7 @@ import { createTransport, Transporter } from 'nodemailer';
 import { ConfigService } from '@/modules/config/config.service';
 
 @Injectable()
-export class MailService {
+export class EmailService {
   private transporter: Transporter;
 
   constructor(private configService: ConfigService) {

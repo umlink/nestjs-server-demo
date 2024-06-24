@@ -16,7 +16,7 @@ import { ResumeModule } from './modules/resume/resume.module';
 import { TemplateModule } from './modules/template/template.module';
 import { VipTypeModule } from './modules/vip-type/vip-type.module';
 import { VipModule } from './modules/vip/vip.module';
-import { MailModule } from './modules/mail/mail.module';
+import { EmailModule } from '@/modules/email/email.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
 
@@ -65,7 +65,7 @@ import winston from 'winston';
     TemplateModule,
     VipTypeModule,
     VipModule,
-    MailModule,
+    EmailModule,
   ],
   providers,
 })

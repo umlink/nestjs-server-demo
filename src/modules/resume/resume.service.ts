@@ -20,8 +20,8 @@ export class ResumeService {
     });
   }
 
-  async findAll(query: { id: number; pageSize: number; pageNum: number }) {
-    const where = { id: query.id };
+  async findAll(query: { userId: number; pageSize: number; pageNum: number }) {
+    const where = { userId: query.userId };
     return await Promise.all([
       this.prisma.resume.findMany({
         skip: (query.pageNum - 1) * query.pageSize,

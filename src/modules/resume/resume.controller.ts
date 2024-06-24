@@ -11,8 +11,8 @@ import { QueryResumeDto } from '@/modules/resume/dto/query-resume.dto';
 import { errorHandler } from '@/utils/prisma-utils';
 import { RequiredVip } from '@/decorator/vip.decorators';
 
-@Controller('resume')
 @ApiTags('简历')
+@Controller('resume')
 export class ResumeController {
   constructor(private readonly resumeService: ResumeService) {}
 
@@ -56,7 +56,6 @@ export class ResumeController {
     summary: '删除我的简历',
   })
   async removeResume(@Param('id') id: string, @User() user: UserBaseInfoVO) {
-    console.log(id, user);
     return this.resumeService.remove(+id, user.id).catch(errorHandler);
   }
 
@@ -69,7 +68,7 @@ export class ResumeController {
   getResumeList(@User() user: UserBaseInfoVO, @Body() query: QueryResumeDto) {
     return this.resumeService.findAll({
       ...query,
-      id: user.id,
+      userId: user.id,
     });
   }
 }

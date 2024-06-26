@@ -18,7 +18,7 @@ export class TemplateItemVO {
 }
 
 export class TemplateListVo {
-  @ApiProperty()
+  @ApiProperty({ type: TemplateItemVO, isArray: true })
   list: TemplateItemVO[];
   @ApiProperty()
   total: number;

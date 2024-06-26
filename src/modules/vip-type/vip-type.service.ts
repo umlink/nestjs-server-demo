@@ -9,7 +9,7 @@ export class VipTypeService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createVipTypeDto: CreateVipTypeDto) {
-    return 'This action adds a new vipType';
+    return this.prisma.vipType.create({ data: createVipTypeDto });
   }
 
   getGiftVip() {
@@ -29,7 +29,10 @@ export class VipTypeService {
   }
 
   update(id: number, updateVipTypeDto: UpdateVipTypeDto) {
-    return `This action updates a #${id} vipType`;
+    return this.prisma.vipType.update({
+      where: { id },
+      data: updateVipTypeDto,
+    });
   }
 
   remove(id: number) {

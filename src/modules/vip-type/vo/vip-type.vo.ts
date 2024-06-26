@@ -1,4 +1,5 @@
 import { Prisma } from '@prisma/client';
+import { $Enums } from '.prisma/client';
 
 export class VipTypeItemVo {
   id: number;
@@ -9,5 +10,5 @@ export class VipTypeItemVo {
   price: number;
   originPrice: number;
   duration: number;
-  sellType: number;
+  sellType: $Enums.vip_type_sell_type;
 }

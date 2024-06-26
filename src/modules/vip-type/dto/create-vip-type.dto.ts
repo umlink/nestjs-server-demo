@@ -1,7 +1,7 @@
 import { IsNumber, IsObject, IsString } from 'class-validator';
 import { Prisma } from '@prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
-import { SellTypeEnum } from '@/constants/enums';
+import { $Enums } from '.prisma/client';
 
 export class CreateVipTypeDto {
   @IsString()
@@ -29,6 +29,6 @@ export class CreateVipTypeDto {
   duration: number;
 
   @IsString()
-  @ApiProperty({ description: '售卖类型' })
-  sellType: SellTypeEnum;
+  @ApiProperty({ description: '售卖类型', enum: $Enums.vip_type_sell_type })
+  sellType: $Enums.vip_type_sell_type;
 }

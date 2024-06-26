@@ -1,7 +1,7 @@
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model VipType {
   id            Int                @id @unique(map: "id") @default(autoincrement())
-  tilte         String             @db.VarChar(64)
+  title         String             @db.VarChar(64)
   description   String             @db.VarChar(512)
   equity        Json?
   price         Decimal            @db.Decimal(10, 0)

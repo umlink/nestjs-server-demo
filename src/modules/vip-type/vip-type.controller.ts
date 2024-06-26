@@ -18,7 +18,6 @@ export class VipTypeController {
   @Api({
     summary: '创建会员类型',
     reqType: CreateVipTypeDto,
-    resType: String,
   })
   createVipType(@Body() createVipTypeDto: CreateVipTypeDto) {
     return this.vipTypeService.create(createVipTypeDto);

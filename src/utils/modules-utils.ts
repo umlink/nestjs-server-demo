@@ -103,6 +103,7 @@ export function addResponseWrapper(doc: OpenAPIObject) {
           continue;
         }
         const schema = json.schema;
+        console.log(schema);
         json.schema = {
           allOf: [
             {

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { RegisterUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { UserBaseInfoVO } from '@/modules/users/entities/user.entity';
+import { UserBaseInfoVO } from '@/modules/users/vo/user.vo';
 import { RolesEnums } from '@/constants/enums';
 import { Prisma } from '@prisma/client';
 import { User } from '@/decorator/user.decorators';

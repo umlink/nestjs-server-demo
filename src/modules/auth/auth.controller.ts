@@ -7,7 +7,7 @@ import { Cache } from 'cache-manager';
 import { Api } from '@/decorator/api.decorator';
 import { EmailService } from '@/modules/email/email.service';
 import { ApiTags } from '@nestjs/swagger';
-import { LoginResVo } from '@/modules/auth/entity/login.entity';
+import { LoginResVo } from '@/modules/auth/vo/login.vo';
 import { VipService } from '@/modules/vip/vip.service';
 import { getFutureDay, getIOSTime } from '@/utils/time-utils';
 import { VipTypeService } from '@/modules/vip-type/vip-type.service';

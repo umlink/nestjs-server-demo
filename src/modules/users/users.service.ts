@@ -28,6 +28,8 @@ export class UsersService {
         avatar: true,
         email: true,
         roles: true,
+        hobby: true,
+        profession: true,
       },
     });
   }

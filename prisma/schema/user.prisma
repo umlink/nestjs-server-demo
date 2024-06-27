@@ -1,13 +1,15 @@
 model User {
-  id        Int      @id @unique(map: "id") @default(autoincrement())
-  email     String?  @unique(map: "email") @db.VarChar(64)
-  avatar    String?  @db.VarChar(128)
-  username  String   @db.VarChar(32)
-  password  String   @db.VarChar(128)
-  disabled  Int      @default(0) @db.TinyInt
-  roles     Json
-  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
-  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
+  id         Int      @id @unique(map: "id") @default(autoincrement())
+  email      String?  @unique(map: "email") @db.VarChar(64)
+  avatar     String?  @db.VarChar(128)
+  username   String   @db.VarChar(32)
+  password   String   @db.VarChar(128)
+  disabled   Int      @default(0) @db.TinyInt
+  roles      Json
+  profession String?  @db.VarChar(100)
+  hobby      String?  @db.VarChar(100)
+  createdAt  DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  updatedAt  DateTime @default(now()) @map("updated_at") @db.Timestamp(0)
 
   @@map("user")
 }

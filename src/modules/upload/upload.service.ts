@@ -8,7 +8,14 @@ export class UploadService {
   @Inject(ConfigService)
   private configService: ConfigService;
 
-  async uploadToQiNiu(filename: string, buffer: Buffer) {
+  async uploadToQiNiu(
+    filename: string,
+    buffer: Buffer,
+  ): Promise<{
+    hash: string;
+    key: string;
+    type: string;
+  }> {
     const config = this.configService;
     const mac = new qiniu.auth.digest.Mac(
       config.get('UPLOAD_QI_NIU_ACCESS_KEY'),

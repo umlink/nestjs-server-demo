@@ -8,6 +8,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { addResponseWrapper } from '@/utils/modules-utils';
 import { ConfigService } from '@/modules/config/config.service';
+import fastifyMultipart from '@fastify/multipart';
 
 /**
  * ⚠️底层使用 fastify
@@ -23,6 +24,14 @@ async function mainApp() {
   // 获取配置信息
   const configService = app.get(ConfigService);
   console.log(configService.getAll());
+
+  // 注册上传插件
+  await app.register(fastifyMultipart, {
+    throwFileSizeLimit: false,
+    limits: {
+      fileSize: 1024 * 1024 * 10,
+    },
+  });
 
   // 保护应用免受一些众所周知的 Web 漏洞的攻击
   await app.register(helmet, {
@@ -77,5 +86,7 @@ async function mainApp() {
 }
 
 mainApp().then((configService) => {
-  Logger.log(`server started by ${configService.get('SERVER_HOST')}:${configService.get('SERVER_PORT')}`);
+  Logger.log(
+    `server started by ${configService.get('SERVER_HOST')}:${configService.get('SERVER_PORT')}`,
+  );
 });

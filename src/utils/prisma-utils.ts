@@ -20,7 +20,10 @@ export const errorHandler = (err: Prisma.PrismaClientKnownRequestError) => {
     throw new HttpException('未找到该数据', HttpStatus.BAD_REQUEST);
   }
   if (err.code === PrismaEnum.TooLong) {
-    throw new HttpException(`数据字段【${err.meta.column_name}】长度不合法`, HttpStatus.BAD_REQUEST);
+    throw new HttpException(
+      `数据字段【${err.meta.column_name}】长度不合法`,
+      HttpStatus.BAD_REQUEST,
+    );
   }
   if (err.code === PrismaEnum.Unique) {
     throw new HttpException(`数据字段【${err.meta.column_name}】重复`, HttpStatus.BAD_REQUEST);

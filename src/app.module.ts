@@ -19,6 +19,7 @@ import { VipModule } from './modules/vip/vip.module';
 import { EmailModule } from '@/modules/email/email.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
+import { UploadModule } from '@/modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import winston from 'winston';
     VipTypeModule,
     VipModule,
     EmailModule,
+    UploadModule,
   ],
   providers,
 })

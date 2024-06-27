@@ -26,6 +26,13 @@ export type EnvConfig = {
   CACHE_HTTP_GLOBAL_TTL: string;
   CACHE_HTTP_GLOBAL_MAX: string;
 
+  UPLOAD_PATH: string;
+  UPLOAD_HOST: string;
+  UPLOAD_MAX_SIZE: string;
+  UPLOAD_QI_NIU_ACCESS_KEY: string;
+  UPLOAD_QI_NIU_SECRET_KEY: string;
+  UPLOAD_QI_NIU_BUCKET: string;
+
   LOG_PATH: string;
   LOG_MAX_SIZE: string;
   LOG_MAX_FILES: string;

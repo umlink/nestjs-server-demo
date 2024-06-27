@@ -30,7 +30,7 @@ export class UploadController {
     const maxSize = Number(this.configService.get('UPLOAD_MAX_SIZE'));
 
     if (fileSize > 1024 * 1024 * maxSize) {
-      throw new BadRequestException(`上传文件最大限制为${maxSize}M`);
+      throw new BadRequestException(`上传文件太大，最大为${maxSize}M`);
     }
 
     const res = await this.uploadService.uploadToQiNiu(filename, buffer).catch((errMsg) => {

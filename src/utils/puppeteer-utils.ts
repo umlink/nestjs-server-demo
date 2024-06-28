@@ -14,13 +14,17 @@ export const initPuppeteerPool = () => {
     maxUses: 2048, //自定义的属性：每一个 实例 最大可重用次数。
     validator: () => Promise.resolve(true),
   };
+  const executablePath =
+    process.env.NODE_ENV === 'production'
+      ? undefined
+      : '//Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
   const factory: any = {
     create: () =>
       puppeteer
         .launch({
           headless: true, //有头模式
           timeout: 30000,
-          executablePath: '//Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+          executablePath,
           args: [
             '--no-zygote',
             '--no-sandbox',

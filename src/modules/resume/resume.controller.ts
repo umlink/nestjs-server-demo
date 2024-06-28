@@ -17,7 +17,6 @@ import { User } from '@/decorator/user.decorators';
 import { ResumeItemVO, ResumeListVO } from '@/modules/resume/vo/resume.entity';
 import { QueryResumeDto } from '@/modules/resume/dto/query-resume.dto';
 import { errorHandler } from '@/utils/prisma-utils';
-import { RequiredVip } from '@/decorator/vip.decorators';
 import { NotLogin } from '@/decorator/auth.decorators';
 import { AuthUser } from '@/decorator/interface';
 
@@ -32,13 +31,11 @@ export class ResumeController {
     reqType: CreateResumeDto,
     resType: Number,
   })
-  @RequiredVip()
   createResume(@Body() createResumeDto: CreateResumeDto, @User() user: AuthUser) {
     return this.resumeService.create(createResumeDto, user.id);
   }
 
   @Post('/update')
-  @RequiredVip()
   @Api({
     summary: '更新我的简历',
     reqType: UpdateResumeDto,

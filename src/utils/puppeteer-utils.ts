@@ -6,7 +6,7 @@ export const waitTime = (n: number) => new Promise((r) => setTimeout(r, n));
 export const initPuppeteerPool = () => {
   const opt = {
     max: 4, //最多产生多少个 puppeteer 实例 。
-    min: 1, //保证池中最少有多少个实例存活
+    min: 2, //保证池中最少有多少个实例存活
     testOnBorrow: true, // 在将 实例 提供给用户之前，池应该验证这些实例。
     autostart: false, //是不是需要在 池 初始化时 初始化 实例
     idleTimeoutMillis: 1000 * 60 * 60, //如果一个实例 60分钟 都没访问就关掉他
@@ -44,7 +44,7 @@ export const initPuppeteerPool = () => {
           instance.useCount = 0;
           return instance;
         }),
-    destroy: (instance) => {
+    destroy: (instance: any) => {
       instance.close();
     },
     validate: (instance: any) => {
@@ -64,7 +64,7 @@ export const initPuppeteerPool = () => {
       return instance;
     });
 
-  pool.use = (fn) => {
+  pool.use = (fn: any) => {
     let resource: any;
     return pool
       .acquire()

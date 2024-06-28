@@ -1,7 +1,7 @@
 import * as puppeteer from 'puppeteer';
 import * as genericPool from 'generic-pool';
 
-export const waitTime = (n) => new Promise((r) => setTimeout(r, n));
+export const waitTime = (n: number) => new Promise((r) => setTimeout(r, n));
 
 export const initPuppeteerPool = () => {
   const opt = {
@@ -51,7 +51,7 @@ export const initPuppeteerPool = () => {
         );
     },
   };
-  const pool = genericPool.createPool(factory, opt);
+  const pool: any = genericPool.createPool(factory, opt);
   const genericAcquire = pool.acquire.bind(pool);
   // 重写了原有池的消费实例的方法。添加一个实例使用次数的增加
   pool.acquire = () =>
@@ -61,7 +61,7 @@ export const initPuppeteerPool = () => {
     });
 
   pool.use = (fn) => {
-    let resource;
+    let resource: any;
     return pool
       .acquire()
       .then((r) => {
@@ -70,12 +70,12 @@ export const initPuppeteerPool = () => {
       })
       .then(fn)
       .then(
-        (result) => {
+        (result: any) => {
           // 不管业务方使用实例成功与后都表示一下实例消费完成
           pool.release(resource);
           return result;
         },
-        (err) => {
+        (err: any) => {
           pool.release(resource);
           throw err;
         },

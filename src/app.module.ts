@@ -20,6 +20,7 @@ import { EmailModule } from '@/modules/email/email.module';
 import Transport from 'winston-transport';
 import winston from 'winston';
 import { UploadModule } from '@/modules/upload/upload.module';
+import { PuppeteerModule } from '@/modules/puppeteer/puppeteer.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { UploadModule } from '@/modules/upload/upload.module';
     VipModule,
     EmailModule,
     UploadModule,
+    PuppeteerModule,
   ],
   providers,
 })

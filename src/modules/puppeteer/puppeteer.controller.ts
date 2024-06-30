@@ -28,6 +28,6 @@ export class PuppeteerController {
       waitTime: 100,
       token: req.headers[this.configService.get('JWT_AUTH_KEY')] as string,
     });
-    res.send(bff); // 1
+    res.send(bff);
   }
 }

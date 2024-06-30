@@ -20,17 +20,13 @@ export class PuppeteerService {
       await page.setExtraHTTPHeaders({
         [this.configService.get('JWT_AUTH_KEY')]: opt.token,
       });
-
       await page.goto(opt.url, { waitUntil: 'networkidle0' });
       await waitTime(opt.waitTime || 0);
+      console.log(page);
       const pdf = await page.pdf({
         format: 'A4',
-        margin: {
-          top: 30,
-          bottom: 30,
-          left: 25,
-          right: 25,
-        },
+        printBackground: true,
+        margin: { top: 30, bottom: 30, left: 10, right: 10 },
       });
       await page.close();
       return pdf;

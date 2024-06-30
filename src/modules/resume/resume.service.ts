@@ -50,7 +50,6 @@ export class ResumeService {
   }
 
   update(userId: number, updateResumeDto: UpdateResumeDto) {
-    console.log(updateResumeDto.title);
     return this.prisma.resume.update({
       data: updateResumeDto,
       where: {

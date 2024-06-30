@@ -3,8 +3,8 @@ import { map, Observable } from 'rxjs';
 import { getReasonPhrase } from 'http-status-codes';
 import { Logger } from 'winston';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
-import { getReqMainInfo } from '@/utils/logger-utils';
 import { ConfigService } from '@/modules/config/config.service';
+import { getReqMainInfo } from '@/utils/logger-utils';
 
 /**
  * 格式化输出内容
@@ -27,7 +27,7 @@ export class ResponseInterceptor implements NestInterceptor {
       map((data) => {
         this.logger.info('httpResponse', {
           url: getReqMainInfo(ctx.getRequest()).url,
-          res: data,
+          // res: data,
         });
         return {
           code,

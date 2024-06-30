@@ -9,7 +9,7 @@ export class ResumeItemVO {
   @ApiProperty()
   content: Prisma.JsonValue;
   @ApiProperty()
-  templateId: number;
+  templateCode: string;
   @ApiProperty()
   themeColor: string;
   @ApiProperty()

@@ -30,7 +30,7 @@ export class TemplateService {
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.resumeTemplate.findFirst({ where: { id } });
+  findOne(code: string) {
+    return this.prisma.resumeTemplate.findFirst({ where: { code } });
   }
 }

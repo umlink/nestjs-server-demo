@@ -1,6 +1,6 @@
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model ResumeTemplate {
-  id        Int      @id @unique(map: "id") @default(autoincrement())
+  id        BigInt   @id @unique(map: "id")
   code      String   @unique(map: "code") @db.VarChar(32)
   title     String   @db.VarChar(64)
   content   Json     @map("content")

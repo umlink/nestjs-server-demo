@@ -31,8 +31,9 @@ export class ResumeController {
     reqType: CreateResumeDto,
     resType: Number,
   })
-  createResume(@Body() createResumeDto: CreateResumeDto, @User() user: AuthUser) {
-    return this.resumeService.create(createResumeDto, user.id);
+  async createResume(@Body() createResumeDto: CreateResumeDto, @User() user: AuthUser) {
+    const data = await this.resumeService.create(createResumeDto, user.id);
+    return data.id;
   }
 
   @Post('/update')

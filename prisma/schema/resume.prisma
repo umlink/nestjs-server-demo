@@ -4,7 +4,7 @@ model resume {
   title       String   @db.VarChar(64)
   content     Json
   userId      Int      @map("user_id")
-  templateId  Int?     @map("template_id")
+  templateId  BigInt   @map("template_id")
   themeColor  String   @map("theme_color") @db.VarChar(10)
   isPublic    Int?     @default(0) @map("is_public") @db.TinyInt
   exportCount Int?     @default(0) @map("export_count")

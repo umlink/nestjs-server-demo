@@ -5,6 +5,7 @@ import { Api } from '@/decorator/api.decorator';
 import { TemplateItemVO, TemplateListVo } from '@/modules/template/vo/template.vo';
 import { ApiTags } from '@nestjs/swagger';
 import { TemplateQueryDto } from '@/modules/template/dto/query-template.dto';
+import { genSnowUUId } from '@/utils/id.gen';
 
 @ApiTags('Template')
 @Controller('template')
@@ -19,6 +20,7 @@ export class TemplateController {
     resType: TemplateListVo,
   })
   getTemplateList(@Body() query: TemplateQueryDto) {
+    console.log(genSnowUUId());
     return this.templateService.findAll(query);
   }
 

@@ -22,7 +22,6 @@ export class PuppeteerService {
       });
       await page.goto(opt.url, { waitUntil: 'networkidle0' });
       await waitTime(opt.waitTime || 0);
-      console.log(page);
       const pdf = await page.pdf({
         format: 'A4',
         printBackground: true,
